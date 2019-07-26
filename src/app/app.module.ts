@@ -15,6 +15,7 @@ import { AboutComponent } from './components/about/about.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { FirstLetterPipe } from './pipes/first-letter.pipe';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FirstLetterPipe } from './pipes/first-letter.pipe';
     AboutComponent,
     SignupComponent,
     FaqComponent,
-    FirstLetterPipe
+    FirstLetterPipe,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
