@@ -13,7 +13,6 @@ import { DiagnosticComponent } from './components/diagnostic/diagnostic.componen
 import { TreatmentComponent } from './components/treatment/treatment.component';
 import { AboutComponent } from './components/about/about.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { SigninComponent } from './components/signin/signin.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { FirstLetterPipe } from './pipes/first-letter.pipe';
 
@@ -27,7 +26,6 @@ import { FirstLetterPipe } from './pipes/first-letter.pipe';
     TreatmentComponent,
     AboutComponent,
     SignupComponent,
-    SigninComponent,
     FaqComponent,
     FirstLetterPipe
   ],
