@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Courgette&display=swap');
+
+.titulo {
+    font-family: 'Pacifico',
+    cursive;
+        font-size: 25px;
+
+}
+
+.menu {
+  background-color: #2196f3;
+  color: white;
+  padding: 0 30px;
+}
+.menu a{
+    color: white;
+    padding: 0 10px;
+}
+.menu a:hover{
+    background-color: #0d528b;
+    color: red;
+}
+
+
+.boton {
+  background-color: #0d528b;
+  border-radius: 10%;
+  margin-right: 15px;
+  color: white;
+}
+.hidden {
+  display: none;
+}
+
+.active-link {
+  background-color: #0d528b;
+}
+
+@media (max-width: 992px) {
+
+  .mod-color a {
+    float: right;
+    width: 150px;
+    text-align: center;
+    background-color: #2196f3;
+    color: white;
+  }
+
+  .mod-color a:hover {
+    color: red;
+  }
+
+  .menu {
+    background-color: #2196f3;
+    padding: 0 30px;
+  }
+
+  .menu a {
+    padding: 0;
+  }
+
+  .boton {
+    display: none;
+  }
+  .hidden {
+    display: block;
+  }
+}
