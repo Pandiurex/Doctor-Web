@@ -1,4 +1,7 @@
+
 .main-container {
+  position: relative;
+  z-index: 900;
   margin-top: 40px;
   text-align: center;
   padding: 50px;

@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Courgette&display=swap');
 
+.navbar {
+  z-index: 950;
+}
+
 .titulo {
     font-family: 'Pacifico',
     cursive;

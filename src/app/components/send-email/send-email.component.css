@@ -1,5 +1,6 @@
 .main-container {
-  margin: 50px auto;
+  margin: 17.1% auto;
+  z-index: -1;
 }
 
 .main-container div {
@@ -38,4 +39,8 @@
 
 .send:active {
   background-color: #04eef6;
+}
+
+.back {
+  z-index: 900;
 }
