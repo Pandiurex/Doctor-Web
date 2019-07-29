@@ -76,11 +76,12 @@
              <p>
                <label *ngFor="let s of sexos, let i = index">
                  <input
-                 checked
+                 formControlName="genero"
                  class="with-gap myColor"
-                  name="genero" 
-                  type="radio"
-                   [value]="s" />
+                 name="genero" 
+                 type="radio"
+                 checked
+                 [value]="s" />
                  <span class="space"> {{s}} </span>
                </label>
              </p>

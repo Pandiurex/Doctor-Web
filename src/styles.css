@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+[type="radio"]:checked+span::after,
+[type="radio"].with-gap:checked+span::after {
+  background-color: #2196f3 !important;
+}
+
+[type="radio"]:checked+span::after,
+[type="radio"].with-gap:checked+span::before,
+[type="radio"].with-gap:checked+span::after {
+  border: 2px solid #2196f3 !important;
+}
+
+.btn.disabled,
+.disabled.btn-large,
+.disabled.btn-small,
+.btn-floating.disabled,
+.btn-large.disabled,
+.btn-small.disabled,
+.btn-flat.disabled,
+.btn:disabled,
+.btn-large:disabled,
+.btn-small:disabled,
+.btn-floating:disabled,
+.btn-large:disabled,
+.btn-small:disabled,
+.btn-flat:disabled,
+.btn[disabled],
+.btn-large[disabled],
+.btn-small[disabled],
+.btn-floating[disabled],
+.btn-large[disabled],
+.btn-small[disabled],
+.btn-flat[disabled]{
+    background-color: #00acee !important;
+    color: white !important;
+}

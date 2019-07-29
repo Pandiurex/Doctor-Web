@@ -38,7 +38,7 @@ export class SignupComponent implements OnInit {
         Validators.required,
         Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$'),
       ]),
-      genero: new FormControl('', Validators.required),
+      genero: new FormControl('Indefinido', Validators.required),
       pasatiempos: new FormArray([new FormControl('Correr', Validators.required)]),
       username: new FormControl('', Validators.required, this.existeUsuario),
       password1: new FormControl('', Validators.required),
