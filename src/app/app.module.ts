@@ -17,6 +17,7 @@ import { FaqComponent } from './components/faq/faq.component';
 import { FirstLetterPipe } from './pipes/first-letter.pipe';
 import { LoginComponent } from './components/login/login.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { SendEmailComponent } from './components/send-email/send-email.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     FaqComponent,
     FirstLetterPipe,
     LoginComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    SendEmailComponent
   ],
   imports: [
     BrowserModule,

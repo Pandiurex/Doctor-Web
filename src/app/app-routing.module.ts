@@ -7,6 +7,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { AboutComponent } from './components/about/about.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { SendEmailComponent } from './components/send-email/send-email.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'recovery', component: ForgotPasswordComponent },
+  { path: 'emailSent', component: SendEmailComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 
