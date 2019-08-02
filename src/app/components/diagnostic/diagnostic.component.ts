@@ -8,7 +8,7 @@ import { NgForm } from '@angular/forms';
 })
 export class DiagnosticComponent implements OnInit {
 
-seleccionado = "";
+seleccionado = '';
 
   categorias = [
     {

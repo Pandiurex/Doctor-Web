@@ -1,0 +1,34 @@
+.boton {
+  margin-left: 45%;
+}
+
+.main-container {
+    border-style: dotted;
+    border-color: red;
+    border-radius: 10px;
+
+}
+
+.main-container h1{
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+
+}
+
+.main-container label {
+  margin-left: 50%;
+  color: red;
+  font-size: 14px;
+}
+
+.main-container input,
+select {
+  margin-left: 50%;
+  width: 50%;
+}
+
+.descripcion {
+  margin-left: 25% !important;
+  width: 100% !important;
+}

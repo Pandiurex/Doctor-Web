@@ -8,6 +8,10 @@ import { AboutComponent } from './components/about/about.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { SendEmailComponent } from './components/send-email/send-email.component';
+import { SintomasComponent } from './components/sintomas/sintomas.component';
+import { PadecimientosComponent } from './components/padecimientos/padecimientos.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { SintomasRoutes } from './components/sintomas/sintomas.routes';
 
 
 const routes: Routes = [
@@ -17,13 +21,22 @@ const routes: Routes = [
   { path: 'registro', component: SignupComponent },
   { path: 'about', component: AboutComponent },
   { path: 'faq', component: FaqComponent },
+  { 
+  path: 'sintomas',
+  component: SintomasComponent,
+  children: SintomasRoutes
+},
+  { path: 'padecimientos', component: PadecimientosComponent },
+  { path: 'usuario', component: UsuarioComponent },
   { path: 'recovery', component: ForgotPasswordComponent },
   { path: 'emailSent', component: SendEmailComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  imports: [
+    RouterModule.forRoot(routes, {useHash: true}),
+    RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

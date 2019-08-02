@@ -18,6 +18,12 @@ import { FirstLetterPipe } from './pipes/first-letter.pipe';
 import { LoginComponent } from './components/login/login.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { SendEmailComponent } from './components/send-email/send-email.component';
+import { SintomasComponent } from './components/sintomas/sintomas.component';
+import { PadecimientosComponent } from './components/padecimientos/padecimientos.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { BorrarSintomasComponent } from './components/sintomas/borrar-sintomas/borrar-sintomas.component';
+import { ModificarSintomasComponent } from './components/sintomas/modificar-sintomas/modificar-sintomas.component';
+import { AgregarSintomasComponent } from './components/sintomas/agregar-sintomas/agregar-sintomas.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +39,13 @@ import { SendEmailComponent } from './components/send-email/send-email.component
     FirstLetterPipe,
     LoginComponent,
     ForgotPasswordComponent,
-    SendEmailComponent
+    SendEmailComponent,
+    SintomasComponent,
+    PadecimientosComponent,
+    UsuarioComponent,
+    BorrarSintomasComponent,
+    ModificarSintomasComponent,
+    AgregarSintomasComponent
   ],
   imports: [
     BrowserModule,
