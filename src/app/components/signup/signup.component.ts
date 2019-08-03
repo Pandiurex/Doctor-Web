@@ -16,18 +16,10 @@ export class SignupComponent implements OnInit {
 
   forma: FormGroup;
 
-  usuario = {
-    nombrecompleto: {
-      nombre: 'Cristopher',
-      apellido: 'Estrada'
-    },
-    correo: 'crissin21_01@hotmail.com',
-    pasatiempos: ['Correr', 'Dormir', 'Comer']
-  };
+  sexos = ['Hombre', 'Mujer', 'Indefinido'];
+
 
   constructor() {
-
-    console.log(this.usuario);
 
     this.forma = new FormGroup({
 
@@ -46,6 +38,7 @@ export class SignupComponent implements OnInit {
         Validators.required,
         Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$'),
       ]),
+      genero: new FormControl('Indefinido', Validators.required),
       pasatiempos: new FormArray([new FormControl('Correr', Validators.required)]),
       username: new FormControl('', Validators.required, this.existeUsuario),
       password1: new FormControl('', Validators.required),
@@ -70,6 +63,8 @@ export class SignupComponent implements OnInit {
     // this.forma.patchValue( this.usuario );
 
   }
+
+  get formData() { return this.formData.get('forma'); }
 
   ngOnInit() { }
 

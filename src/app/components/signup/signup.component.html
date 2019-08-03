@@ -10,7 +10,7 @@
           <div class="form-group row">
             <div class="col-8">
 
-              <input [ngClass]="{'is-invalid': !forma.controls['nombrecompleto'].controls['nombre'].valid}"
+              <input [ngClass]="{'is-invalid': !forma.get['nombrecompleto'].controls['nombre'].valid}"
                 formControlName="nombre" class="form-control is-valid" type="text" placeholder="Nombre">
 
               <div *ngIf="forma.get('nombrecompleto.nombre').errors?.required" class="form-control-feedback">
@@ -26,7 +26,7 @@
           <div class="form-group row">
             <div class="col-8">
 
-              <input [ngClass]="{'is-invalid': !forma.controls['nombrecompleto'].controls['apellido'].valid}"
+              <input [ngClass]="{'is-invalid': !forma.get['nombrecompleto'].controls['apellido'].valid}"
                 formControlName="apellido" class="form-control is-valid" type="text" placeholder="Apellido">
               <div *ngIf="forma.get('nombrecompleto.apellido').errors?.required" class="form-control-feedback">
                 *El Apellido es necesario
@@ -67,6 +67,24 @@
             <div *ngIf="forma.status === 'PENDING'" class="form-control-feedback checking">
               Verificando si el usuario existe
             </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+
+          <div class="col-md-8">
+             <p>
+               <label *ngFor="let s of sexos, let i = index">
+                 <input
+                 formControlName="genero"
+                 class="with-gap myColor"
+                 name="genero" 
+                 type="radio"
+                 checked
+                 [value]="s" />
+                 <span class="space"> {{s}} </span>
+               </label>
+             </p>
           </div>
         </div>
 
@@ -121,16 +139,18 @@
       <div class="container">
 
         <h5>Nombre</h5>
-        <h3 *ngIf="forma.controls['nombrecompleto'].controls['nombre'].value"> {{forma.controls['nombrecompleto'].controls['nombre'].value | firstLetter}} </h3>
+        <h3 *ngIf="forma.get['nombrecompleto'].controls['nombre'].value">
+          {{forma.get['nombrecompleto'].controls['nombre'].value | firstLetter}} </h3>
         <br>
         <h5>Apellido</h5>
-        <h3 *ngIf="forma.controls['nombrecompleto'].controls['apellido'].value"> {{forma.controls['nombrecompleto'].controls['apellido'].value | firstLetter}} </h3>
+        <h3 *ngIf="forma.get['nombrecompleto'].controls['apellido'].value">
+          {{forma.get['nombrecompleto'].controls['apellido'].value | firstLetter}} </h3>
         <br>
         <h5 clas>Correo</h5>
-        <h3> {{forma.controls['correo'].value}} </h3>
+        <h3> {{forma.get['correo'].value}} </h3>
         <br>
         <h5>Nombre de Usuario</h5>
-        <h3> {{forma.controls['username'].value}} </h3>
+        <h3> {{forma.get['username'].value}} </h3>
       </div>
     </div>
 

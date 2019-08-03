@@ -13,9 +13,17 @@ import { DiagnosticComponent } from './components/diagnostic/diagnostic.componen
 import { TreatmentComponent } from './components/treatment/treatment.component';
 import { AboutComponent } from './components/about/about.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { SigninComponent } from './components/signin/signin.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { FirstLetterPipe } from './pipes/first-letter.pipe';
+import { LoginComponent } from './components/login/login.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { SendEmailComponent } from './components/send-email/send-email.component';
+import { SintomasComponent } from './components/sintomas/sintomas.component';
+import { PadecimientosComponent } from './components/padecimientos/padecimientos.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { BorrarSintomasComponent } from './components/sintomas/borrar-sintomas/borrar-sintomas.component';
+import { ModificarSintomasComponent } from './components/sintomas/modificar-sintomas/modificar-sintomas.component';
+import { AgregarSintomasComponent } from './components/sintomas/agregar-sintomas/agregar-sintomas.component';
 
 @NgModule({
   declarations: [
@@ -27,9 +35,17 @@ import { FirstLetterPipe } from './pipes/first-letter.pipe';
     TreatmentComponent,
     AboutComponent,
     SignupComponent,
-    SigninComponent,
     FaqComponent,
-    FirstLetterPipe
+    FirstLetterPipe,
+    LoginComponent,
+    ForgotPasswordComponent,
+    SendEmailComponent,
+    SintomasComponent,
+    PadecimientosComponent,
+    UsuarioComponent,
+    BorrarSintomasComponent,
+    ModificarSintomasComponent,
+    AgregarSintomasComponent
   ],
   imports: [
     BrowserModule,

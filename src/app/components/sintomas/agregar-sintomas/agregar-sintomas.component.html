@@ -1,0 +1,62 @@
+<div class="container main-container">
+
+  <div class="row">
+    <div class="col m12 s6">
+      <h1>Agregar Sintomas</h1>
+      <hr>
+      <form [formGroup]="sintomas" (ngSubmit)="guardar()">
+
+        <div class="form-group row">
+          <div class="col-md-8">
+            <input [ngClass]="{'is-invalid': !sintomas.controls['nombre'].valid}" formControlName="nombre"
+              class="form-control is-valid" type="text" placeholder="Nombre del Sintoma">
+            <div *ngIf="sintomas.get('nombre').errors?.required" class="form-control-feedback">
+              <label>
+                *El Nombre es necesario
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-md-8">
+            <input [ngClass]="{'is-invalid': !sintomas.controls['keyword'].valid}" formControlName="keyword"
+              class="form-control is-valid" type="text" placeholder="Palabra clave">
+            <div *ngIf="sintomas.get('keyword').errors?.required" class="form-control-feedback">
+              <label>
+                *La palabra clave es necesaria
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-md-8">
+            <select formControlName="categoria" name="categoria" id="categoria" class="form-control">
+              <option value="">Seleccione una Categoria</option>
+              <option *ngFor="let item of categorias" [value]="item.abreviacion">{{item.nombre}}</option>
+            </select>
+            <div *ngIf="sintomas.get('categoria').errors?.required" class="form-control-feedback">
+              <label>
+
+                *Seleccione la categoria correspondiente
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-md-8">
+            <input formControlName="descripcion" class="form-control is-valid descripcion" type="text"
+              placeholder="Descripcion">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary boton" [disabled]="!sintomas.valid">
+          Guardar
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>

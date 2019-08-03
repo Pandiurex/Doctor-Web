@@ -1,1 +1,14 @@
-<p>faq works!</p>
+<div class="container main-container">
+    <div class="row">
+        <div class="col m12">
+            <h1>Preguntas Frecuentes</h1>
+            <hr>
+            <div class="answer" *ngFor="let boton of botones; let i=index">
+                <a class="waves-effect waves-light btn" (click)="showAnswer(i)">Hola papi rico como te va y que es lo que te
+                  preguntas</a>
+                <p *ngIf="botones[i]">Lo que te preguntas no tiene respuesta Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio, omnis culpa laborum ratione similique quasi quo. Consequuntur fugiat obcaecati sequi laborum incidunt, laboriosam ex illum quam velit, atque ipsum quae!</p>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>

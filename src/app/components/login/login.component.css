@@ -1,0 +1,41 @@
+.trans {
+  background-color: transparent;
+}
+.modal-content {
+  padding: 0;
+  border-radius: 18px;
+}
+
+.modal-header {
+  border-radius: 15px 15px 0 0;
+  background-color: #2196f3;
+  color: white;
+
+}
+
+.modal-body a {
+  margin-left: 10px;
+  padding: 10px;
+}
+
+.modal-footer {
+  border-radius: 0 0 15px 15px;
+
+  background-color: #2196f3;
+  color: white;
+}
+
+.modal-footer button {
+
+  padding: 5px 10px;
+  margin: 10px;
+
+}
+
+.cancel {
+  background-color: red;
+}
+
+.send {
+  background-color: #0d528b;
+}

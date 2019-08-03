@@ -1,1 +1,44 @@
-<p>diagnostic works!</p>
+<div class="container main-container">
+    <div class="row">
+        <div class="col m12 margin-color">
+            <div class="margin-color center">
+
+                <h1>Dinos, que es lo que te duele?</h1>
+                <p>Aqui te mostramos una lista de los sintomas
+                    mas comunes, porfavor selecciona uno y 
+                    te en base a ellos trataermos de 
+                    identificar tu enfermedad
+                </p>
+            </div>
+
+            <div class="margin-color center">
+                <h1>Selecciona una Categoria</h1>
+                <div class="form-group">
+
+                    <select [(ngModel)]="seleccionado" name="categoria" id="categoria" class="form-control">
+                        <option value="">Seleccione una Categoria</option>
+                        <option *ngFor="let categoria of categorias" value="{{categoria.abreviacion}}">
+                            {{categoria.nombre}}
+                        </option>
+                    </select>
+                </div>
+                
+            </div>
+
+            <div class="margin-color center" *ngIf="seleccionado" >
+                <h1>Ahora Selecciona el o los Sintoma</h1>
+                <div class="sintomas" *ngFor="let sintoma of sintomas">
+                    <p>
+                      <label>
+                        <input type="checkbox" />
+                        <span class="option"> {{sintoma}} </span>
+                      </label>
+                    </p>
+                </div>
+            </div>
+
+            <button type="submit" class="btn">Aceptar</button>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+.main-container {
+    z-index: 900;
+    margin: 50px;
+}
+
+.back {
+    z-index: 900;
+}
+
+.description {
+    text-align: center;
+}
+
+.card-image span{
+    font-weight: bold;
+    color: rgb(204, 0, 0);
+    text-align: center;
+}
+
+.card-content{
+    text-align: center;
+    font-size: 20px;
+}
+
+.facebook {
+    color: #0078FF;
+    margin-right: 10px;
+}
+.instagram {
+    color: #e95950;
+    margin-right: 10px;
+}
+
+.card-action {
+    text-align: center;
+}
