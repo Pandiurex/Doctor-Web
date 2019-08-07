@@ -64,7 +64,6 @@ export class SignupComponent implements OnInit {
 
   }
 
-  get formData() { return this.formData.get('forma'); }
 
   ngOnInit() { }
 
