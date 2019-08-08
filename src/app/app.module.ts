@@ -24,6 +24,8 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { BorrarSintomasComponent } from './components/sintomas/borrar-sintomas/borrar-sintomas.component';
 import { ModificarSintomasComponent } from './components/sintomas/modificar-sintomas/modificar-sintomas.component';
 import { AgregarSintomasComponent } from './components/sintomas/agregar-sintomas/agregar-sintomas.component';
+import { OwlModule } from 'ngx-owl-carousel';
+
 
 @NgModule({
   declarations: [
@@ -51,8 +53,9 @@ import { AgregarSintomasComponent } from './components/sintomas/agregar-sintomas
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
-  ],
+    AppRoutingModule,
+    OwlModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
