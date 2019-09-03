@@ -6,21 +6,26 @@ import {
   FormArray
 } from '@angular/forms';
 import { Observable } from 'rxjs';
-
+import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { SignupService } from './signup.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
+  providers: [SignupService, HttpClient]
 })
+
 export class SignupComponent implements OnInit {
 
+  
   forma: FormGroup;
-
+  
+  private values : HttpParams;
   sexos = ['Hombre', 'Mujer', 'Indefinido'];
 
 
-  constructor() {
-
+  constructor(private signupServ : SignupService, private http : HttpClient) {
     this.forma = new FormGroup({
 
       nombrecompleto: new FormGroup({
@@ -70,14 +75,19 @@ export class SignupComponent implements OnInit {
   guardarCambios() {
     console.log(this.forma.value);
     console.log(this.forma);
-
-    // this.forma.reset({
-    //   nombrecompleto: {
-    //     nombre: '',
-    //     apellido: ''
-    //   },
-    //   correo: ''
-    // });
+    this.values = new HttpParams()
+    .set('nickname', this.forma.value.username)
+    .set('email', this.forma.value.correo)
+    .set('sexo', this.forma.value.genero)
+    .set('nombres', this.forma.value.nombrecompleto.nombre)
+    .set('apellidos', this.forma.value.nombrecompleto.apellido)
+    .set('password', this.forma.value.password1)
+    .set('passwordVerif', this.forma.value.password2)
+    .set('tipoUsuario', '1')
+    .set('fecha', '2019-01-01 00:00:00');
+    this.signupServ.checkLogin(this.values).subscribe(resp => {
+      console.log(resp)
+    })
   }
 
   existeUsuario(control: FormControl): Promise<any> | Observable<any> {

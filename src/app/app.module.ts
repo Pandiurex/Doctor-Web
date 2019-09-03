@@ -25,7 +25,7 @@ import { BorrarSintomasComponent } from './components/sintomas/borrar-sintomas/b
 import { ModificarSintomasComponent } from './components/sintomas/modificar-sintomas/modificar-sintomas.component';
 import { AgregarSintomasComponent } from './components/sintomas/agregar-sintomas/agregar-sintomas.component';
 import { OwlModule } from 'ngx-owl-carousel';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -54,7 +54,8 @@ import { OwlModule } from 'ngx-owl-carousel';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    OwlModule
+    OwlModule,
+    HttpClientModule
     ],
   providers: [],
   bootstrap: [AppComponent]
