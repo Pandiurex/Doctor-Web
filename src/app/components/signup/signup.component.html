@@ -40,6 +40,17 @@
         </div>
 
         <div class="form-group row">
+          <div class="col-8">
+
+            <input [ngClass]="{'is-invalid': !forma.controls['fechanacimiento'].valid}"
+              formControlName="fechanacimiento" class="form-control is-valid" type="date" placeholder="Fecha">
+            <div *ngIf="forma.get('fechanacimiento').errors?.required" class="form-control-feedback">
+              *Ingrese su fecha de nacimiento
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
           <div class="col-md-8">
 
             <input [ngClass]="{'is-invalid': !forma.controls['correo'].valid}" formControlName="correo"
@@ -91,6 +102,10 @@
             <div *ngIf="forma.get('password1').errors?.required" class="form-control-feedback">
               *Contraseña obligatoria
             </div>
+            <div *ngIf="forma.get('password2').errors?.noiguales && !forma.get('password2').errors?.required"
+            class="form-control-feedback">
+            *Las contraseñas no son iguales
+          </div>
           </div>
         </div>
 
@@ -116,10 +131,6 @@
             </button>
           </div>
         </div>
-
-        {{forma.valid}}
-        <br>
-        {{forma.status}}
 
       </form>
     </div>

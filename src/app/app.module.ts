@@ -26,6 +26,8 @@ import { ModificarSintomasComponent } from './components/sintomas/modificar-sint
 import { AgregarSintomasComponent } from './components/sintomas/agregar-sintomas/agregar-sintomas.component';
 import { OwlModule } from 'ngx-owl-carousel';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     AppRoutingModule,
     OwlModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
     ],
   providers: [],
   bootstrap: [AppComponent]
