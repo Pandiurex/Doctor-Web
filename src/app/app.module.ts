@@ -24,6 +24,7 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { BorrarSintomasComponent } from './components/sintomas/borrar-sintomas/borrar-sintomas.component';
 import { ModificarSintomasComponent } from './components/sintomas/modificar-sintomas/modificar-sintomas.component';
 import { AgregarSintomasComponent } from './components/sintomas/agregar-sintomas/agregar-sintomas.component';
+import { VerificacionComponent } from './components/verificacion/verificacion.component';
 import { OwlModule } from 'ngx-owl-carousel';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
@@ -49,7 +50,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UsuarioComponent,
     BorrarSintomasComponent,
     ModificarSintomasComponent,
-    AgregarSintomasComponent
+    AgregarSintomasComponent,
+    VerificacionComponent
   ],
   imports: [
     BrowserModule,
