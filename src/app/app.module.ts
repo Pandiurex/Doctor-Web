@@ -25,6 +25,7 @@ import { BorrarSintomasComponent } from './components/sintomas/borrar-sintomas/b
 import { ModificarSintomasComponent } from './components/sintomas/modificar-sintomas/modificar-sintomas.component';
 import { AgregarSintomasComponent } from './components/sintomas/agregar-sintomas/agregar-sintomas.component';
 import { VerificacionComponent } from './components/verificacion/verificacion.component';
+import { ResetPasswordComponent} from './components/reset-password/reset-password.component';
 import { OwlModule } from 'ngx-owl-carousel';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
@@ -51,7 +52,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BorrarSintomasComponent,
     ModificarSintomasComponent,
     AgregarSintomasComponent,
-    VerificacionComponent
+    VerificacionComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

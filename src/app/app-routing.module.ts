@@ -13,7 +13,7 @@ import { PadecimientosComponent } from './components/padecimientos/padecimientos
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { SintomasRoutes } from './components/sintomas/sintomas.routes';
 import { VerificacionComponent}  from './components/verificacion/verificacion.component';
-
+import { ResetPasswordComponent} from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -32,6 +32,7 @@ const routes: Routes = [
   { path: 'recovery', component: ForgotPasswordComponent },
   { path: 'emailSent', component: SendEmailComponent },
   { path: 'verificacion/:hash', component : VerificacionComponent},
+  { path: 'recuperar/:hash', component : ResetPasswordComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 
