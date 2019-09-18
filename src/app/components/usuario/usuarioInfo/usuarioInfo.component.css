@@ -1,0 +1,75 @@
+.main-container {
+    position: relative;
+    z-index: 900;
+    margin-top: 20px;
+    text-align: left;
+    padding: 25px;
+    margin-bottom: 20px;
+  }
+
+  .main-container input{
+      margin: 0 25px 8px;
+  }
+  .center {
+    padding: 0 40%;
+  }
+  .example{
+    padding: 40px 10px;
+    height: 100%;
+  }
+
+  .form-control-feedback {
+    color: red;
+  }
+  .checking{
+    color: blue;
+  }
+  .space {
+    margin-top: 15px;
+    color: #2196f3;
+    margin-left: 15px;
+  }
+  
+  .main-container h3{
+    text-align: left;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .main-container h4{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+
+.wrapper {
+    text-align: center;
+}
+
+section{
+  display: -webkit-flex;
+  display: flex;
+}
+
+section .info{
+  -webkit-flex:1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 20px;
+}
+
+article{
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  padding: 10px;
+}
+
+
+  @media (max-width: 992px){
+  
+    .control{
+      display: none;
+    }
+  }
+  

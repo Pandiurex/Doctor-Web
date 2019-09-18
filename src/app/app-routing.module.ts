@@ -14,6 +14,7 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { SintomasRoutes } from './components/sintomas/sintomas.routes';
 import { VerificacionComponent}  from './components/verificacion/verificacion.component';
 import { ResetPasswordComponent} from './components/reset-password/reset-password.component';
+import { UsuarioInfoComponent} from './components/usuario/usuarioInfo/usuarioInfo.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -28,11 +29,12 @@ const routes: Routes = [
   children: SintomasRoutes
 },
   { path: 'padecimientos', component: PadecimientosComponent },
-  { path: 'usuario', component: UsuarioComponent },
+  { path: 'usuarios', component: UsuarioComponent },
   { path: 'recovery', component: ForgotPasswordComponent },
   { path: 'emailSent', component: SendEmailComponent },
   { path: 'verificacion/:hash', component : VerificacionComponent},
   { path: 'recuperar/:hash', component : ResetPasswordComponent},
+  { path: 'usuarios/info/:id', component : UsuarioInfoComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 

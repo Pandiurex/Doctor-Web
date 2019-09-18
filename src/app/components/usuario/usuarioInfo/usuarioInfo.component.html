@@ -1,0 +1,28 @@
+<div class="container main-container">
+    <h4>Detalles de Usuario</h4>
+    
+    <section>
+        <div class="info">
+            <legend>Nickname: </legend>
+            <h5>{{user.nickname}}</h5>
+            <legend>Nombre Completo: </legend>
+            <h5>{{user.nombres + " " + user.apellidos}}</h5>
+        </div>
+
+        <article>
+            <legend>Correo: </legend>
+            <h5>{{user.email}}</h5>
+            <legend>Sexo: </legend>
+            <h5>{{user.sexo}}</h5>
+            <legend>Fecha Nacimiento: </legend>
+            <h5>{{user.fecha_nacimiento}}</h5>
+            <legend>Miembro desde: </legend>
+            <h5>{{user.createdAt}}</h5>
+        </article>
+
+    </section>
+</div>
+
+<div class="wrapper">
+        <button type="button" class="btn btn-secondary info" routerLink="/usuarios">Volver</button>
+</div>

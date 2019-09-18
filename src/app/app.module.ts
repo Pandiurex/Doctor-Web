@@ -30,6 +30,7 @@ import { OwlModule } from 'ngx-owl-carousel';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UsuarioInfoComponent} from './components/usuario/usuarioInfo/usuarioInfo.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ModificarSintomasComponent,
     AgregarSintomasComponent,
     VerificacionComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    UsuarioInfoComponent
   ],
   imports: [
     BrowserModule,

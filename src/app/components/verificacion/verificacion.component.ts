@@ -2,7 +2,7 @@ import { VerificacionService } from './verificacion.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { HttpParams, HttpClient, HttpHeaders, HttpUrlEncodingCodec } from '@angular/common/http';
+import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Inject } from '@angular/core';
 
@@ -10,7 +10,7 @@ import { Inject } from '@angular/core';
   selector: 'app-verificacion',
   templateUrl: './verificacion.component.html',
   styleUrls: ['./verificacion.component.css'],
-  providers: [VerificacionService, HttpUrlEncodingCodec]
+  providers: [VerificacionService]
 })
 export class VerificacionComponent implements OnInit {
 

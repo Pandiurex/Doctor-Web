@@ -1,0 +1,108 @@
+.main-container {
+    position: relative;
+    z-index: 900;
+    margin-top: 20px;
+    text-align: left;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-style: solid;
+    border-radius: 2px;
+    border-color: rgb(124, 131, 132);
+  }
+
+  .main-container input{
+      margin: 0 25px 8px;
+  }
+  .center {
+    padding: 0 40%;
+  }
+  .checking{
+    color: blue;
+  }
+  .space {
+    margin-top: 15px;
+    color: #2196f3;
+    margin-left: 15px;
+  }
+  
+  .main-container h3{
+    text-align: left;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .tab{
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+  }
+
+  .tab button{
+    background-color: #2196f3;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    width: 50%;
+    color: #FFFFFF;
+  }
+
+  .tab button:hover{
+    background-color: #135D97;
+  }
+
+  .tab button.active {
+    background-color: #ccc;
+  }
+
+  .tabcontent{
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+    animation: fadeEffect 1s;
+  }
+
+  .tab-container {
+    position: relative;
+    z-index: 900;
+    margin-top: 20px;
+    text-align: left;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-style: solid;
+    border-radius: 2px;
+    border-color: rgb(124, 131, 132);
+  }
+  
+  @keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  table{
+    border-collapse: collapse;
+  }
+
+  td, th{
+    text-align: left;
+    padding: 8px;
+  }
+
+  th[colspan="5"]{
+    text-align: center;
+    color: #4C4848
+  }
+
+  tr:nth-child(even) {
+    background-color: #F3F0F0;
+  }
+  @media (max-width: 992px){
+  
+    .control{
+      display: none;
+    }
+  }
+  

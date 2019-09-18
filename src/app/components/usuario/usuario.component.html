@@ -1,1 +1,51 @@
-<p>usuario works!</p>
+<div class="container main-container">
+    <div class="tab">
+        <button name="Doctor" class="tablinks" (click)="changeTab('Doctor')" id="defaultOpen">Doctores</button>
+        <button name="Paciente" class="tablinks" (click)="changeTab('Paciente')">Pacientes</button>
+    </div>
+
+    <div id="Doctor" class="tabcontent">
+        <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Nickname</th>
+            <th>Email</th>
+            <th>Creación</th>
+            <th>Enabled</th>
+        </tr>
+        <tr ng-if="doctors.length>0" *ngFor="let doctor of doctors">
+        <a routerLink="info/{{doctor.id}}"><th>{{doctor.nombres}}</th></a>
+                <th>{{ doctor.nickname}}</th>
+                <th>{{ doctor.email}}</th>
+                <th>{{ doctor.createdAt}}</th>
+                <th>{{ doctor.enabled}}</th>
+        </tr>
+        <tr *ngIf="doctors.length==0">
+            <th colspan="5">No hay registro de doctores en el sistema</th>
+        </tr>
+        </table>
+    </div>
+
+    <div id="Paciente" class="tabcontent">
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>Nickname</th>
+                <th>Email</th>
+                <th>Creación</th>
+                <th>Enabled</th>
+            </tr>
+            <tr ng-if="patients.length>0" *ngFor="let patient of patients">
+                <a routerLink="info/{{patient.id}}"><th>{{patient.nombres}}</th></a>
+                    <th>{{ patient.nickname}}</th>
+                    <th>{{ patient.email}}</th>
+                    <th>{{ patient.createdAt}}</th>
+                    <th>{{ patient.enabled}}</th>
+            </tr>
+            <tr *ngIf="patients.length==0">
+                    <th colspan="5">No hay registro de pacientes en el sistema</th>
+            </tr>
+        </table>
+    </div>
+</div>
+
