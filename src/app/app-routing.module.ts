@@ -10,11 +10,13 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { SendEmailComponent } from './components/send-email/send-email.component';
 import { SintomasComponent } from './components/sintomas/sintomas.component';
 import { PadecimientosComponent } from './components/padecimientos/padecimientos.component';
+import { PadecimientosRoutes } from './components/padecimientos/padecimientos.routes';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { SintomasRoutes } from './components/sintomas/sintomas.routes';
 import { VerificacionComponent}  from './components/verificacion/verificacion.component';
 import { ResetPasswordComponent} from './components/reset-password/reset-password.component';
 import { UsuarioInfoComponent} from './components/usuario/usuarioInfo/usuarioInfo.component';
+import { BDCComponent } from './components/bdc/bdc.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -27,14 +29,19 @@ const routes: Routes = [
   path: 'sintomas',
   component: SintomasComponent,
   children: SintomasRoutes
-},
-  { path: 'padecimientos', component: PadecimientosComponent },
+  },
+  { 
+    path: 'padecimientos', 
+    component: PadecimientosComponent , 
+    children: PadecimientosRoutes
+  },
   { path: 'usuarios', component: UsuarioComponent },
   { path: 'recovery', component: ForgotPasswordComponent },
   { path: 'emailSent', component: SendEmailComponent },
   { path: 'verificacion/:hash', component : VerificacionComponent},
   { path: 'recuperar/:hash', component : ResetPasswordComponent},
   { path: 'usuarios/info/:id', component : UsuarioInfoComponent},
+  { path: 'bdc', component : BDCComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 

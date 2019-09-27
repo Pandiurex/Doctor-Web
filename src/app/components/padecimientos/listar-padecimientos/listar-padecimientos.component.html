@@ -1,0 +1,21 @@
+<table>
+        <tr>
+            <th>Padecimiento</th>
+            <th>Descripcion</th>
+            <th>Categoria</th>
+            <th>Acciones</th>
+        </tr>
+        <tr ng-if="padecimientos.length>0" *ngFor="let padecimiento of padecimientos">
+                <th>{{padecimiento.nombre_pad}}</th>
+                <th>{{ padecimiento.descripcion}}</th>
+                <th>{{ padecimiento.categoria}}</th>
+                <th style="text-align:center; width: 20%;"><a routerLinkActive="active-link" routerLink="/padecimientos/modificar"><button class="btn btn-info btn-sm" style="float:left">Modificar</button></a>
+                <a  routerLinkActive="active-link" data-toggle="modal" data-target="#infoPad"><button class="btn btn-success btn-sm" >Detalle</button></a></th>
+        </tr>
+        <tr *ngIf="padecimientos.length==0">
+            <th colspan="4">No hay registro de padecimientos en el sistema</th>
+        </tr>
+</table>
+
+<app-info-padecimientos></app-info-padecimientos>
+

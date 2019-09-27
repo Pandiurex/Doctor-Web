@@ -6,8 +6,6 @@
 .answer {
     margin: 30px 0;
     border-radius: 10px;
-    border-color: red;
-    border-style: dotted;
     padding: 20px;
     width: 100%;
 }

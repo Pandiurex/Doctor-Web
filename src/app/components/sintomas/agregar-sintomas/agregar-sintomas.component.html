@@ -52,6 +52,28 @@
           </div>
         </div>
 
+        <div class="form-group row">
+          <div class="col-md-8">
+              <p>
+                <label >
+                  <input formControlName="compuesto"  name="compuesto" type="checkbox" checked
+                            [value]="s" />
+                  <span class="space"> Compuesto </span>
+                </label>
+              </p>
+          </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-8">
+              <label>Componentes</label>
+              <select multiple formControlName="componentes" name="componentes"  class="form-control">
+                <option value="">Seleccione los componentes</option>
+                <option *ngFor="let comp of compuestos" [value]="comp.value">{{comp.name}}</option>
+              </select>
+            </div>
+          </div>
+
         <button type="submit" class="btn btn-outline-primary boton" [disabled]="!sintomas.valid">
           Guardar
         </button>

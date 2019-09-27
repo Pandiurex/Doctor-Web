@@ -1,0 +1,41 @@
+.modal {
+  display: none;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: transparent;
+}
+.modal.open {
+ display: block;
+}
+
+
+.modal-content {
+  padding: 0;
+  border-radius: 18px;
+}
+
+.modal-header {
+  border-radius: 15px 15px 0 0;
+  background-color: #2196f3;
+  color: white;
+
+}
+.modal-body a {
+  margin-left: 10px;
+  padding: 10px;
+}
+
+.modal-footer {
+  border-radius: 0 0 15px 15px;
+
+  background-color: #2196f3;
+  color: white;
+  text-align: center;
+}
+
+.modal-open .modal.modal-allow-overflow {
+  overflow: visible;
+}

@@ -20,10 +20,14 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { SendEmailComponent } from './components/send-email/send-email.component';
 import { SintomasComponent } from './components/sintomas/sintomas.component';
 import { PadecimientosComponent } from './components/padecimientos/padecimientos.component';
+import { ListarPadecimientosComponent } from './components/padecimientos/listar-padecimientos/listar-padecimientos.component';
+import { AgregarPadecimientosComponent } from './components/padecimientos/agregar-padecimientos/agregar-padecimientos.component';
+import { ModificarPadecimientosComponent } from './components/padecimientos/modificar-padecimientos/modificar-padecimientos.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
-import { BorrarSintomasComponent } from './components/sintomas/borrar-sintomas/borrar-sintomas.component';
-import { ModificarSintomasComponent } from './components/sintomas/modificar-sintomas/modificar-sintomas.component';
+import { InfoSintomasComponent } from './components/sintomas/info-sintomas/info-sintomas.component';
+import { ListarSintomasComponent } from './components/sintomas/listar-sintomas/listar-sintomas.component';
 import { AgregarSintomasComponent } from './components/sintomas/agregar-sintomas/agregar-sintomas.component';
+import { ModificarSintomasComponent} from './components/sintomas/modificar-sintomas/modificar-sintomas.component';
 import { VerificacionComponent } from './components/verificacion/verificacion.component';
 import { ResetPasswordComponent} from './components/reset-password/reset-password.component';
 import { OwlModule } from 'ngx-owl-carousel';
@@ -31,6 +35,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsuarioInfoComponent} from './components/usuario/usuarioInfo/usuarioInfo.component';
+import { InfoPadecimientosComponent } from './components/padecimientos/info-padecimientos/info-padecimientos.component';
+import { BDCComponent } from './components/bdc/bdc.component';
 
 @NgModule({
   declarations: [
@@ -49,13 +55,19 @@ import { UsuarioInfoComponent} from './components/usuario/usuarioInfo/usuarioInf
     SendEmailComponent,
     SintomasComponent,
     PadecimientosComponent,
+    ListarPadecimientosComponent,
+    AgregarPadecimientosComponent,
+    ModificarPadecimientosComponent,
     UsuarioComponent,
-    BorrarSintomasComponent,
-    ModificarSintomasComponent,
+    InfoSintomasComponent,
+    ListarSintomasComponent,
     AgregarSintomasComponent,
+    ModificarSintomasComponent,
     VerificacionComponent,
     ResetPasswordComponent,
-    UsuarioInfoComponent
+    UsuarioInfoComponent,
+    InfoPadecimientosComponent,
+    BDCComponent
   ],
   imports: [
     BrowserModule,

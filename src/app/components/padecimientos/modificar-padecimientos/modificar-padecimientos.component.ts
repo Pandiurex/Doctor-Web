@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-agregar-sintomas',
-  templateUrl: './agregar-sintomas.component.html',
-  styleUrls: ['./agregar-sintomas.component.css']
+  selector: 'app-modificar-padecimientos',
+  templateUrl: './modificar-padecimientos.component.html',
+  styleUrls: ['./modificar-padecimientos.component.css']
 })
-export class AgregarSintomasComponent implements OnInit {
+export class ModificarPadecimientosComponent implements OnInit {
 
-  sintomas: FormGroup;
+  modify: FormGroup;
 
   categorias = [
     {
@@ -28,29 +28,22 @@ export class AgregarSintomasComponent implements OnInit {
     }
   ];
 
-  public compuestos = [
+  public sintomas = [
     { value: 'id1', name: 'Gripe' },
     { value: 'id2', name: 'Mucosidad' },
     { value: 'id3', name: 'Dificultad ir al baño' }
   ];
   
   constructor() {
-    this.sintomas = new FormGroup({
-      // id: new FormControl(),
+    this.modify = new FormGroup({
       nombre: new FormControl('', Validators.required),
-      keyword: new FormControl('', Validators.required),
       categoria: new FormControl('', Validators.required),
       descripcion: new FormControl(''),
-      compuesto: new FormControl('', Validators.required),
-      componentes: new FormControl('')
+      sintomas: new FormControl('')
     });
   }
 
   ngOnInit() {
-  }
-
-  guardar() {
-    console.log(this.sintomas.value);
   }
 
 }

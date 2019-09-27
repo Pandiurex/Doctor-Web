@@ -1,0 +1,74 @@
+<div class="container main-container">
+    
+      <div class="row">
+        <div class="col m12 s6">
+          <h1>Modificar Padecimiento</h1>
+          <hr>
+          <form [formGroup]="modify" (ngSubmit)="guardar()">
+    
+            <div class="form-group row">
+              <div class="col-md-8">
+                <input [ngClass]="{'is-invalid': !modify.controls['nombre'].valid}" formControlName="nombre"
+                  class="form-control is-valid" type="text" placeholder="Nombre del padecimiento a modificar">
+                <div *ngIf="modify.get('nombre').errors?.required" class="form-control-feedback">
+                  <label>
+                    *El Nombre es necesario
+                  </label>
+                </div>
+              </div>
+            </div>
+    
+            <div class="form-group row">
+              <div class="col-md-8">
+                <input [ngClass]="{'is-invalid': !modify.controls['descripcion'].valid}" formControlName="descripcion"
+                  class="form-control is-valid" type="text" placeholder="Descripcion del padecimiento a modificar">
+                <div *ngIf="modify.get('descripcion').errors?.required" class="form-control-feedback">
+                  <label>
+                    *La descripcion es necesaria
+                  </label>
+                </div>
+              </div>
+            </div>
+    
+            <div class="form-group row">
+              <div class="col-md-8">
+                <select formControlName="categoria" name="categoria" id="categoria" class="form-control">
+                  <option value="">Seleccione una Categoria</option>
+                  <option *ngFor="let item of categorias" [value]="item.abreviacion">{{item.nombre}}</option>
+                </select>
+                <div *ngIf="modify.get('categoria').errors?.required" class="form-control-feedback">
+                  <label>
+    
+                    *Seleccione la categoria correspondiente
+                  </label>
+                </div>
+              </div>
+            </div>
+    
+            <div class="form-group row">
+              <div class="col-md-8">
+                <label>Imagen</label>
+                <input formControlName="descripcion" class="form-control is-valid descripcion" type="file">
+              </div>
+            </div>
+    
+            <div class="form-group row">
+                <div class="col-md-8">
+                  <label>Sintomas</label>
+                  <select multiple formControlName="sintomas" name="sintomas"  class="form-control">
+                    <option value="">Seleccione los sintomas</option>
+                    <option *ngFor="let sint of sintomas" [value]="sint.value">{{sint.name}}</option>
+                  </select>
+                </div>
+              </div>
+    
+            <a routerLink="listar" routerLinkActive="active"><button type="button" class="btn btn-secondary cancel">Volver</button></a>    
+
+            <button type="submit" class="btn btn-outline-primary boton" [disabled]="!modify.valid">
+              Guardar
+            </button>
+    
+          </form>
+        </div>
+      </div>
+</div>

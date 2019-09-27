@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BorrarSintomasComponent } from './borrar-sintomas.component';
+import { InfoPadecimientosComponent } from './info-padecimientos.component';
 
-describe('BorrarSintomasComponent', () => {
-  let component: BorrarSintomasComponent;
-  let fixture: ComponentFixture<BorrarSintomasComponent>;
+describe('InfoPadecimientosComponent', () => {
+  let component: InfoPadecimientosComponent;
+  let fixture: ComponentFixture<InfoPadecimientosComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BorrarSintomasComponent ]
+      declarations: [ InfoPadecimientosComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BorrarSintomasComponent);
+    fixture = TestBed.createComponent(InfoPadecimientosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
