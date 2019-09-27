@@ -26,7 +26,7 @@ export class FaqComponent implements OnInit {
 
     this.respuestas[0] = "Un grupo que se encuentra dedicado al cuidado de la salud con el apoyo de los mejores especialistas en los campos de medicina";
     this.respuestas[1] = "Brindar información y apoyo para consultas médicas de nuestros usuarios";
-    this.respuestas[2] = "Tan simple como registrarse y comenzar a disfrutar los beneficios de la página";
+    this.respuestas[2] = "Tan simple como registrarse y comenzar a disfrutar los beneficios y servicios de la página";
     this.respuestas[3] = "Por supuesto que no, la página y los servicios son siempre gratuitos de uso siempre y cuando usted tenga una cuenta en la página";
    }
 
