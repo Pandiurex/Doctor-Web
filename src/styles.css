@@ -5,6 +5,20 @@
   margin-top: 40px;
 }
 
+.myCustomModalClass {
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: transparent;
+}
+
+.modal-content {
+  padding: 0;
+  border-radius: 0px;
+}
+
 [type="radio"]:checked+span::after,
 [type="radio"].with-gap:checked+span::after {
   background-color: #2196f3 !important;

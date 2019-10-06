@@ -9,13 +9,24 @@
                 <th>{{sintoma.nombre_sint}}</th>
                 <th>{{ sintoma.descripcion}}</th>
                 <th>{{ sintoma.categoria_sint}}</th>
-                <th style="text-align:center; width: 20%;"><a routerLinkActive="active-link" routerLink="/sintomas/modificar"><button class="btn btn-info btn-sm" style="float:left">Modificar</button></a>
-                <a  routerLinkActive="active-link" data-toggle="modal" data-target="#info"><button class="btn btn-success btn-sm" >Detalle</button></a></th>
+                <th style="text-align:center; width: 20%;"><a routerLinkActive="active-link" routerLink="/sintomas/modificar/{{sintoma.hashId}}"><button class="btn btn-info btn-sm" style="float:left">Modificar</button></a>
+                <button class="btn btn-success btn-sm" (click)="openModal(content,sintoma)" >Detalle</button></th>
         </tr>
         <tr *ngIf="sintomas.length==0">
             <th colspan="4">No hay registro de sintomas en el sistema</th>
         </tr>
 </table>
 
-<app-info-sintomas></app-info-sintomas>
-
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Modal title</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>One fine body&hellip;</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>

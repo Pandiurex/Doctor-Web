@@ -4,7 +4,7 @@
     <div class="col m12 s6">
       <h1>Modificar Sintoma</h1>
       <hr>
-      <form [formGroup]="modify" (ngSubmit)="guardar()">
+      <form [formGroup]="modify" (ngSubmit)="modificar()">
 
         <div class="form-group row">
           <div class="col-md-8">
@@ -34,7 +34,7 @@
           <div class="col-md-8">
             <select formControlName="categoria" name="categoria" id="categoria" class="form-control">
               <option value="">Seleccione una Categoria</option>
-              <option *ngFor="let item of categorias" [value]="item.abreviacion">{{item.nombre}}</option>
+              <option *ngFor="let item of categorias" [value]="item.nombre">{{item.nombre}}</option>
             </select>
             <div *ngIf="modify.get('categoria').errors?.required" class="form-control-feedback">
               <label>
@@ -56,22 +56,27 @@
           <div class="col-md-8">
               <p>
                 <label >
-                  <input formControlName="compuesto"  name="compuesto" type="checkbox" checked
-                            [value]="s" />
-                  <span class="space"> Compuesto </span>
+                  <input formControlName="compuesto" type="checkbox" [checked]="checkbox" (change)="changed($event)"/>
+                  <span class="space"> ¿Compuesto? </span>
                 </label>
               </p>
           </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row" *ngIf="isChecked">
             <div class="col-md-8">
               <label>Componentes</label>
-              <select multiple formControlName="componentes" name="componentes"  class="form-control">
+              <select formControlName="componentes" name="componentes"  class="form-control" (change)="creacionComposicion()">
                 <option value="">Seleccione los componentes</option>
-                <option *ngFor="let comp of compuestos" [value]="comp.value">{{comp.name}}</option>
+                <option *ngFor="let comp of compuestos" [value]="comp.idSint" [hidden]="isTheSame(comp.nombre_sint)" >{{comp.nombre_sint}}</option>
               </select>
             </div>
+
+            <div class="col-md-8">
+              <input formControlName="composite" class="form-control descripcion" type="text"
+                placeholder="Composicion del sintoma" (change)="cambioContextual()">
+            </div>
+
           </div>
 
         <a routerLink="listar" routerLinkActive="active"><button type="button" class="btn btn-secondary cancel">Volver</button></a>

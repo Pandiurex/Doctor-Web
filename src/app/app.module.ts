@@ -37,6 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsuarioInfoComponent} from './components/usuario/usuarioInfo/usuarioInfo.component';
 import { InfoPadecimientosComponent } from './components/padecimientos/info-padecimientos/info-padecimientos.component';
 import { BDCComponent } from './components/bdc/bdc.component';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -77,9 +78,12 @@ import { BDCComponent } from './components/bdc/bdc.component';
     OwlModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgbModule
     ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [NgbActiveModal],
+  bootstrap: [AppComponent],
+  
+  entryComponents: [InfoSintomasComponent]
 })
 export class AppModule { }

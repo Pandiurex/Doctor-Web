@@ -6,6 +6,6 @@ import { ModificarSintomasComponent} from './modificar-sintomas/modificar-sintom
 export const SintomasRoutes: Routes = [
     { path: 'add', component: AgregarSintomasComponent },
     { path: 'listar', component: ListarSintomasComponent},
-    { path: 'modificar', component: ModificarSintomasComponent},
+    { path: 'modificar/:hash', component: ModificarSintomasComponent},
     { path: '**', pathMatch: 'full', redirectTo: 'listar' }
 ];
