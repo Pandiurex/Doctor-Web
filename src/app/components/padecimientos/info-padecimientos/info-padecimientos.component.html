@@ -1,39 +1,35 @@
-
-<div class="modal fade" id="infoPad" aria-labelledby="info"
-aria-hidden="true">
-<div class="modal-dialog modal-dialog-scrollable">
-  <div class="modal-content">
+<div class="myMod">
     <div class="modal-header">
       <h5 class="modal-title" id="info">Detalles de padecimiento</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <button type="button" class="close" (click)="activeModal.dismiss('Cross click')" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
     <label>Nombre del padecimiento</label>
-    <input type="text"  value="Nombre del padecimiento" disabled>
+    <input type="text"  value="{{padecimiento.nombre_pad}}" disabled>
 
     <label>Categoria del padecimiento</label>
-    <input type="text"  value="Categoria del padecimiento" disabled>
+    <input type="text"  value="{{padecimiento.categoria}}" disabled>
 
     <label>Descripcion del padecimiento</label>
-    <textarea rows="10" disabled>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        Aliquam massa ex, mollis maximus urna ac, faucibus pretium velit. In hac habitasse platea 
-        dictumst. Sed facilisis commodo viverra. Nullam tempor aliquam est nec sagittis. 
-        Nullam a erat bibendum purus aliquam ornare. Donec vitae mauris id risus ultricies convallis vulputate et mi. 
-        Vivamus convallis eros sed egestas sagittis. Nullam nec augue urna. Aenean nec tempus purus. 
-        Phasellus scelerisque a metus ut cursus.</textarea>
+    <textarea rows="10" disabled>{{padecimiento.descripcion}}</textarea>
 
+    <div *ngIf="hasInfo">
       <label>Imagen</label><br>
-      <img style="width:300px;height:200px;" src="../../../../assets/default-image.jpg">
+      <img class="center" style="width:300px;height:200px;" [src]="'data:image/jpg;base64,' + url">
+    </div>
     
+    <div *ngIf="!hasInfo">
+      <label>Imagen</label><br>
+      <img class="center"style="width:300px;height:200px;" [src]="url">
+    </div>
       <br><br>
     <label>Sintomas</label>
-    <input type="text"  value="Sintomas" disabled>
+    <textarea rows="10" disabled>{{sintomasCadena}}</textarea>
     </div>
     <div class="modal-footer" >
-      <button type="button" class="btn btn-secondary cancel" data-dismiss="modal" #cerrar>Volver</button>
+      <button type="button" class="btn btn-secondary cancel" (click)="activeModal.close('Close click')">Volver</button>
     </div>
-    </div>
-  </div>
 </div>
+    

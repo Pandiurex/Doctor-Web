@@ -84,6 +84,6 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   providers: [NgbActiveModal],
   bootstrap: [AppComponent],
   
-  entryComponents: [InfoSintomasComponent]
+  entryComponents: [InfoSintomasComponent, InfoPadecimientosComponent]
 })
 export class AppModule { }

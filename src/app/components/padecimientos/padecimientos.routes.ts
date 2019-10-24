@@ -6,6 +6,6 @@ import { ModificarPadecimientosComponent} from './modificar-padecimientos/modifi
 export const PadecimientosRoutes: Routes = [
     { path: 'add', component: AgregarPadecimientosComponent },
     { path: 'listar', component: ListarPadecimientosComponent},
-    { path: 'modificar', component: ModificarPadecimientosComponent},
+    { path: 'modificar/:hash', component: ModificarPadecimientosComponent},
     { path: '**', pathMatch: 'full', redirectTo: 'listar' }
 ];
