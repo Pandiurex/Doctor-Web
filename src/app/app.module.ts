@@ -1,9 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -38,6 +35,7 @@ import { UsuarioInfoComponent} from './components/usuario/usuarioInfo/usuarioInf
 import { InfoPadecimientosComponent } from './components/padecimientos/info-padecimientos/info-padecimientos.component';
 import { BDCComponent } from './components/bdc/bdc.component';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { JwPaginationComponent} from 'jw-angular-pagination';
 
 @NgModule({
   declarations: [
@@ -68,7 +66,8 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     ResetPasswordComponent,
     UsuarioInfoComponent,
     InfoPadecimientosComponent,
-    BDCComponent
+    BDCComponent,
+    JwPaginationComponent
   ],
   imports: [
     BrowserModule,

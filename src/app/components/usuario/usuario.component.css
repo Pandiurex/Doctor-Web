@@ -3,11 +3,9 @@
     z-index: 900;
     margin-top: 20px;
     text-align: left;
-    padding: 25px;
+    padding: 79px;
     margin-bottom: 20px;
-    border-style: solid;
-    border-radius: 2px;
-    border-color: rgb(124, 131, 132);
+    
   }
 
   .main-container input{
