@@ -6,17 +6,20 @@
 }
 
 .myCustomModalClass {
-  height: 100%;
   left: 0;
   position: fixed;
   top: 0;
-  width: 100%;
   background-color: transparent;
+  max-height: 100%;
 }
 
-.modal-content {
-  padding: 0;
-  border-radius: 0px;
+.myCustomModalClass .modal-content {
+  padding: 0px !important;
+  border-radius: 18px;
+}
+
+.card-footer{
+  background-color: transparent;
 }
 
 [type="radio"]:checked+span::after,
