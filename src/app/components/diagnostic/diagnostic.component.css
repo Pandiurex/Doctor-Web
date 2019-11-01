@@ -1,8 +1,15 @@
+.main-container {
+    position: relative;
+    z-index: 900;
+    margin-top: 20px;
+    text-align: center;
+    padding: 79px;
+    margin-bottom: 20px;
+    
+  }
+
 .margin-color {
     margin: 20px 0;
-    border-style: dotted;
-    border-color: red;
-    border-radius: 10px;
     text-align: center;
 }
 
@@ -11,11 +18,16 @@
 }
 
 .center {
+    margin: 10px 0;
+    text-align: center;
     color: white;
     background-color: #2196f3;
     font-size: 18px;
 }
 
+.btn{
+    margin-left: 5px;
+}
 .form-group select{
     width: 30%;
     display: inline-block;
