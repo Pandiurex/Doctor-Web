@@ -78,62 +78,73 @@ disparadorReglas(mt){
     return atomos;
 }
 
-desgloseReglas(regla : any){
-    let partes = regla.context.split("_");
-    let condicion,conclusion,atomo,obj;
-    condicion=conclusion=atomo=obj=false;
+
+  desgloseReglas(regla : any){
+    let partes = regla.atomos.split(",");
+    let conclusion = regla.atomo_conclusion.split(",");
+    let negado = false;
+    let unions = [];
+    let concUnions = [];
+    let obj = false;
+    if(regla.es_obj==1){
+        obj = true;
+    }
+
+    this.objetivo=obj;
 
     partes.forEach(parte =>{
-        switch(parte){
-            case "<atomo>": atomo=true;
-                            obj=false;
-                            break;
-            
-            case "</atomo>": atomo=false;
-                             obj=false;
-                             break;
-                            
-            case "<atomoObj>": atomo=true;
-                               obj=true;
-                               this.objetivo=true;
-                               break;
+        switch(parte){  
+            case "!": negado = true;
+                      break;
 
-            case "</atomoObj>": atomo=false;
-                                obj=false;
-                                break;
+            case "&": unions.push(parte);
+                      break;
             
-            case "<condicion>": condicion=true;
-                                break;
-            
-            case "</condicion>": condicion=false;
-                                 break;
-            
-            case "<conclusion>": conclusion=true;
-                                 break;
-                        
-            case "</conclusion>": conclusion=false;
-                                  break;
-                
-            case "<negacion/>": if(condicion&&!conclusion) this.partesCondicion.push("~");
-                                if(conclusion&&!condicion) this.partesConclusion.push("~");
-                                break;
-
-            case "<conjuncion/>": if(condicion&&!conclusion) this.partesCondicion.push("&");
-                                  if(conclusion&&!condicion) this.partesConclusion.push("&");
-                                  break;
-            
-            case "<disyuncion/>": if(condicion&&!conclusion) this.partesCondicion.push("|");
-                                  if(conclusion&&!condicion) this.partesConclusion.push("|");
+            case "|": unions.push(parte);
                                   break;
 
-            default: if(atomo){
-                let atomoRegla = new Atomo(parte,true,obj);
-                if(condicion&&!conclusion&&!obj) this.partesCondicion.push(atomoRegla);
-                if(conclusion&&!condicion) this.partesConclusion.push(atomoRegla);
-            }
+            default: 
+                let atomoRegla = new Atomo(parte,true,false);
+                this.partesCondicion.push(atomoRegla);
+                if(negado==true){
+                    this.partesCondicion.push("~");
+                    negado=false;
+                }
             break;
         }
     });
+
+    unions.forEach(char => {
+        this.partesCondicion.push(char);
+    });
+
+    conclusion.forEach(conc =>{
+        switch(conc){  
+            case "!": negado = true;
+                      break;
+
+            case "&": concUnions.push(conc);
+                      break;
+            
+            case "|": concUnions.push(conc);
+                      break;
+
+            default: 
+                let atomoRegla = new Atomo(conc,true,obj);
+                this.partesConclusion.push(atomoRegla);
+                if(negado==true){
+                    this.partesConclusion.push("~");
+                    negado=false;
+                }
+            break;
+        }
+    });
+
+    concUnions.forEach(char => {
+        this.partesConclusion.push(char);
+    });
+
     return this;
   }
+
 }

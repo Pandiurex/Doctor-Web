@@ -38,10 +38,12 @@ export class DiagnosticComponent implements OnInit {
       //this.hasPregunta = true;
       console.log(res.body);
       
-      res.body.reglas.forEach(element => {
+     res.body.reglas.forEach(element => {
         let rule = new Regla();
         this.baseConocimiento.push(rule.desgloseReglas(element));
       });
+
+      console.log(this.baseConocimiento);
       this.hasPregunta = true;
       this.inferencia();
     }, error =>{
@@ -115,7 +117,7 @@ export class DiagnosticComponent implements OnInit {
         }
 
         if(this.reglaEvaluar.objetivo===true){
-
+          console.log(this.reglaEvaluar.partesConclusion[0].desc)
           this.message="Usted padece de : " + this.reglaEvaluar.partesConclusion[0].desc;
           this.hasResult=true;
         }
@@ -130,7 +132,7 @@ export class DiagnosticComponent implements OnInit {
       console.log(this.memoriaDeTrabajo)
       console.log(this.contador);
       console.log(this.baseConocimiento.length);
-      if(this.contador<this.baseConocimiento.length){
+      if(this.contador<this.baseConocimiento.length && this.hasResult==false){
       this.inferencia();
       }else if(this.hasResult==false){
         this.message="Lo sentimos, no se pudo encontrar su padecimiento conforme sus respuestas";
