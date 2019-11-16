@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     if(res.body.message=="Verificacion"){
       this.toast.info('Su cuenta aun no se encuentra verificada, favor de verificarla mediante su correo.', 'Cuenta sin verificar');
     }else{
-    this.toast.success('Bienvenido al sistema Medic Path ' +  res.body.usuario, 'Éxito!');
+    this.toast.success('Bienvenido al sistema Medic Path ' +  res.body.usuario.nickname, 'Éxito!');
     this.cerrar.nativeElement.click();
     //Pending
     //Guardar sesion de usuario
