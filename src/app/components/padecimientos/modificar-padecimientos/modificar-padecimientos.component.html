@@ -58,20 +58,17 @@
             </div>
     
             <div class="form-row">
-              <div class="col">
-                <label>Sintomas</label>
-                <select multiple formControlName="sintomas" name="sintomas"  class="form-control" (change)="seleccionSintomas()">
-                  <option *ngFor="let sint of sintomas" [value]="sint.idSint" [hidden]="isAlreadySelected(sint.idSint)">{{sint.nombre_sint}}</option>
-                </select>
+              <div class="col" cdk-scrollable style="height: 300px; overflow-y:scroll" >
+                <div class="col" cdkDropList [cdkDropListData]="sintomas" [cdkDropListConnectedTo]="secondList" #firstList="cdkDropList" (cdkDropListDropped)="drop($event)">
+                  <legend style="margin-left: 42%">Sintomas</legend>
+                  <div *ngFor="let sint of sintomas" class="list" cdkDrag>{{sint.nombre_sint}}</div>
+                </div>
               </div>
-              <div class="col">
-                <label>Sintomas Seleccionados</label>
-                <select multiple formControlName="sintomasSeleccionados" name="sintomasSelected"  class="form-control" (change)="quitarSintomas()">
-                  <option *ngFor="let selected of selectedSints" [value]="selected.idSint">{{selected.nombre_sint}}</option>
-                </select>
+                <div class="col" cdkDropList [cdkDropListData]="selectedSints" [cdkDropListConnectedTo]="firstList" #secondList="cdkDropList" (cdkDropListDropped)="drop($event)">
+                  <legend style="margin-left: 42%">Sintomas Seleccionados</legend>
+                  <div *ngFor="let selected of selectedSints" class="list" cdkDrag>{{selected.nombre_sint}}</div>
+                </div>
               </div>
-  
-            </div>
     
             <a routerLink="listar" routerLinkActive="active"><button type="button" class="btn btn-secondary cancel">Volver</button></a>    
 

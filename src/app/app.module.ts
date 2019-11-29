@@ -36,6 +36,8 @@ import { InfoPadecimientosComponent } from './components/padecimientos/info-pade
 import { BDCComponent } from './components/bdc/bdc.component';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JwPaginationComponent} from 'jw-angular-pagination';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -78,7 +80,9 @@ import { JwPaginationComponent} from 'jw-angular-pagination';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    NgbModule
+    NgbModule,
+    DragDropModule,
+    ScrollingModule
     ],
   providers: [NgbActiveModal],
   bootstrap: [AppComponent],

@@ -63,18 +63,23 @@
           </div>
         </div>
 
-        <div class="form-group row" *ngIf="isChecked">
-            <div class="col-md-8">
-              <label>Componentes</label>
-              <select formControlName="componentes" name="componentes"  class="form-control" (change)="creacionComposicion()">
-                <option value="">Seleccione los componentes</option>
-                <option *ngFor="let comp of compuestos" [value]="comp.idSint" [hidden]="isTheSame(comp.nombre_sint)" >{{comp.nombre_sint}}</option>
-              </select>
+        <div class="form-row" *ngIf="isChecked">
+            <legend>Componentes</legend>
+            <div class="col">
+              <div class="col" cdk-scrollable style="height: 300px; overflow-y:scroll" >
+                <div class="col" cdkDropList [cdkDropListData]="compuestos" [cdkDropListConnectedTo]="secondList" #firstList="cdkDropList" (cdkDropListDropped)="drop($event)">
+                  <legend style="margin-left: 40%">Componentes</legend>
+                  <div *ngFor="let comp of compuestos" class="list" cdkDrag>{{comp.nombre_sint}}</div>
+                </div>
+              </div>
             </div>
 
-            <div class="col-md-8">
-              <input formControlName="composite" class="form-control descripcion" type="text"
-                placeholder="Composicion del sintoma" (change)="cambioContextual()">
+            <div class="col">
+              <div class="col" cdkDropList [cdkDropListData]="selectedCompuestos" [cdkDropListConnectedTo]="firstList" #secondList="cdkDropList" (cdkDropListDropped)="drop($event)">
+                  <legend style="margin-left: 22%">Componentes Seleccionados</legend>
+                  <div *ngFor="let selected of selectedCompuestos" class="list" cdkDrag>{{selected.nombre_sint}}</div>
+              </div>
+              
             </div>
 
           </div>

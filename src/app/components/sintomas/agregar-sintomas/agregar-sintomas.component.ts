@@ -4,6 +4,7 @@ import { SintomasService } from '../sintomas.service';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-agregar-sintomas',
@@ -29,6 +30,7 @@ export class AgregarSintomasComponent implements OnInit {
   ];
 
   public compuestos : any = [];
+  public selectedCompuestos : any = [];
   public composicionFront : string = "";
   public composicionBack : string = "";
 
@@ -47,6 +49,7 @@ export class AgregarSintomasComponent implements OnInit {
   ngOnInit() {
       this.sintServ.getComponents().subscribe(res =>{
         this.compuestos = res.body;
+        console.log(this.compuestos);
       })
   }
 
@@ -61,7 +64,7 @@ export class AgregarSintomasComponent implements OnInit {
       .set('compuesto', 'false')
       .set('composicion', '')
     }else{
-      this.nameToId(this.composicionFront);
+      this.nameToId();
       this.values = new HttpParams()
       .set('nombre_sint', this.sintomas.value.nombre)
       .set('categoria_sint', this.sintomas.value.categoria)
@@ -84,6 +87,17 @@ export class AgregarSintomasComponent implements OnInit {
   changed(evt){
     this.isChecked = evt.target.checked;
     console.log(evt.target.checked);
+  }
+
+  drop(event: CdkDragDrop<string[]>){
+    if(event.previousContainer !== event.container){
+      transferArrayItem(event.previousContainer.data,event.container.data,
+                        event.previousIndex, event.currentIndex);
+                        console.log(this.selectedCompuestos);
+    }else{
+      moveItemInArray(this.compuestos, event.previousIndex, event.currentIndex);
+      console.log(this.selectedCompuestos);
+    }
   }
 
   creacionComposicion(){
@@ -109,16 +123,14 @@ export class AgregarSintomasComponent implements OnInit {
     this.composicionFront = this.sintomas.value.composite;
   }
 
-  nameToId(componentes : string){
-    let nombres = componentes.split("_");
-    for(let nombre of nombres){
-      let item = this.compuestos.find(s => s.nombre_sint == nombre )
+  nameToId(){
+    for(let sintoma of this.selectedCompuestos){
 
-      if(item != null){
+      if(sintoma != null){
         if(this.composicionBack==""){
-          this.composicionBack += item.idSint;
+          this.composicionBack += sintoma.idSint;
           }else{
-          this.composicionBack += ",&," + item.idSint;
+          this.composicionBack += ",&," + sintoma.idSint;
           }
       }
     }

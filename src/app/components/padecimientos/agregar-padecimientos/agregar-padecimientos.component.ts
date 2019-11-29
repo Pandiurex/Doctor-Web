@@ -5,7 +5,7 @@ import { SintomasService } from '../../sintomas/sintomas.service';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-agregar-padecimientos',
   templateUrl: './agregar-padecimientos.component.html',
@@ -61,48 +61,15 @@ export class AgregarPadecimientosComponent implements OnInit {
     console.log(this.formData.get('image'));
   }
 
-  seleccionSintomas(){
-    var id = this.padecimiento.value.sintomas;
-
-    console.log(id);
-
-    let item = this.sintomas.find(s => s.idSint == id );
-
-    console.log(item);
-
-    this.selectedSints.push(item);
-
-    this.sintomas = this.sintomas.filter(function(value,index, arr){
-      return value != item;
-    });
-  }
-
-  isAlreadySelected(elemento : any){
-    
-    this.selectedSints.forEach(element => {
-      if(elemento == element.idSint){
-        return true;
-      }
-    });
-    return false;
-  }
-
-  quitarSintomas(){
-    var id = this.padecimiento.value.sintomasSeleccionados;
-
-    console.log(id);
-
-    let item = this.selectedSints.find(s => s.idSint == id );
-
-    console.log(item);
-
-    this.selectedSints = this.selectedSints.filter(function(value,index, arr){
-      return value != item;
-    });
-
-    this.sintomas.push(item);
-    console.log(this.selectedSints);
-
+  drop(event: CdkDragDrop<string[]>){
+    if(event.previousContainer !== event.container){
+      transferArrayItem(event.previousContainer.data,event.container.data,
+                        event.previousIndex, event.currentIndex);
+                        console.log(this.selectedSints);
+    }else{
+      moveItemInArray(this.sintomas, event.previousIndex, event.currentIndex);
+      console.log(this.selectedSints);
+    }
   }
 
   guardar(){

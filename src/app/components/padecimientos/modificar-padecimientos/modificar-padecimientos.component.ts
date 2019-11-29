@@ -6,7 +6,7 @@ import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router, ActivatedRoute} from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Padecimiento } from '../../../interfaces/padecimiento.interface';
-
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-modificar-padecimientos',
   templateUrl: './modificar-padecimientos.component.html',
@@ -86,6 +86,16 @@ export class ModificarPadecimientosComponent implements OnInit {
     console.log(this.formData.get('image'));
   }
 
+  drop(event: CdkDragDrop<string[]>){
+    if(event.previousContainer !== event.container){
+      transferArrayItem(event.previousContainer.data,event.container.data,
+                        event.previousIndex, event.currentIndex);
+                        console.log(this.selectedSints);
+    }else{
+      moveItemInArray(this.sintomas, event.previousIndex, event.currentIndex);
+      console.log(this.selectedSints);
+    }
+  }
   seleccionSintomas(){
     var id = this.modify.value.sintomas;
 

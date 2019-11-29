@@ -5,6 +5,7 @@ import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router, ActivatedRoute} from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Sintoma } from '../../../interfaces/sintoma.interface';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-modificar-sintomas',
@@ -30,6 +31,7 @@ export class ModificarSintomasComponent implements OnInit {
   ];
 
   public compuestos : any = [];
+  public selectedCompuestos : any = [];
   public sintoma : Sintoma = {} as any;
   public  isChecked : boolean;
   public composicionFront : string = "";
@@ -56,12 +58,22 @@ export class ModificarSintomasComponent implements OnInit {
       this.sintoma = res.body.sintoma;
 
       if(this.sintoma.compuesto==true){
-        for(let item of res.body.compuestos){
-          this.sintoma.composicion = this.sintoma.composicion.replace(item.idSint,item.nombre_sint);
-        }
+        this.selectedCompuestos = res.body.compuestos;
+
+        this.selectedCompuestos.forEach(element => {
+          let item = this.compuestos.find(s => s.idSint == element.idSint );
+    
+          this.compuestos = this.compuestos.filter(function(value,index, arr){
+            return value != item;
+          });
+
+          console.log(this.compuestos);
+        });
+
       }
 
-      console.log(this.sintoma);
+      
+      console.log(this.selectedCompuestos);
       this.composicionFront = this.sintoma.composicion.replace(/,/g,'_');
       this.modify.patchValue({
         nombre : this.sintoma.nombre_sint,
@@ -86,6 +98,17 @@ export class ModificarSintomasComponent implements OnInit {
     console.log(evt.target.checked);
   }
 
+  drop(event: CdkDragDrop<string[]>){
+    if(event.previousContainer !== event.container){
+      transferArrayItem(event.previousContainer.data,event.container.data,
+                        event.previousIndex, event.currentIndex);
+                        console.log(this.selectedCompuestos);
+    }else{
+      moveItemInArray(this.compuestos, event.previousIndex, event.currentIndex);
+      console.log(this.selectedCompuestos);
+    }
+  }
+
   modificar(){
     if(this.isChecked==false){
       this.values = new HttpParams()
@@ -96,7 +119,7 @@ export class ModificarSintomasComponent implements OnInit {
       .set('compuesto', 'false')
       .set('composicion', '')
     }else{
-      this.nameToId(this.composicionFront);
+      this.nameToId();
       this.values = new HttpParams()
       .set('nombre_sint', this.modify.value.nombre)
       .set('categoria_sint', this.modify.value.categoria)
@@ -141,21 +164,18 @@ export class ModificarSintomasComponent implements OnInit {
     console.log(this.compuestos);
   }
 
-  nameToId(componentes : string){
-    let nombres = componentes.split("_");
-    for(let nombre of nombres){
-      console.log(nombre);
-      let item = this.compuestos.find(s => s.nombre_sint == nombre ) as any;
-      console.log(item);
-      if(item != null){
-        if(this.composicionBack==""){
-          this.composicionBack += item.idSint;
-          }else{
-          this.composicionBack += ",&," + item.idSint;
+  nameToId(){
+    for(let sintoma of this.selectedCompuestos){
+      
+            if(sintoma != null){
+              if(this.composicionBack==""){
+                this.composicionBack += sintoma.idSint;
+                }else{
+                this.composicionBack += ",&," + sintoma.idSint;
+                }
+            }
           }
-      }
-    }
-    console.log(this.composicionBack);
+  console.log(this.composicionBack);
   }
 
   isTheSame(compuesto : any){
