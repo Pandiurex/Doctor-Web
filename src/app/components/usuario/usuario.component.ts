@@ -4,7 +4,6 @@ import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Usuario } from '../../interfaces/usuario.interface';
 
-import paginate = require('jw-paginate');
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.component.html',
@@ -12,13 +11,7 @@ import paginate = require('jw-paginate');
   providers: [UsuarioService],
 })
 export class UsuarioComponent implements OnInit {
-  @Input() items : Array<any>
-  @Output() changePage = new EventEmitter<any>(true);
-  @Input() initialPage = 1;
-  @Input() pageSize = 10;
-  @Input() maxPages = 200;
-  paginado: any = {};
-  itemsPagina: Array<any>;
+ pagina = 0;
 
   private users : Usuario[] = [];
   private doctors : Usuario[] = [];
@@ -42,7 +35,7 @@ export class UsuarioComponent implements OnInit {
         console.log("Ok");
       }
       this.users = this.doctors;
-      this.setPage(this.initialPage);
+      this.pagina=1;
     },
   error =>{
       console.log(error);
@@ -54,10 +47,10 @@ export class UsuarioComponent implements OnInit {
     
         if(tipo=="Paciente"){
           this.users=this.patients;
-          this.setPage(this.initialPage);
+          this.pagina=1;
         }else{
           this.users=this.doctors;
-          this.setPage(this.initialPage);
+          this.pagina=1;
         }
 
         tabcontent = document.getElementsByClassName("tabcontent");
@@ -76,19 +69,7 @@ export class UsuarioComponent implements OnInit {
         active[0].className += " active";
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.items.currentValue !== changes.items.previousValue) {
-      this.setPage(this.initialPage);
-    }
+  filtering(){
+    this.pagina=1;
   }
-
-  private setPage(pagina : number){
-    console.log(this.users)
-    this.paginado = paginate(this.users.length,pagina, this.pageSize, this.maxPages);
-
-    this.itemsPagina = this.users.slice(this.paginado.startIndex, this.paginado.endIndex + 1);
-
-    this.changePage.emit(this.itemsPagina);
-  }
-
 }

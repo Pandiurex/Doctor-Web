@@ -1,3 +1,7 @@
+<div class="search">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Nombre del padecimiento" [(ngModel)]="myFilter" (ngModelChange)="filtering()">
+</div>
 <table>
         <tr>
             <th>Padecimiento</th>
@@ -5,7 +9,7 @@
             <th>Categoria</th>
             <th>Acciones</th>
         </tr>
-        <tr ng-if="padecimientos.length>0" *ngFor="let padecimiento of itemsPagina">
+        <tr ng-if="padecimientos.length>0" *ngFor="let padecimiento of padecimientos | ListFilter: 'nombre_pad' : myFilter | paginate:{itemsPerPage: 10, currentPage:pagina}">
                 <th>{{padecimiento.nombre_pad}}</th>
                 <th>{{ padecimiento.descripcion}}</th>
                 <th>{{ padecimiento.categoria}}</th>
@@ -16,23 +20,7 @@
             <th colspan="4">No hay registro de padecimientos en el sistema</th>
         </tr>
 </table>
-
-<div style="float:right" class="card-footer pb-0 pt-3">
-    <ul *ngIf="paginado.pages && paginado.pages.length" class="pagination">
-        <li [ngClass]="{disabled:paginado.currentPage === 1}" class="page-item first-item">
-            <a (click)="setPage(1)" class="page-link">Primera</a>
-        </li>
-        <li [ngClass]="{disabled:paginado.currentPage === 1}" class="page-item previous-item">
-            <a (click)="setPage(paginado.currentPage - 1)" class="page-link">Anterior</a>
-        </li>
-        <li *ngFor="let page of paginado.pages" [ngClass]="{active:paginado.currentPage === page}" class="page-item number-item">
-            <a (click)="setPage(page)" class="page-link">{{page}}</a>
-        </li>
-        <li [ngClass]="{disabled:paginado.currentPage === paginado.totalPages}" class="page-item next-item">
-            <a (click)="setPage(paginado.currentPage + 1)" class="page-link">Siguiente</a>
-        </li>
-        <li [ngClass]="{disabled:paginado.currentPage === paginado.totalPages}" class="page-item last-item">
-            <a (click)="setPage(paginado.totalPages)" class="page-link">Última</a>
-        </li>
-      </ul>
-</div>
+<pagination-controls (pageChange)="pagina = $event"
+previousLabel="Anterior"
+nextLabel="Siguiente"
+autoHide="true"></pagination-controls>

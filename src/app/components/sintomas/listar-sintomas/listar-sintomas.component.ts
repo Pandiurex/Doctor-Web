@@ -6,7 +6,6 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InfoSintomasComponent } from '../info-sintomas/info-sintomas.component';
 
-import paginate = require('jw-paginate');
 
 @Component({
   selector: 'app-listar-sintomas',
@@ -17,14 +16,8 @@ import paginate = require('jw-paginate');
 })
 
 export class ListarSintomasComponent implements OnInit {
-
-  @Input() items : Array<any>
-  @Output() changePage = new EventEmitter<any>(true);
-  @Input() initialPage = 1;
-  @Input() pageSize = 10;
-  @Input() maxPages = 10;
-  paginado: any = {};
-  itemsPagina: Array<any>;
+  
+ pagina = 0;
   
   private sintomas : Sintoma[] = [];
   constructor(private sintServ : SintomasService, private http : HttpClient, private modalService: NgbModal) { 
@@ -36,7 +29,7 @@ export class ListarSintomasComponent implements OnInit {
       this.sintomas = res.body;
 
       if(this.sintomas){
-        this.setPage(this.initialPage);
+        this.pagina = 1;
       }
     },
   error =>{
@@ -51,17 +44,7 @@ export class ListarSintomasComponent implements OnInit {
     modalRef.componentInstance.sintoma = sint;
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.items.currentValue !== changes.items.previousValue) {
-      this.setPage(this.initialPage);
-    }
-  }
-
-  private setPage(pagina : number){
-    this.paginado = paginate(this.sintomas.length,pagina, this.pageSize, this.maxPages);
-
-    this.itemsPagina = this.sintomas.slice(this.paginado.startIndex, this.paginado.endIndex + 1);
-
-    this.changePage.emit(this.itemsPagina);
+  filtering(){
+    this.pagina=1;
   }
 }

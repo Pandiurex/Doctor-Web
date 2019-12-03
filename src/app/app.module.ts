@@ -35,10 +35,10 @@ import { UsuarioInfoComponent} from './components/usuario/usuarioInfo/usuarioInf
 import { InfoPadecimientosComponent } from './components/padecimientos/info-padecimientos/info-padecimientos.component';
 import { BDCComponent } from './components/bdc/bdc.component';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JwPaginationComponent} from 'jw-angular-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {ScrollingModule} from '@angular/cdk/scrolling';
-
+import { ListFilter } from './pipes/filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +69,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     UsuarioInfoComponent,
     InfoPadecimientosComponent,
     BDCComponent,
-    JwPaginationComponent
+    ListFilter
   ],
   imports: [
     BrowserModule,
@@ -82,7 +82,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     ToastrModule.forRoot(),
     NgbModule,
     DragDropModule,
-    ScrollingModule
+    ScrollingModule,
+    NgxPaginationModule
     ],
   providers: [NgbActiveModal],
   bootstrap: [AppComponent],

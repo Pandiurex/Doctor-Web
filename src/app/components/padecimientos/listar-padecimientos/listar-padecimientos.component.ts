@@ -4,7 +4,6 @@ import { PadecimientoService } from '../padecimientos.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InfoPadecimientosComponent } from '../info-padecimientos/info-padecimientos.component';
 
-import paginate = require('jw-paginate');
 @Component({
   selector: 'app-listar-padecimientos',
   templateUrl: './listar-padecimientos.component.html',
@@ -12,14 +11,8 @@ import paginate = require('jw-paginate');
   providers: [PadecimientoService]
 })
 export class ListarPadecimientosComponent implements OnInit {
-  @Input() items : Array<any>
-  @Output() changePage = new EventEmitter<any>(true);
-  @Input() initialPage = 1;
-  @Input() pageSize = 10;
-  @Input() maxPages = 10;
-  paginado: any = {};
-  itemsPagina: Array<any>;
-
+  
+  pagina = 0;
   private padecimientos : Padecimiento[] = [];
   constructor(private padServ : PadecimientoService, private modalService : NgbModal) { 
 
@@ -30,7 +23,7 @@ export class ListarPadecimientosComponent implements OnInit {
       this.padecimientos = res.body;
 
       if(this.padecimientos){
-        this.setPage(this.initialPage);
+        this.pagina=1;
       }
     },
   error =>{
@@ -43,17 +36,7 @@ export class ListarPadecimientosComponent implements OnInit {
     modalRef.componentInstance.pad = pad;
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.items.currentValue !== changes.items.previousValue) {
-      this.setPage(this.initialPage);
-    }
-  }
-
-  private setPage(pagina : number){
-    this.paginado = paginate(this.padecimientos.length,pagina, this.pageSize, this.maxPages);
-
-    this.itemsPagina = this.padecimientos.slice(this.paginado.startIndex, this.paginado.endIndex + 1);
-
-    this.changePage.emit(this.itemsPagina);
+  filtering(){
+    this.pagina=1;
   }
 }

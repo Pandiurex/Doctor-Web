@@ -1,9 +1,14 @@
+
 <div class="container main-container">
+    <div class="search">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Nombre del usuario" [(ngModel)]="myFilter" (ngModelChange)="filtering()">
+    </div>
     <div class="tab">
         <button name="Doctor" class="tablinks" (click)="changeTab('Doctor')" id="defaultOpen">Doctores</button>
         <button name="Paciente" class="tablinks" (click)="changeTab('Paciente')">Pacientes</button>
     </div>
-
+    
     <div id="Doctor" class="tabcontent">
         <table>
         <tr>
@@ -13,7 +18,7 @@
             <th>Creación</th>
             <th>Enabled</th>
         </tr>
-        <tr ng-if="doctors.length>0" *ngFor="let doctor of itemsPagina">
+        <tr ng-if="doctors.length>0" *ngFor="let doctor of users | ListFilter: 'nombres' : myFilter | paginate:{itemsPerPage: 1, currentPage:pagina}">
         <a routerLink="info/{{doctor.id}}"><th>{{doctor.nombres}}</th></a>
                 <th>{{ doctor.nickname}}</th>
                 <th>{{ doctor.email}}</th>
@@ -35,7 +40,7 @@
                 <th>Creación</th>
                 <th>Enabled</th>
             </tr>
-            <tr ng-if="patients.length>0" *ngFor="let patient of itemsPagina">
+            <tr ng-if="patients.length>0" *ngFor="let patient of users | ListFilter: 'nombres' : myFilter | paginate:{itemsPerPage: 1, currentPage:pagina}">
                 <a routerLink="info/{{patient.id}}"><th>{{patient.nombres}}</th></a>
                     <th>{{ patient.nickname}}</th>
                     <th>{{ patient.email}}</th>
@@ -48,26 +53,10 @@
         </table>
     </div>
 
-    <div style="float:right" class="card-footer pb-0 pt-3" >
-            <ul *ngIf="paginado.pages && paginado.pages.length" class="pagination">
-                <li [ngClass]="{disabled:paginado.currentPage === 1}" class="page-item first-item">
-                    <a (click)="setPage(1)" class="page-link">Primera</a>
-                </li>
-                <li [ngClass]="{disabled:paginado.currentPage === 1}" class="page-item previous-item">
-                    <a (click)="setPage(paginado.currentPage - 1)" class="page-link">Anterior</a>
-                </li>
-                <li *ngFor="let page of paginado.pages" [ngClass]="{active:paginado.currentPage === page}" class="page-item number-item">
-                    <a (click)="setPage(page)" class="page-link">{{page}}</a>
-                </li>
-                <li [ngClass]="{disabled:paginado.currentPage === paginado.totalPages}" class="page-item next-item">
-                    <a (click)="setPage(paginado.currentPage + 1)" class="page-link">Siguiente</a>
-                </li>
-                <li [ngClass]="{disabled:paginado.currentPage === paginado.totalPages}" class="page-item last-item">
-                    <a (click)="setPage(paginado.totalPages)" class="page-link">Última</a>
-                </li>
-              </ul>
-        </div>
-</div>
+    <pagination-controls (pageChange)="pagina = $event"
+    previousLabel="Anterior"
+    nextLabel="Siguiente"
+    autoHide="true"></pagination-controls>
 
 
 
