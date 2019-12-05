@@ -18,8 +18,9 @@ import { InfoSintomasComponent } from '../info-sintomas/info-sintomas.component'
 export class ListarSintomasComponent implements OnInit {
   
  pagina = 0;
-  
   private sintomas : Sintoma[] = [];
+  key :string = 'nombre_sint';
+  reversa : boolean = false;
   constructor(private sintServ : SintomasService, private http : HttpClient, private modalService: NgbModal) { 
 
   }
@@ -46,5 +47,10 @@ export class ListarSintomasComponent implements OnInit {
 
   filtering(){
     this.pagina=1;
+  }
+
+  sorting(key : any){
+    this.key = key;
+    this.reversa = !this.reversa;
   }
 }

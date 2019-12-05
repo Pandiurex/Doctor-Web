@@ -4,12 +4,16 @@
 </div>
 <table>
         <tr>
-            <th>Padecimiento</th>
+            <th (click)="sorting('nombre_pad')" >Padecimiento
+                <span class="fas" *ngIf="key == 'nombre_pad'" [ngClass]="{'fa-chevron-up':reversa==true,'fa-chevron-down':reversa==false}"></span>    
+            </th>
             <th>Descripcion</th>
-            <th>Categoria</th>
+            <th (click)="sorting('categoria')">Categoria
+                <span class="fas" *ngIf="key == 'categoria'" [ngClass]="{'fa-chevron-up':reversa==true,'fa-chevron-down':reversa==false}"></span>     
+            </th>
             <th>Acciones</th>
         </tr>
-        <tr ng-if="padecimientos.length>0" *ngFor="let padecimiento of padecimientos | ListFilter: 'nombre_pad' : myFilter | paginate:{itemsPerPage: 10, currentPage:pagina}">
+        <tr ng-if="padecimientos.length>0" *ngFor="let padecimiento of padecimientos | orderBy : key : reversa : true | ListFilter: 'nombre_pad' : myFilter | paginate:{itemsPerPage: 10, currentPage:pagina}">
                 <th>{{padecimiento.nombre_pad}}</th>
                 <th>{{ padecimiento.descripcion}}</th>
                 <th>{{ padecimiento.categoria}}</th>

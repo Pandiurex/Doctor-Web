@@ -12,13 +12,17 @@
     <div id="Doctor" class="tabcontent">
         <table>
         <tr>
-            <th>Nombre</th>
+            <th (click)="sorting('nombres')">Nombre
+                <span class="fas" *ngIf="key == 'nombres'" [ngClass]="{'fa-chevron-up':reversa==true,'fa-chevron-down':reversa==false}"></span>                
+            </th>
             <th>Nickname</th>
             <th>Email</th>
-            <th>Creación</th>
+            <th (click)="sorting('createdAt')">Creación
+                <span class="fas" *ngIf="key == 'createdAt'" [ngClass]="{'fa-chevron-up':reversa==true,'fa-chevron-down':reversa==false}"></span>                
+            </th>
             <th>Enabled</th>
         </tr>
-        <tr ng-if="doctors.length>0" *ngFor="let doctor of users | ListFilter: 'nombres' : myFilter | paginate:{itemsPerPage: 1, currentPage:pagina}">
+        <tr ng-if="doctors.length>0" *ngFor="let doctor of users | orderBy : key : reversa : true | ListFilter: 'nombres' : myFilter | paginate:{itemsPerPage: 10, currentPage:pagina}">
         <a routerLink="info/{{doctor.id}}"><th>{{doctor.nombres}}</th></a>
                 <th>{{ doctor.nickname}}</th>
                 <th>{{ doctor.email}}</th>
@@ -34,13 +38,17 @@
     <div id="Paciente" class="tabcontent">
         <table>
             <tr>
-                <th>Nombre</th>
+                <th (click)="sorting('nombres')">Nombre
+                    <span class="fas" *ngIf="key == 'nombres'" [ngClass]="{'fa-chevron-up':reversa==true,'fa-chevron-down':reversa==false}"></span>                
+                </th>
                 <th>Nickname</th>
                 <th>Email</th>
-                <th>Creación</th>
+                <th (click)="sorting('createdAt')">Creación
+                    <span class="fas" *ngIf="key == 'createdAt'" [ngClass]="{'fa-chevron-up':reversa==true,'fa-chevron-down':reversa==false}"></span>                
+                </th>
                 <th>Enabled</th>
             </tr>
-            <tr ng-if="patients.length>0" *ngFor="let patient of users | ListFilter: 'nombres' : myFilter | paginate:{itemsPerPage: 1, currentPage:pagina}">
+            <tr ng-if="patients.length>0" *ngFor="let patient of users | orderBy : key : reversa : true | ListFilter: 'nombres' : myFilter | paginate:{itemsPerPage: 10, currentPage:pagina}">
                 <a routerLink="info/{{patient.id}}"><th>{{patient.nombres}}</th></a>
                     <th>{{ patient.nickname}}</th>
                     <th>{{ patient.email}}</th>

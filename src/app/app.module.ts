@@ -39,6 +39,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { ListFilter } from './pipes/filter.pipe';
+import { OrderModule } from 'ngx-order-pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -83,7 +85,8 @@ import { ListFilter } from './pipes/filter.pipe';
     NgbModule,
     DragDropModule,
     ScrollingModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    OrderModule
     ],
   providers: [NgbActiveModal],
   bootstrap: [AppComponent],

@@ -14,6 +14,8 @@ export class ListarPadecimientosComponent implements OnInit {
   
   pagina = 0;
   private padecimientos : Padecimiento[] = [];
+  key :string = 'nombre_pad';
+  reversa : boolean = false;
   constructor(private padServ : PadecimientoService, private modalService : NgbModal) { 
 
   }
@@ -38,5 +40,10 @@ export class ListarPadecimientosComponent implements OnInit {
 
   filtering(){
     this.pagina=1;
+  }
+
+  sorting(key : any){
+    this.key = key;
+    this.reversa = !this.reversa;
   }
 }

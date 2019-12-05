@@ -16,6 +16,8 @@ export class UsuarioComponent implements OnInit {
   private users : Usuario[] = [];
   private doctors : Usuario[] = [];
   private patients : Usuario[] = [];
+  key :string = 'nombres';
+  reversa : boolean = false;
   constructor(private userServ : UsuarioService, private http : HttpClient) { }
 
   ngOnInit() {
@@ -71,5 +73,10 @@ export class UsuarioComponent implements OnInit {
 
   filtering(){
     this.pagina=1;
+  }
+
+  sorting(key : any){
+    this.key = key;
+    this.reversa = !this.reversa;
   }
 }
