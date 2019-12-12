@@ -13,9 +13,11 @@ import { InfoPadecimientosComponent } from '../info-padecimientos/info-padecimie
 export class ListarPadecimientosComponent implements OnInit {
   
   pagina = 0;
-  private padecimientos : Padecimiento[] = [];
+  public padecimientos : Padecimiento[] = [];
   key :string = 'nombre_pad';
   reversa : boolean = false;
+  myFilter;
+  content;
   constructor(private padServ : PadecimientoService, private modalService : NgbModal) { 
 
   }
