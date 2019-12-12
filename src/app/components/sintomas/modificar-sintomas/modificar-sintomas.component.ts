@@ -69,12 +69,12 @@ export class ModificarSintomasComponent implements OnInit {
 
           console.log(this.compuestos);
         });
-
+        this.composicionFront = this.sintoma.composicion.replace(/,/g,'_');
       }
 
       
       console.log(this.selectedCompuestos);
-      this.composicionFront = this.sintoma.composicion.replace(/,/g,'_');
+     
       this.modify.patchValue({
         nombre : this.sintoma.nombre_sint,
         keyword : this.sintoma.keyWord,

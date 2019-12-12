@@ -5,8 +5,10 @@ export class UsuarioService{
     _url : string = '';
     _urlIndividual : string = '';
     constructor(private _http: HttpClient) {
-        this._url = 'http://localhost:3000/usuarios/userlist/';
-        this._urlIndividual = 'http://localhost:3000/usuarios/'
+        this._url = 'https://medicpath.herokuapp.com/usuarios/userlist/';
+        //'http://localhost:3000/usuarios/userlist/';
+        this._urlIndividual = 'https://medicpath.herokuapp.com/usuarios/';
+        //'http://localhost:3000/usuarios/'
     }
 
     getUsers(){

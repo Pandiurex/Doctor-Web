@@ -8,10 +8,18 @@ export class PadecimientoService{
     _urlModificar = "";
 
     constructor(private _http: HttpClient){
-        this._url = "http://localhost:3000/padecimientos/padlist";
-        this._urlInd = "http://localhost:3000/padecimientos/"
-        this._create = "http://localhost:3000/padecimientos/create"
-        this._urlModificar = 'http://localhost:3000/padecimientos/update/'
+        
+        this._url = "https://medicpath.herokuapp.com/padecimientos/padlist";
+        //"http://localhost:3000/padecimientos/padlist";
+
+        this._urlInd = "https://medicpath.herokuapp.com/padecimientos/";
+        //"http://localhost:3000/padecimientos/"
+
+        this._create = "https://medicpath.herokuapp.com/padecimientos/create";
+        //"http://localhost:3000/padecimientos/create"
+
+        this._urlModificar = "https://medicpath.herokuapp.com/padecimientos/update/";
+        //'http://localhost:3000/padecimientos/update/'
     }
 
     getPads(){

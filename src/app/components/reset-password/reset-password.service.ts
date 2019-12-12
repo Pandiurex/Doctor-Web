@@ -10,8 +10,12 @@ export class ResetPassService{
     _urlVerif : string = '';
     private router: Router;
     constructor(private _http: HttpClient) {
-        this._url = 'http://localhost:3000/usuarios/cambiarPassword/';
-        this._urlVerif = 'http://localhost:3000/usuarios/isValidUrl/';
+
+        this._url = 'https://medicpath.herokuapp.com/usuarios/cambiarPassword/';
+        //'http://localhost:3000/usuarios/cambiarPassword/';
+
+        this._urlVerif = 'https://medicpath.herokuapp.com/usuarios/isValidUrl/';
+        //'http://localhost:3000/usuarios/isValidUrl/';
     }
 
     changePassword(hashId : any, pass : any){

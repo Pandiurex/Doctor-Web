@@ -4,7 +4,9 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 export class VerificacionService{
     _url : string = '';
     constructor(private _http: HttpClient) {
-        this._url = 'http://localhost:3000/usuarios/verificar/';
+
+        this._url = 'https://medicpath.herokuapp.com/usuarios/verificar/';
+        //'http://localhost:3000/usuarios/verificar/';
     }
 
     verifyUser(hashId : any){
