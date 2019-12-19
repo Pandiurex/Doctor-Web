@@ -159,7 +159,7 @@ export class ModificarPadecimientosComponent implements OnInit {
     this.router.navigate(['/padecimientos'])
   }, error =>{
       console.log("Error", error.error);
-      this.toast.error(error.error, 'Error');
+      this.toast.error(error.error.message, 'Error');
   })
   }
 
