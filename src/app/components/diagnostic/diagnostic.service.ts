@@ -1,6 +1,9 @@
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
+
+@Injectable()
 export class DiagnosticService{
     _url : string = '';
 
