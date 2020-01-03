@@ -13,10 +13,11 @@ import { PadecimientosComponent } from './components/padecimientos/padecimientos
 import { PadecimientosRoutes } from './components/padecimientos/padecimientos.routes';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { SintomasRoutes } from './components/sintomas/sintomas.routes';
-import { VerificacionComponent}  from './components/verificacion/verificacion.component';
+import { VerificacionComponent} from './components/verificacion/verificacion.component';
 import { ResetPasswordComponent} from './components/reset-password/reset-password.component';
 import { UsuarioInfoComponent} from './components/usuario/usuarioInfo/usuarioInfo.component';
 import { BDCComponent } from './components/bdc/bdc.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -24,15 +25,16 @@ const routes: Routes = [
   { path: 'tratamiento', component: TreatmentComponent },
   { path: 'registro', component: SignupComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: 'faq', component: FaqComponent },
-  { 
+  {
   path: 'sintomas',
   component: SintomasComponent,
   children: SintomasRoutes
   },
-  { 
-    path: 'padecimientos', 
-    component: PadecimientosComponent , 
+  {
+    path: 'padecimientos',
+    component: PadecimientosComponent ,
     children: PadecimientosRoutes
   },
   { path: 'usuarios', component: UsuarioComponent },

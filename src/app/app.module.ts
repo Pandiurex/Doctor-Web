@@ -40,6 +40,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { ListFilter } from './pipes/filter.pipe';
 import { OrderModule } from 'ngx-order-pipe';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { OrderModule } from 'ngx-order-pipe';
     UsuarioInfoComponent,
     InfoPadecimientosComponent,
     BDCComponent,
-    ListFilter
+    ListFilter,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
