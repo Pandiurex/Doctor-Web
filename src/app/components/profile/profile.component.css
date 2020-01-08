@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Courgette&display=swap');
+
 .margin {
   text-align: center;
   padding: 50px;
@@ -7,8 +10,19 @@
   border-color: red;
 }
 .profile-pic {
-    width: 70%;
+    margin-top: 40px;
+    width: 35%;
     height: auto;
+}
+.pic-select{
+    margin: 3% 35% !important;
+}
+.headers {
+    font-family: 'Pacifico',
+    cursive;
+    font-size: 50px;
+    color: red;
+    margin-top: 20px;
 }
 .boton {
     margin-top: 15px;
@@ -23,4 +37,11 @@
     border-style: double;
     border-radius: 15px;
     border-color: red;
+}
+.color input {
+    text-align: center;
+    margin-left: 25%;
+}
+.color button {
+    margin-bottom: 50px;
 }
