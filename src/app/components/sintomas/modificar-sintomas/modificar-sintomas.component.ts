@@ -131,7 +131,7 @@ export class ModificarSintomasComponent implements OnInit {
     console.log(this.values);
     this.sintServ.modificar(this.sintoma.idSint,this.values).subscribe(res =>{
       console.log("Ok", res)
-      this.toast.success('Se ha modificado el sintoma con éxito!', 'Registro Exitoso!');
+      this.toast.success('Se ha modificado el sintoma con éxito!', 'Modificación Exitosa!');
     this.router.navigate(['/sintomas'])
   }, error =>{
       console.log("Error", error.error);

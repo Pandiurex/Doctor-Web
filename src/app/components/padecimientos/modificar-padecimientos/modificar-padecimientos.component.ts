@@ -155,7 +155,7 @@ export class ModificarPadecimientosComponent implements OnInit {
     
     this.padServ.updatePadecimiento(this.formData, this.url.snapshot.params.hash).subscribe(res =>{
       console.log("Ok", res)
-      this.toast.success('Se ha registrado el padecimiento con éxito!', 'Registro Exitoso!');
+      this.toast.success('Se ha modificado el padecimiento con éxito!', 'Modificación Exitosa!');
     this.router.navigate(['/padecimientos'])
   }, error =>{
       console.log("Error", error.error);
