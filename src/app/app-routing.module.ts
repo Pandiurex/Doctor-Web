@@ -18,6 +18,8 @@ import { ResetPasswordComponent} from './components/reset-password/reset-passwor
 import { UsuarioInfoComponent} from './components/usuario/usuarioInfo/usuarioInfo.component';
 import { BDCComponent } from './components/bdc/bdc.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { MedicalRecordComponent } from './components/profile/medical-record/medical-record.component';
+import { MedicsComponent } from './components/profile/medics/medics.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -26,6 +28,8 @@ const routes: Routes = [
   { path: 'registro', component: SignupComponent },
   { path: 'about', component: AboutComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'record', component: MedicalRecordComponent },
+  { path: 'medics', component: MedicsComponent },
   { path: 'faq', component: FaqComponent },
   {
   path: 'sintomas',
