@@ -41,6 +41,9 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { ListFilter } from './pipes/filter.pipe';
 import { OrderModule } from 'ngx-order-pipe';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SubmenuComponent } from './components/profile/submenu/submenu.component';
+import { ProfilePicComponent } from './components/profile/profile-pic/profile-pic.component';
+import { ProfileInfoComponent } from './components/profile/profile-info/profile-info.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +76,10 @@ import { ProfileComponent } from './components/profile/profile.component';
     InfoPadecimientosComponent,
     BDCComponent,
     ListFilter,
-    ProfileComponent
+    ProfileComponent,
+    SubmenuComponent,
+    ProfilePicComponent,
+    ProfileInfoComponent
   ],
   imports: [
     BrowserModule,
