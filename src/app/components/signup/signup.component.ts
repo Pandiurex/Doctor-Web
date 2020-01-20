@@ -11,7 +11,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { SignupService } from './signup.service';
 import {Router} from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
+import { ErrorMsg } from '../../interfaces/errorMsg.const';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -21,7 +21,8 @@ import { ToastrService } from 'ngx-toastr';
 
 export class SignupComponent implements OnInit {
 
-  
+  mensajes_error = ErrorMsg.ERROR_MSG_REGISTER;
+
   forma: FormGroup;
   
   private values : HttpParams;
@@ -34,33 +35,32 @@ export class SignupComponent implements OnInit {
       nombrecompleto: new FormGroup({
         nombre: new FormControl('', [
           Validators.required,
-          Validators.minLength(3)
+          Validators.minLength(3),
+          Validators.maxLength(50)
         ]),
         apellido: new FormControl('', [
           Validators.required,
-          Validators.minLength(3)
+          Validators.minLength(3),
+          Validators.maxLength(50)
         ])
       }),
       correo: new FormControl('', [
         Validators.required,
-        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$'),
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
       ]),
       genero: new FormControl('Indefinido', Validators.required),
-      username: new FormControl('', Validators.required),
-      password1: new FormControl('', Validators.required),
-      password2: new FormControl('', Validators.required),
+      username: new FormControl('', [Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(20)]),
+        password_validations : new FormGroup({
+          password1 : new FormControl('', [Validators.required, Validators.minLength(5)]),
+          password2 : new FormControl('', Validators.required),
+          }, (formGroup : FormGroup) => {
+              return this.equalPasswords(formGroup);
+          }),
       fechanacimiento: new FormControl('', Validators.required),
     });
 
-    this.forma.controls.password2.setValidators([
-      Validators.required,
-      this.noIgual.bind(this.forma)
-    ]);
-
-    this.forma.controls.username.valueChanges
-      .subscribe(data => {
-        console.log(data);
-      });
 
   }
 
@@ -76,8 +76,8 @@ export class SignupComponent implements OnInit {
     .set('sexo', this.forma.value.genero)
     .set('nombres', this.forma.value.nombrecompleto.nombre)
     .set('apellidos', this.forma.value.nombrecompleto.apellido)
-    .set('password', this.forma.value.password1)
-    .set('passwordVerif', this.forma.value.password2)
+    .set('password', this.forma.value.password_validations.password1)
+    .set('passwordVerif', this.forma.value.password_validations.password2)
     .set('tipoUsuario', '1')
     .set('fecha_nacimiento', this.forma.value.fechanacimiento);
     this.signupServ.checkRegister(this.values).subscribe(res =>{
@@ -100,4 +100,28 @@ export class SignupComponent implements OnInit {
     return null;
   }
 
+  equalPasswords(formGroup : FormGroup){
+    let val;
+    let valid = true;
+
+    for(let key in formGroup.controls){
+      if(formGroup.controls.hasOwnProperty(key)){
+        let control : FormControl = <FormControl>formGroup.controls[key];
+        if(val === undefined){
+           val = control.value
+        }else{
+          if(val !== control.value){
+             valid = false;
+             break;
+          }
+        }
+      }
+    }
+    if(valid){
+      return null;
+    }
+    return{
+      equalPasswords : true
+    }
+  }
 }

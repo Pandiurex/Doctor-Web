@@ -6,7 +6,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Sintoma } from '../../../interfaces/sintoma.interface';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-
+import { ErrorMsg } from '../../../interfaces/errorMsg.const';
 @Component({
   selector: 'app-modificar-sintomas',
   templateUrl: './modificar-sintomas.component.html',
@@ -14,7 +14,8 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
   providers : [SintomasService]
 })
 export class ModificarSintomasComponent implements OnInit {
-
+  
+  mensajes_error = ErrorMsg.ERROR_MSG_SINT_PADS;
   modify: FormGroup;
   private values : HttpParams;
 
@@ -39,10 +40,21 @@ export class ModificarSintomasComponent implements OnInit {
 
   constructor(private sintServ : SintomasService, private router : Router, private toast : ToastrService, private url : ActivatedRoute) {
     this.modify = new FormGroup({
-      nombre: new FormControl('', Validators.required),
-      keyword: new FormControl('', Validators.required),
+      nombre: new FormControl('', 
+      [Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(50)]),
+
+      keyword: new FormControl('', 
+      [Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(30)]),
+
       categoria: new FormControl('', Validators.required),
-      descripcion: new FormControl(''),
+      descripcion: new FormControl('', 
+      [Validators.required,
+        Validators.minLength(20),
+        Validators.maxLength(200)]),
       compuesto: new FormControl(''),
       componentes: new FormControl(''),
       composite: new FormControl('')
@@ -50,7 +62,7 @@ export class ModificarSintomasComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(encodeURIComponent(this.url.snapshot.params.hash));
+    //console.log(encodeURIComponent(this.url.snapshot.params.hash));
 
     //Carga de datos principales
     this.sintServ.getSint(this.url.snapshot.params.hash).subscribe( (res : any) =>{
@@ -131,7 +143,7 @@ export class ModificarSintomasComponent implements OnInit {
     console.log(this.values);
     this.sintServ.modificar(this.sintoma.idSint,this.values).subscribe(res =>{
       console.log("Ok", res)
-      this.toast.success('Se ha modificado el sintoma con éxito!', 'Registro Exitoso!');
+      this.toast.success('Se ha modificado el sintoma con éxito!', 'Modificación Exitosa!');
     this.router.navigate(['/sintomas'])
   }, error =>{
       console.log("Error", error.error);

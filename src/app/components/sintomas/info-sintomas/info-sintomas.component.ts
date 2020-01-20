@@ -35,6 +35,9 @@ export class InfoSintomasComponent implements OnInit {
     error =>{
         console.log(error);
     })
+
+    this.sintoma.composicion = this.sintoma.composicion.replace(/,/g,' ');
+    this.sintoma.composicion = this.sintoma.composicion.replace(/&/g,'Y');
     }
     
   }

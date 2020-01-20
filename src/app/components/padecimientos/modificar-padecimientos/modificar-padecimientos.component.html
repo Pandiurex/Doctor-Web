@@ -10,18 +10,29 @@
               <div class="col-md-8">
                 <input [ngClass]="{'is-invalid': !modify.controls['nombre'].valid}" formControlName="nombre"
                   class="form-control is-valid" type="text" placeholder="Nombre del padecimiento a modificar">
-                <div *ngIf="modify.get('nombre').errors?.required" class="form-control-feedback">
-                  <label>
-                    *El Nombre es necesario
-                  </label>
+                  <div class="validation-errors">
+                    <ng-container *ngFor="let validation of mensajes_error.nombrePad">
+                      <div class="form-control-feedback" *ngIf="modify.get('nombre').hasError(validation.type) 
+                      && (modify.get('nombre').dirty || modify.get('nombre').touched)">
+                      <i class="fas fa-exclamation-circle"></i> {{validation.message}}
+                      </div>
+                    </ng-container>
                 </div>
               </div>
             </div>
     
             <div class="form-group row">
                 <div class="col-md-8">
-                  <input formControlName="descripcion" class="form-control is-valid descripcion" type="text"
-                  placeholder="Descripcion del sintoma a modificar">
+                  <input formControlName="descripcion" [ngClass]="{'is-invalid': !modify.controls['descripcion'].valid}" type="text"
+                  placeholder="Descripcion del sintoma a modificar" class="form-control is-valid descripcion">
+                  <div class="validation-errors">
+                    <ng-container *ngFor="let validation of mensajes_error.descripcion">
+                      <div class="form-control-feedback" *ngIf="modify.get('descripcion').hasError(validation.type) 
+                      && (modify.get('descripcion').dirty || modify.get('descripcion').touched)">
+                      <i class="fas fa-exclamation-circle"></i> {{validation.message}}
+                      </div>
+                    </ng-container>
+                </div>
                 </div>
               </div>
     
@@ -31,12 +42,14 @@
                       <option value="">Seleccione una Categoria</option>
                       <option *ngFor="let item of categorias" [value]="item.nombre">{{item.nombre}}</option>
                     </select>
-                    <div *ngIf="modify.get('categoria').errors?.required" class="form-control-feedback">
-                      <label>
-        
-                        *Seleccione la categoria correspondiente
-                      </label>
-                    </div>
+                    <div class="validation-errors">
+                      <ng-container *ngFor="let validation of mensajes_error.categoria">
+                        <div class="form-control-feedback" *ngIf="modify.get('categoria').hasError(validation.type) 
+                        && (modify.get('categoria').dirty || modify.get('categoria').touched)">
+                        <i class="fas fa-exclamation-circle"></i> {{validation.message}}
+                        </div>
+                      </ng-container>
+                  </div>
                   </div>
                 </div>
     

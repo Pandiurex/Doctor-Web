@@ -6,6 +6,7 @@ import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { ErrorMsg } from '../../../interfaces/errorMsg.const';
 @Component({
   selector: 'app-agregar-padecimientos',
   templateUrl: './agregar-padecimientos.component.html',
@@ -14,6 +15,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 export class AgregarPadecimientosComponent implements OnInit {
 
+  mensajes_error = ErrorMsg.ERROR_MSG_SINT_PADS;
   padecimiento: FormGroup;
   private values : HttpParams;
 
@@ -37,9 +39,17 @@ export class AgregarPadecimientosComponent implements OnInit {
   
   constructor(private padServ : PadecimientoService, private sintServ : SintomasService, private toast : ToastrService, private router : Router) {
     this.padecimiento = new FormGroup({
-      nombre: new FormControl('', Validators.required),
+      nombre: new FormControl('', 
+      [Validators.required,
+       Validators.minLength(4),
+       Validators.maxLength(50)]),
+
       categoria: new FormControl('', Validators.required),
-      descripcion: new FormControl(''),
+
+      descripcion: new FormControl('', [Validators.required,
+      Validators.minLength(20),
+      Validators.maxLength(200)]),
+
       sintomas: new FormControl(''),
       imagen : new FormControl(''),
       sintomasSeleccionados : new FormControl('')
