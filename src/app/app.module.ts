@@ -46,6 +46,7 @@ import { ProfilePicComponent } from './components/profile/profile-pic/profile-pi
 import { ProfileInfoComponent } from './components/profile/profile-info/profile-info.component';
 import { MedicalRecordComponent } from './components/profile/medical-record/medical-record.component';
 import { MedicsComponent } from './components/profile/medics/medics.component';
+import { RecorddComponent } from './components/recordd/recordd.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { MedicsComponent } from './components/profile/medics/medics.component';
     ProfilePicComponent,
     ProfileInfoComponent,
     MedicalRecordComponent,
-    MedicsComponent
+    MedicsComponent,
+    RecorddComponent
   ],
   imports: [
     BrowserModule,

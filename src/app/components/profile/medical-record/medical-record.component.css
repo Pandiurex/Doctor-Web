@@ -1,11 +1,16 @@
 .margin {
   width: 100%;
-  height: 500px;
+  height: auto;
   text-align: center;
   padding: 50px;
   margin: 40px 2%;
+  margin-bottom: 10%;
   border-style: double;
   border-radius: 15px;
   border-color: red;
 }
 
+.fa-info-circle {
+  font-size: 23px;
+  padding: 15px 5px;
+}

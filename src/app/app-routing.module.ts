@@ -20,6 +20,7 @@ import { BDCComponent } from './components/bdc/bdc.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MedicalRecordComponent } from './components/profile/medical-record/medical-record.component';
 import { MedicsComponent } from './components/profile/medics/medics.component';
+import { RecorddComponent } from './components/recordd/recordd.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'record', component: MedicalRecordComponent },
+  { path: 'recordDescription', component: RecorddComponent },
   { path: 'medics', component: MedicsComponent },
   { path: 'faq', component: FaqComponent },
   {
