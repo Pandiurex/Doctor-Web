@@ -9,3 +9,7 @@
   background-color: #00acee !important;
   color: white !important;
 }
+
+.form-control-feedback {
+  color: red;
+}
