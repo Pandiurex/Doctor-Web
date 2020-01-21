@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit {
   }
 
   loginCheck(){
-    console.log(this.login);
     this.values = new HttpParams()
     .set('nickOrEmail', this.login.value.emailOrNickname)
     .set('password', this.login.value.logPassword);
@@ -52,8 +51,13 @@ export class LoginComponent implements OnInit {
     }else{
     this.toast.success('Bienvenido al sistema Medic Path ' +  res.body.usuario.nickname, 'Éxito!');
     this.cerrar.nativeElement.click();
-    //Pending
-    //Guardar sesion de usuario
+    sessionStorage.setItem('usuario',res.body.usuario.id);
+    sessionStorage.setItem('tipoUsuario',res.body.usuario.tipoUsuario);
+    sessionStorage.setItem('token',res.body.token);
+    console.log(sessionStorage.getItem('usuario'));
+    console.log(sessionStorage.getItem('tipoUsuario'));
+    console.log(sessionStorage.getItem('token'));
+    window.location.reload();
     this.router.navigate(['/home']);
 
     }
