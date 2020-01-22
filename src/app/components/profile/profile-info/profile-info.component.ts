@@ -39,6 +39,7 @@ export class ProfileInfoComponent implements OnInit {
    }
 
   ngOnInit() {
+    console.log(sessionStorage.getItem('token'));
     this.datos_perfil.controls['nickname'].setValue(this.usuarioInfo.nickname, {onlySelf : true});
     this.datos_perfil.controls['nombres'].setValue(this.usuarioInfo.nombres, {onlySelf : true});
     this.datos_perfil.controls['apellidos'].setValue(this.usuarioInfo.apellidos, {onlySelf : true});
@@ -46,12 +47,21 @@ export class ProfileInfoComponent implements OnInit {
 
   actualizarDatos(){
     console.log(this.datos_perfil.value);
+    console.log(sessionStorage.getItem('token'));
     this.formData.append('nickname', this.datos_perfil.value.nickname);
     this.formData.append('nombres', this.datos_perfil.value.nombres);
     this.formData.append('apellidos', this.datos_perfil.value.apellidos);
-        this.profileServ.updateUser(this.usuarioInfo.id, this.formData).subscribe( (res: any) =>{
+        this.profileServ.updateUser(this.usuarioInfo.id, this.formData, sessionStorage.getItem('token')).subscribe( (res: any) =>{
+          console.log(res);
+          if(res.body.mensaje != "Token no válido"){
           this.toast.success('Datos Modificados con éxito', 'Modificación Exitosa!');
           this.formData = new FormData();
+          sessionStorage.setItem('token', res.body.token);
+          }else{
+            sessionStorage.clear();
+            localStorage.setItem('action', 'inactividad');
+            this.router.navigate(['/home']);
+          }
         },
       error =>{
         console.log(error.message);
