@@ -49,14 +49,12 @@ export class LoginComponent implements OnInit {
     if(res.body.message=="Verificacion"){
       this.toast.info('Su cuenta aun no se encuentra verificada, favor de verificarla mediante su correo.', 'Cuenta sin verificar');
     }else{
-    this.toast.success('Bienvenido al sistema Medic Path ' +  res.body.usuario.nickname, 'Éxito!');
     this.cerrar.nativeElement.click();
     sessionStorage.setItem('usuario',res.body.usuario.id);
     sessionStorage.setItem('tipoUsuario',res.body.usuario.tipoUsuario);
     sessionStorage.setItem('token',res.body.token);
-    console.log(sessionStorage.getItem('usuario'));
-    console.log(sessionStorage.getItem('tipoUsuario'));
-    console.log(sessionStorage.getItem('token'));
+    sessionStorage.setItem('nickname',res.body.usuario.nickname);
+    localStorage.setItem('action','login');
     window.location.reload();
     this.router.navigate(['/home']);
 
