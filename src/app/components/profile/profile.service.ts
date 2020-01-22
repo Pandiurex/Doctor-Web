@@ -4,11 +4,20 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 export class ProfileService{
     _urlIndividual : string = '';
     _urlEditar : string = '';
+    _urlCambioImagen : string = '';
+    _urlListadoExpediente : string = '';
+    _urlIndividualExp : string = '';
     constructor(private _http: HttpClient) {
         this._urlIndividual = "https://medicpath.herokuapp.com/usuarios/";
-        //'http://localhost:3000/usuarios/'
+        //'http://localhost:3000/usuarios/';
         this._urlEditar = "https://medicpath.herokuapp.com/usuarios/update/";
-        //'http://localhost:3000/usuarios/update/'
+        //'http://localhost:3000/usuarios/update/';
+        this._urlCambioImagen = 'http://localhost:3000/usuarios/cambiarImagen/';
+        this._urlListadoExpediente = //"https://medicpath.herokuapp.com/historial/"
+        'http://localhost:3000/historial/'
+        this._urlIndividualExp = //"https://medicpath.herokuapp.com/historial/usuarioHist/"
+        'http://localhost:3000/historial/usuarioHist/'
+        
     }
 
 
@@ -23,10 +32,42 @@ export class ProfileService{
         )
     }
 
-    updateUser(id : any,valores : FormData){
+    updateUser(id : any,valores : FormData, token : any){
+        
+        const headers = new HttpHeaders({'Authorization': token ,'X-Requested-With':'XMLHttpRequest'});
         return this._http.put(this._urlEditar + id,
             valores,
             {
+                headers : headers,
+                observe : 'response' 
+            }
+        )
+    }
+
+    updateProfilePic(id : any,imagen : FormData){
+        return this._http.put(this._urlCambioImagen + id,
+            imagen,
+            {
+                observe : 'response' 
+            }
+        )
+    }
+
+    historyList(user : any){
+        return this._http.get(this._urlListadoExpediente + user,
+            {
+              headers: new HttpHeaders()
+              .set('Content-Type', 'application/x-www-form-urlencoded'),
+              observe : 'response'
+            },
+        )
+    }
+
+    getHistory(id : any){
+        return this._http.get(this._urlIndividualExp + encodeURIComponent(id),
+            {
+                headers: new HttpHeaders()
+                .set('Content-Type', 'application/x-www-form-urlencoded'),
                 observe : 'response' 
             }
         )
