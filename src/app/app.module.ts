@@ -45,6 +45,7 @@ import { SubmenuComponent } from './components/profile/submenu/submenu.component
 import { ProfilePicComponent } from './components/profile/profile-pic/profile-pic.component';
 import { ProfileInfoComponent } from './components/profile/profile-info/profile-info.component';
 import { MedicalRecordComponent } from './components/profile/medical-record/medical-record.component';
+import { InfoMedicalRecordComponent} from './components/profile/medical-record/info-medical-record/info-medical-record.component';
 import { MedicsComponent } from './components/profile/medics/medics.component';
 
 @NgModule({
@@ -83,7 +84,8 @@ import { MedicsComponent } from './components/profile/medics/medics.component';
     ProfilePicComponent,
     ProfileInfoComponent,
     MedicalRecordComponent,
-    MedicsComponent
+    MedicsComponent,
+    InfoMedicalRecordComponent
   ],
   imports: [
     BrowserModule,
@@ -103,6 +105,6 @@ import { MedicsComponent } from './components/profile/medics/medics.component';
   providers: [NgbActiveModal],
   bootstrap: [AppComponent],
   
-  entryComponents: [InfoSintomasComponent, InfoPadecimientosComponent]
+  entryComponents: [InfoSintomasComponent, InfoPadecimientosComponent, InfoMedicalRecordComponent]
 })
 export class AppModule { }
