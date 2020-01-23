@@ -28,7 +28,7 @@ import { ModificarSintomasComponent} from './components/sintomas/modificar-sinto
 import { VerificacionComponent } from './components/verificacion/verificacion.component';
 import { ResetPasswordComponent} from './components/reset-password/reset-password.component';
 import { OwlModule } from 'ngx-owl-carousel';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsuarioInfoComponent} from './components/usuario/usuarioInfo/usuarioInfo.component';
@@ -48,6 +48,7 @@ import { MedicalRecordComponent } from './components/profile/medical-record/medi
 import { InfoMedicalRecordComponent} from './components/profile/medical-record/info-medical-record/info-medical-record.component';
 import { MedicsComponent } from './components/profile/medics/medics.component';
 
+import { AuthInterceptorService } from "./components/auth/interceptor.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -102,7 +103,7 @@ import { MedicsComponent } from './components/profile/medics/medics.component';
     NgxPaginationModule,
     OrderModule
     ],
-  providers: [NgbActiveModal],
+  providers: [NgbActiveModal,{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent],
   
   entryComponents: [InfoSintomasComponent, InfoPadecimientosComponent, InfoMedicalRecordComponent]

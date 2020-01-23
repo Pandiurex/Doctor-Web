@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
       this.user = true;
     }
 
-    if(this.tipoUsuario==="1"){
+    if(this.tipoUsuario==="2"){
       this.isDoctor = true;
     }
     else if(this.tipoUsuario=="3"){
