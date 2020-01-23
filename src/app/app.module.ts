@@ -45,6 +45,7 @@ import { SubmenuComponent } from './components/profile/submenu/submenu.component
 import { ProfilePicComponent } from './components/profile/profile-pic/profile-pic.component';
 import { ProfileInfoComponent } from './components/profile/profile-info/profile-info.component';
 import { MedicalRecordComponent } from './components/profile/medical-record/medical-record.component';
+import { InfoMedicalRecordComponent} from './components/profile/medical-record/info-medical-record/info-medical-record.component';
 import { MedicsComponent } from './components/profile/medics/medics.component';
 import { RecorddComponent } from './components/recordd/recordd.component';
 
@@ -85,7 +86,11 @@ import { RecorddComponent } from './components/recordd/recordd.component';
     ProfileInfoComponent,
     MedicalRecordComponent,
     MedicsComponent,
+<<<<<<< HEAD
     RecorddComponent
+=======
+    InfoMedicalRecordComponent
+>>>>>>> deb15883eb3a73503ecd29c828aad52f0ae34e67
   ],
   imports: [
     BrowserModule,
@@ -105,6 +110,6 @@ import { RecorddComponent } from './components/recordd/recordd.component';
   providers: [NgbActiveModal],
   bootstrap: [AppComponent],
   
-  entryComponents: [InfoSintomasComponent, InfoPadecimientosComponent]
+  entryComponents: [InfoSintomasComponent, InfoPadecimientosComponent, InfoMedicalRecordComponent]
 })
 export class AppModule { }
