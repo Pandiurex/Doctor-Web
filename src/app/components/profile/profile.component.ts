@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-    id = sessionStorage.getItem('usuario');
+    hash = sessionStorage.getItem('hash');
     usuario = {} as any;
     public url : string = "";
 
@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.profileServ.getUser(this.id).subscribe( (res: any) =>{
+    this.profileServ.getUser(this.hash).subscribe( (res: any) =>{
       this.usuario = res.body.resultado;
       sessionStorage.setItem('token',res.body.token);
       if(this.usuario.imagen_perfil!=null){

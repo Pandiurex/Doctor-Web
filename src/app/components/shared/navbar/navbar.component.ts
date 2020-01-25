@@ -32,8 +32,7 @@ export class NavbarComponent implements OnInit {
   logout(){
     sessionStorage.clear();
     localStorage.setItem('action','logout');
-    window.location.reload();
-    this.router.navigate(['/home']);
+    window.location.href='home';
   }
 
 }

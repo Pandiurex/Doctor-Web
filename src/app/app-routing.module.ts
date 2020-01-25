@@ -49,7 +49,7 @@ const routes: Routes = [
   { path: 'emailSent', component: SendEmailComponent },
   { path: 'verificacion/:hash', component : VerificacionComponent},
   { path: 'recuperar/:hash', component : ResetPasswordComponent},
-  { path: 'usuarios/info/:id', component : UsuarioInfoComponent, canActivate: [AdminGuardService]},
+  { path: 'usuarios/info/:hash', component : UsuarioInfoComponent, canActivate: [AdminGuardService]},
   { path: 'bdc', component : BDCComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];

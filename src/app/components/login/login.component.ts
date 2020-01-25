@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
     sessionStorage.setItem('tipoUsuario',res.body.usuario.tipoUsuario);
     sessionStorage.setItem('token',res.body.token);
     sessionStorage.setItem('nickname',res.body.usuario.nickname);
+    sessionStorage.setItem('hash',res.body.usuario.hash_id);
     localStorage.setItem('action','login');
     window.location.reload();
     this.router.navigate(['/home']);

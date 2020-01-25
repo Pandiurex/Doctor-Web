@@ -51,7 +51,7 @@ export class ProfileInfoComponent implements OnInit {
     this.formData.append('nickname', this.datos_perfil.value.nickname);
     this.formData.append('nombres', this.datos_perfil.value.nombres);
     this.formData.append('apellidos', this.datos_perfil.value.apellidos);
-        this.profileServ.updateUser(this.usuarioInfo.id, this.formData, sessionStorage.getItem('token')).subscribe( (res: any) =>{
+        this.profileServ.updateUser(this.usuarioInfo.hash_id, this.formData, sessionStorage.getItem('token')).subscribe( (res: any) =>{
           console.log(res);
           if(res.body.mensaje != "Token no válido"){
           this.toast.success('Datos Modificados con éxito', 'Modificación Exitosa!');

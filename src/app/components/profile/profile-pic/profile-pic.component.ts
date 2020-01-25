@@ -15,7 +15,7 @@ export class ProfilePicComponent implements OnInit {
   formData: any = new FormData();
   public selectedFile : File = null;
   public selectedImg = false;
-  id = sessionStorage.getItem('usuario');
+  hash = sessionStorage.getItem('hash');
   constructor(private profileServ : ProfileService, private toast : ToastrService, private router : Router) { 
   }
 
@@ -29,7 +29,7 @@ export class ProfilePicComponent implements OnInit {
   }
 
   actualizarDatos(){
-        this.profileServ.updateProfilePic(this.id, this.formData).subscribe( (res: any) =>{
+        this.profileServ.updateProfilePic(this.hash, this.formData).subscribe( (res: any) =>{
           this.formData = new FormData();
           window.location.reload();
           this.toast.success('Imagen cambiada con éxito!', 'Modificación Exitosa!');
