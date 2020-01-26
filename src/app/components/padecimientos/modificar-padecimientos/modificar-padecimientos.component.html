@@ -53,6 +53,23 @@
                   </div>
                 </div>
     
+                <div class="form-group row">
+                  <div class="col-md-8">
+                    <select formControlName="especializacion" name="especializacion" id="especializacion" class="form-control">
+                      <option value="">Seleccione una Especialidad</option>
+                      <option *ngFor="let item of especializaciones" [value]="item.id">{{item.nombre_esp}}</option>
+                    </select>
+                    <div class="validation-errors">
+                      <ng-container *ngFor="let validation of mensajes_error.especializacion">
+                        <div class="form-control-feedback" *ngIf="modify.get('especializacion').hasError(validation.type) 
+                        && (modify.get('especializacion').dirty || modify.get('especializacion').touched)">
+                        <i class="fas fa-exclamation-circle"></i> {{validation.message}}
+                        </div>
+                      </ng-container>
+                  </div>
+                  </div>
+                </div>
+
             <div  *ngIf="hasInfo" >
                 <label>Imagen Actual</label><br>
                 <img class="center" style="width:300px;height:200px;" [src]="'data:image/jpg;base64,' + urlImage" >

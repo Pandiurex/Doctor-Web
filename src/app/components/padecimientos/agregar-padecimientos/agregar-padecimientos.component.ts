@@ -33,7 +33,7 @@ export class AgregarPadecimientosComponent implements OnInit {
 
   public sintomas : any = [];
   public selectedSints : any = [];
-
+  public especializaciones : any = [];
   selectedFile : File = null;
   formData: any = new FormData();
   
@@ -45,7 +45,7 @@ export class AgregarPadecimientosComponent implements OnInit {
        Validators.maxLength(50)]),
 
       categoria: new FormControl('', Validators.required),
-
+      especializacion: new FormControl('', Validators.required),
       descripcion: new FormControl('', [Validators.required,
       Validators.minLength(20),
       Validators.maxLength(200)]),
@@ -57,6 +57,12 @@ export class AgregarPadecimientosComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.padServ.getEspecializaciones().subscribe((res: any) =>{
+      this.especializaciones = res.body;
+    }, error =>{
+      console.log(error);
+    })
+
     this.sintServ.getSints().subscribe( (res: any) =>{
       this.sintomas = res.body;
     },
@@ -93,7 +99,7 @@ export class AgregarPadecimientosComponent implements OnInit {
       this.formData.append('categoria', this.padecimiento.value.categoria);
       this.formData.append('descripcion', this.padecimiento.value.descripcion);
       this.formData.append('sintomas', idsOnly);
-  
+      this.formData.append('especializacion', this.padecimiento.value.especializacion);
     console.log(JSON.stringify(this.formData));
     
     this.padServ.createPadecimiento(this.formData).subscribe(res =>{
@@ -103,6 +109,7 @@ export class AgregarPadecimientosComponent implements OnInit {
   }, error =>{
       console.log("Error", error.error);
       this.toast.error(error.error, 'Error');
+      this.formData = new FormData();
   })
   }
 }

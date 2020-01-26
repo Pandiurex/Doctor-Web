@@ -33,6 +33,7 @@ export class ModificarPadecimientosComponent implements OnInit {
   public sintomas : any = [];
   public selectedSints : any = [];
   public padecimiento : Padecimiento = {} as any;
+  public especializaciones : any = [];
   selectedFile : File = null;
   formData: any = new FormData();
   public  hasInfo : boolean = false;
@@ -44,6 +45,7 @@ export class ModificarPadecimientosComponent implements OnInit {
         Validators.minLength(4),
         Validators.maxLength(50)]),
       categoria: new FormControl('', Validators.required),
+      especializacion: new FormControl('', Validators.required),
       descripcion: new FormControl('', [Validators.required,
         Validators.minLength(20),
         Validators.maxLength(200)]),
@@ -54,6 +56,11 @@ export class ModificarPadecimientosComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.padServ.getEspecializaciones().subscribe((res: any) =>{
+      this.especializaciones = res.body;
+    }, error =>{
+      console.log(error);
+    })
     this.sintServ.getSints().subscribe( (res: any) =>{
       this.sintomas = res.body;
     },
@@ -77,7 +84,7 @@ export class ModificarPadecimientosComponent implements OnInit {
     this.modify.controls['nombre'].setValue(this.padecimiento.nombre_pad, {onlySelf : true});
     this.modify.controls['categoria'].setValue(this.padecimiento.categoria, {onlySelf : true});
     this.modify.controls['descripcion'].setValue(this.padecimiento.descripcion, {onlySelf : true});
-    
+    this.modify.controls['especializacion'].setValue(this.padecimiento.espe_id, {onlySelf : true});
     if(this.padecimiento.url_imagen_pad!=null){
       this.hasInfo = true;
       this.urlImage = this.padecimiento.url_imagen_pad.toString();
@@ -157,6 +164,7 @@ export class ModificarPadecimientosComponent implements OnInit {
       this.formData.append('categoria', this.modify.value.categoria);
       this.formData.append('descripcion', this.modify.value.descripcion);
       this.formData.append('sintomas', idsOnly);
+      this.formData.append('especializacion', this.modify.value.especializacion);
   
     
     this.padServ.updatePadecimiento(this.formData, this.url.snapshot.params.hash).subscribe(res =>{
@@ -166,6 +174,7 @@ export class ModificarPadecimientosComponent implements OnInit {
   }, error =>{
       console.log("Error", error.error);
       this.toast.error(error.error.message, 'Error');
+      this.formData = new FormData();
   })
   }
 
