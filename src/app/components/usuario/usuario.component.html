@@ -23,7 +23,7 @@
             <th>Enabled</th>
         </tr>
         <tr ng-if="doctors.length>0" *ngFor="let doctor of users | orderBy : key : reversa : true | ListFilter: 'nombres' : myFilter | paginate:{itemsPerPage: 10, currentPage:pagina}">
-        <a routerLink="info/{{doctor.id}}"><th>{{doctor.nombres}}</th></a>
+        <a routerLink="info/{{doctor.hash_id}}"><th>{{doctor.nombres}}</th></a>
                 <th>{{ doctor.nickname}}</th>
                 <th>{{ doctor.email}}</th>
                 <th>{{ doctor.createdAt}}</th>
@@ -49,7 +49,7 @@
                 <th>Enabled</th>
             </tr>
             <tr ng-if="patients.length>0" *ngFor="let patient of users | orderBy : key : reversa : true | ListFilter: 'nombres' : myFilter | paginate:{itemsPerPage: 10, currentPage:pagina}">
-                <a routerLink="info/{{patient.id}}"><th>{{patient.nombres}}</th></a>
+                <a routerLink="info/{{patient.hash_id}}"><th>{{patient.nombres}}</th></a>
                     <th>{{ patient.nickname}}</th>
                     <th>{{ patient.email}}</th>
                     <th>{{ patient.createdAt}}</th>

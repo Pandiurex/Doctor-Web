@@ -8,6 +8,7 @@ export class PadecimientoService {
   _urlInd: string = "";
   _create: string = "";
   _urlModificar = "";
+  _urlEspecializaciones = "";
 
   constructor(private _http: HttpClient) {
     this._url = "https://medicpath.herokuapp.com/padecimientos/padlist";
@@ -19,9 +20,11 @@ export class PadecimientoService {
     this._create = "https://medicpath.herokuapp.com/padecimientos/create";
     //"http://localhost:3000/padecimientos/create"
 
-    this._urlModificar =
-      "https://medicpath.herokuapp.com/padecimientos/update/";
+    this._urlModificar ="https://medicpath.herokuapp.com/padecimientos/update/";
     //'http://localhost:3000/padecimientos/update/'
+
+    this._urlEspecializaciones = "https://medicpath.herokuapp.com/especializacion/esplist";
+    //'http://localhost:3000/especializacion/esplist';
   }
 
   getPads() {
@@ -58,5 +61,15 @@ export class PadecimientoService {
         observe: "response"
       }
     );
+  }
+
+  getEspecializaciones() {
+    return this._http.get(this._urlEspecializaciones, {
+      headers: new HttpHeaders().set(
+        "Content-Type",
+        "application/x-www-form-urlencoded"
+      ),
+      observe: "response"
+    });
   }
 }

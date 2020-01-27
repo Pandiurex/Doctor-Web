@@ -23,8 +23,8 @@ export class UsuarioService {
     });
   }
 
-  getUser(id: any) {
-    return this._http.get(this._urlIndividual + id, {
+  getUser(hash: any) {
+    return this._http.get(this._urlIndividual + encodeURIComponent(hash), {
       headers: new HttpHeaders().set(
         "Content-Type",
         "application/x-www-form-urlencoded"

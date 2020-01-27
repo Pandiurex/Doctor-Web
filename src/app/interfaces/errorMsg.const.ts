@@ -48,6 +48,9 @@ export class ErrorMsg {
           'categoria' : [
             {type: 'required', message: 'Es necesario el seleccionar una categoría'}
           ],
+          'especializacion' : [
+            {type: 'required', message: 'Es necesario el seleccionar una especializacion para el padecimiento'}
+          ],
           'nombrePad' : [
             {type: 'required', message: 'Es necesario ingresar el nombre del padecimiento'},
             {type: 'minlength', message: 'El nombre del padecimiento debe ser mayor a 4 caracteres'},

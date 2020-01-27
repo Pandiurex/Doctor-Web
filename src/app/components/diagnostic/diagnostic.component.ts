@@ -5,6 +5,8 @@ import { Regla } from '../../inferencia/regla.class';
 import { Atomo } from '../../inferencia/atomo.class';
 import { MemoriaTrabajo } from '../../inferencia/memoriaTrabajo.class';
 import { ToastrService } from 'ngx-toastr';
+import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-diagnostic',
@@ -25,10 +27,14 @@ export class DiagnosticComponent implements OnInit {
   contador : number = 0;
   hasResult : boolean = false;
   breadcrumb : string = "";
-
-  constructor(private diagServ : DiagnosticService, private toast : ToastrService) { }
+  idResultado : string = '';
+  user : boolean = false;
+  constructor(private diagServ : DiagnosticService, private toast : ToastrService, private router : Router) { }
 
   ngOnInit() {
+    if(window.sessionStorage.getItem('usuario')!=null){
+      this.user = true;
+    }
   }
 
   iniciarDiagnostico(){
@@ -65,7 +71,7 @@ export class DiagnosticComponent implements OnInit {
             almacenado =  this.memoriaDeTrabajo.estaAlmacenado(element);
             console.log("Esta en la memoria?" + almacenado)
             if(almacenado===false){
-            this.atomosCondicion.push(new Atomo(element.desc,element.estado,element.obj));
+            this.atomosCondicion.push(new Atomo(element.desc,element.estado,element.obj,element.padecimiento));
              this.preguntas.push("¿Ha tenido " + element.desc + " ?");
             }
           }
@@ -120,11 +126,16 @@ export class DiagnosticComponent implements OnInit {
           console.log(this.reglaEvaluar.partesConclusion[0].desc)
           this.message="Usted padece de : " + this.reglaEvaluar.partesConclusion[0].desc;
           this.hasResult=true;
+          console.log(this.reglaEvaluar.partesConclusion[0]);
+          this.idResultado=this.reglaEvaluar.partesConclusion[0].padecimiento;
+          if(this.user==true){
+            this.guardar();
+          }
         }
       }else{
         console.log("No se cumplio: " + this.reglaEvaluar.partesConclusion)
         for(var noCumplido of this.reglaEvaluar.partesConclusion){
-          let atomoNoCumplido = new Atomo(noCumplido.desc,false,noCumplido.obj);
+          let atomoNoCumplido = new Atomo(noCumplido.desc,false,noCumplido.obj,noCumplido.padecimiento);
           this.memoriaDeTrabajo.almacenarAtomo(atomoNoCumplido);
         }
       }
@@ -137,5 +148,25 @@ export class DiagnosticComponent implements OnInit {
       }else if(this.hasResult==false){
         this.message="Lo sentimos, no se pudo encontrar su padecimiento conforme sus respuestas";
       }
+    }
+
+    guardar(){
+      console.log("se envia");
+      let values = new HttpParams()
+      .set('detalles', this.breadcrumb.replace(/->/g,","))
+      .set('usuario', window.sessionStorage.getItem('usuario'))
+      .set('padecimiento_final', this.idResultado)
+      .set('visible', 'true');
+
+      this.diagServ.guardarHistorial(values).subscribe(res =>{
+        console.log("Ok", res)
+        
+      this.toast.success('Se ha guardado con éxito en su historial', 'Guardado Exitoso!');
+      
+    }, error =>{
+        console.log("Error", error.error);
+        this.toast.error(error.error, 'Error');
+        this.router.navigate(['/landing'])
+    })
     }
 }

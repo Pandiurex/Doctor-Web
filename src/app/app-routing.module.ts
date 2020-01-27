@@ -20,8 +20,9 @@ import { BDCComponent } from './components/bdc/bdc.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MedicalRecordComponent } from './components/profile/medical-record/medical-record.component';
 import { MedicsComponent } from './components/profile/medics/medics.component';
+import { AdminGuardService } from './components/auth/admin-role-guard.service';
+import { DoctorGuardService } from './components/auth/doctor-role-guard.service';
 import { RecorddComponent } from './components/recordd/recordd.component';
-
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'diagnostico', component: DiagnosticComponent },
@@ -30,25 +31,27 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'record', component: MedicalRecordComponent },
-  { path: 'recordDescription', component: RecorddComponent },
+  { path: 'details', component: RecorddComponent },
   { path: 'medics', component: MedicsComponent },
   { path: 'faq', component: FaqComponent },
   {
   path: 'sintomas',
   component: SintomasComponent,
+  canActivate: [DoctorGuardService],
   children: SintomasRoutes
   },
   {
     path: 'padecimientos',
     component: PadecimientosComponent ,
+    canActivate: [DoctorGuardService],
     children: PadecimientosRoutes
   },
-  { path: 'usuarios', component: UsuarioComponent },
+  { path: 'usuarios', component: UsuarioComponent, canActivate: [AdminGuardService] },
   { path: 'recovery', component: ForgotPasswordComponent },
   { path: 'emailSent', component: SendEmailComponent },
   { path: 'verificacion/:hash', component : VerificacionComponent},
   { path: 'recuperar/:hash', component : ResetPasswordComponent},
-  { path: 'usuarios/info/:id', component : UsuarioInfoComponent},
+  { path: 'usuarios/info/:hash', component : UsuarioInfoComponent, canActivate: [AdminGuardService]},
   { path: 'bdc', component : BDCComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];

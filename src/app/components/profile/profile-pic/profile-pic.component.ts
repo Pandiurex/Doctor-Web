@@ -1,8 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ProfileService } from '../profile.service';
-import {Router} from '@angular/router';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  ReactiveFormsModule
+} from '@angular/forms';
 @Component({
   selector: 'app-profile-pic',
   templateUrl: './profile-pic.component.html',
@@ -10,34 +15,39 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
   providers: [ProfileService]
 })
 export class ProfilePicComponent implements OnInit {
-
   @Input() imagen: any;
   formData: any = new FormData();
-  public selectedFile : File = null;
+  public selectedFile: File = null;
   public selectedImg = false;
-  id = sessionStorage.getItem('usuario');
-  constructor(private profileServ : ProfileService, private toast : ToastrService, private router : Router) { 
-  }
+  hash = sessionStorage.getItem('hash');
+  constructor(
+    private profileServ: ProfileService,
+    private toast: ToastrService,
+    private router: Router
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  createFormData(event){
-    this.selectedFile = <File>event.target.files[0];
+  createFormData(event) {
+    this.selectedFile = event.target.files[0] as File;
     this.formData.append('image', this.selectedFile, this.selectedFile.name);
     this.selectedImg = true;
   }
 
-  actualizarDatos(){
-        this.profileServ.updateProfilePic(this.id, this.formData).subscribe( (res: any) =>{
-          this.formData = new FormData();
-          window.location.reload();
-          this.toast.success('Imagen cambiada con éxito!', 'Modificación Exitosa!');
-        },
-      error =>{
+  actualizarDatos() {
+    this.profileServ.updateProfilePic(this.hash, this.formData).subscribe(
+      (res: any) => {
+        this.formData = new FormData();
+        window.location.reload();
+        this.toast.success(
+          'Imagen cambiada con éxito!',
+          'Modificación Exitosa!'
+        );
+      },
+      error => {
         console.log(error.message);
-          this.toast.error(error.error.message,'Error');
-      })
-    
+        this.toast.error(error.error.message, 'Error');
+      }
+    );
   }
 }

@@ -28,7 +28,7 @@ import { ModificarSintomasComponent } from "./components/sintomas/modificar-sint
 import { VerificacionComponent } from "./components/verificacion/verificacion.component";
 import { ResetPasswordComponent } from "./components/reset-password/reset-password.component";
 import { OwlModule } from "ngx-owl-carousel";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ToastrModule } from "ngx-toastr";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { UsuarioInfoComponent } from "./components/usuario/usuarioInfo/usuarioInfo.component";
@@ -49,6 +49,8 @@ import { InfoMedicalRecordComponent } from "./components/profile/medical-record/
 import { MedicsComponent } from "./components/profile/medics/medics.component";
 import { RecorddComponent } from './components/recordd/recordd.component';
 
+import { AuthInterceptorService } from "./components/auth/interceptor.service";
+import { InjuryPicComponent } from './components/injury-pic/injury-pic.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -87,7 +89,8 @@ import { RecorddComponent } from './components/recordd/recordd.component';
     MedicalRecordComponent,
     MedicsComponent,
     InfoMedicalRecordComponent,
-    RecorddComponent
+    RecorddComponent,
+    InjuryPicComponent
   ],
   imports: [
     BrowserModule,
@@ -103,8 +106,8 @@ import { RecorddComponent } from './components/recordd/recordd.component';
     ScrollingModule,
     NgxPaginationModule,
     OrderModule
-  ],
-  providers: [NgbActiveModal],
+    ],
+  providers: [NgbActiveModal,{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent],
 
   entryComponents: [
