@@ -23,7 +23,11 @@
     </div>
       <br><br>
     <label>Detalles</label>
-    <textarea rows="10" disabled>{{historial.detalles}}</textarea>
+    <ul>
+      <li *ngFor="let item of injurys">
+        {{item}}
+      </li>
+    </ul>
     </div>
     <div class="modal-footer" >
       <button type="button" class="btn btn-secondary cancel" (click)="activeModal.close('Close click')">Volver</button>
