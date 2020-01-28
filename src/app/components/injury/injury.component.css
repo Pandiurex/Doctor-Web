@@ -1,0 +1,10 @@
+.format input {
+  width: 100%;
+  text-align: center;
+  margin: 0%;
+}
+
+.format li {
+    font-size: 24px;
+    margin-top: 15px;
+}

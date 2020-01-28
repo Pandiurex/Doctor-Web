@@ -1,26 +1,24 @@
 .margin {
   text-align: center;
   padding: 50px;
-  margin: 40px 2%;
+  margin: 40px 0 0 5.5%;
   border-style: double;
   border-radius: 15px;
   border-color: red;
 }
 
 .bordered {
-    padding: 1% !important;
-
+  padding: 1% !important;
 }
 
 .headers {
-    font-family: 'Pacifico',
-    cursive;
-    font-size: 50px;
-    color: red;
-    margin-top: 20px;
+  font-family: "Pacifico", cursive;
+  font-size: 50px;
+  color: red;
+  margin-top: 20px;
 }
 .boton {
-    margin-top: 15px;
-    background-color: #00acee !important;
-    color: white !important;
+  margin-top: 15px;
+  background-color: #00acee !important;
+  color: white !important;
 }

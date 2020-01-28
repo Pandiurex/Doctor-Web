@@ -51,6 +51,8 @@ import { RecorddComponent } from './components/recordd/recordd.component';
 
 import { AuthInterceptorService } from "./components/auth/interceptor.service";
 import { InjuryPicComponent } from './components/injury-pic/injury-pic.component';
+import { InjuryComponent } from './components/injury/injury.component';
+import { MedicalCheckComponent } from './components/medical-check/medical-check.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +92,9 @@ import { InjuryPicComponent } from './components/injury-pic/injury-pic.component
     MedicsComponent,
     InfoMedicalRecordComponent,
     RecorddComponent,
-    InjuryPicComponent
+    InjuryPicComponent,
+    InjuryComponent,
+    MedicalCheckComponent
   ],
   imports: [
     BrowserModule,

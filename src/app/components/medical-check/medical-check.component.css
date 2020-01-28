@@ -1,0 +1,11 @@
+.format input {
+  width: 100%;
+  text-align: center;
+  margin: 0%;
+}
+
+.boton {
+  margin-top: 10px;
+  background-color: #00acee !important;
+  color: white !important;
+}
