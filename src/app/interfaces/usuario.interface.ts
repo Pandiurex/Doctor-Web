@@ -13,5 +13,5 @@ export interface Usuario{
     fecha_nacimiento: Date,
     telefono: String,
     direccion: String,
-    imagen_perfil: Blob
+    imagen_perfil: String
 }
