@@ -30,6 +30,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'record', component: MedicalRecordComponent },
+  { path: 'medics/:type', component: MedicsComponent },
   { path: 'medics', component: MedicsComponent },
   { path: 'faq', component: FaqComponent },
   {

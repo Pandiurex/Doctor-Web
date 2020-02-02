@@ -10,20 +10,25 @@
     <input type="text"  value="{{historial.fecha_consulta}}" disabled>
 
     <label>Padecimiento resultante</label>
-    <input type="text" value="{{padecimientoInfo.nombre_pad}}" disabled>
+    <input type="text" value="{{historial.nombre_pad}}" disabled>
 
     <label>Categoria del padecimiento</label>
-    <input type="text"  value="{{padecimientoInfo.categoria}}" disabled>
+    <input type="text"  value="{{historial.categoria}}" disabled>
 
     <label>Especialidad Padecimiento</label>
-    <input type="text" value="{{padecimientoInfo.categoria}}" disabled>
+    <br>
+    <legend (click)="activeModal.dismiss('Cross click')" routerLink="/medics/{{historial.nombre_esp}}">{{historial.nombre_esp}}</legend>
     <div>
       <label>Imagen</label><br>
       <img class="center" style="width:300px;height:200px;" [src]="url">
     </div>
       <br><br>
-    <label>Detalles</label>
-    <textarea rows="10" disabled>{{historial.detalles}}</textarea>
+    <label>Sintomas</label>
+    <ul>
+      <li *ngFor="let sintoma of sintomas">
+        {{sintoma}}
+      </li>
+    </ul>
     </div>
     <div class="modal-footer" >
       <button type="button" class="btn btn-secondary cancel" (click)="activeModal.close('Close click')">Volver</button>

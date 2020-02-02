@@ -13,6 +13,7 @@ export class InfoMedicalRecordComponent implements OnInit {
   @Input() public historial;
   padecimientoInfo = {} as any;
   public url : string = '';
+  public sintomas = [];
   constructor(public activeModal: NgbActiveModal, private profileServ : ProfileService) { 
 
   }
@@ -20,11 +21,11 @@ export class InfoMedicalRecordComponent implements OnInit {
   ngOnInit() {
     this.profileServ.getHistory(this.historial).subscribe( (res: any) =>{
        console.log(res.body);
-      this.historial = res.body[0];
-      this.padecimientoInfo = res.body[1];
-
-      if(this.padecimientoInfo.url_imagen_pad!= null){
-      this.url = 'data:image/jpg;base64,' + this.padecimientoInfo.url_imagen_pad.toString();
+      this.historial = res.body;
+      this.sintomas = res.body.detalles.split(",");
+      console.log(this.sintomas);
+      if(this.historial.url_imagen_pad!= null){
+      this.url = 'data:image/jpg;base64,' + this.historial.url_imagen_pad.toString();
       }
     },
   error =>{
