@@ -19,7 +19,7 @@ import { UsuarioInfoComponent} from './components/usuario/usuarioInfo/usuarioInf
 import { BDCComponent } from './components/bdc/bdc.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MedicalRecordComponent } from './components/profile/medical-record/medical-record.component';
-import { MedicsComponent } from './components/profile/medics/medics.component';
+import { MedicsComponent } from './components/directory/medics.component';
 import { AdminGuardService } from './components/auth/admin-role-guard.service';
 import { DoctorGuardService } from './components/auth/doctor-role-guard.service';
 const routes: Routes = [

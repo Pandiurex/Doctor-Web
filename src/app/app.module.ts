@@ -46,8 +46,8 @@ import { ProfilePicComponent } from './components/profile/profile-pic/profile-pi
 import { ProfileInfoComponent } from './components/profile/profile-info/profile-info.component';
 import { MedicalRecordComponent } from './components/profile/medical-record/medical-record.component';
 import { InfoMedicalRecordComponent} from './components/profile/medical-record/info-medical-record/info-medical-record.component';
-import { MedicsComponent } from './components/profile/medics/medics.component';
-
+import { MedicsComponent } from './components/directory/medics.component';
+import { InfoMedicComponent } from './components/directory/info-medic/info-medic.component';
 import { AuthInterceptorService } from "./components/auth/interceptor.service";
 @NgModule({
   declarations: [
@@ -86,6 +86,7 @@ import { AuthInterceptorService } from "./components/auth/interceptor.service";
     ProfileInfoComponent,
     MedicalRecordComponent,
     MedicsComponent,
+    InfoMedicComponent,
     InfoMedicalRecordComponent
   ],
   imports: [
@@ -106,6 +107,6 @@ import { AuthInterceptorService } from "./components/auth/interceptor.service";
   providers: [NgbActiveModal,{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent],
   
-  entryComponents: [InfoSintomasComponent, InfoPadecimientosComponent, InfoMedicalRecordComponent]
+  entryComponents: [InfoSintomasComponent, InfoPadecimientosComponent, InfoMedicalRecordComponent, InfoMedicComponent]
 })
 export class AppModule { }

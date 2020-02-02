@@ -26,7 +26,7 @@
               <th><button class="btn btn-success btn-sm" (click)="openModal(content,historial.hashId)" >Detalle</button></th>
       </tr>
       <tr *ngIf="historiales.length==0">
-          <th colspan="3">No hay registros de expedientes en el sistema</th>
+          <th colspan="4">No hay registros de expedientes en el sistema</th>
       </tr>
 </table>
 <pagination-controls (pageChange)="pagina = $event"
