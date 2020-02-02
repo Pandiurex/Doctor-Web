@@ -13,9 +13,9 @@ export class UsuarioService {
     //'http://localhost:3000/usuarios/userlist/';
     this._urlIndividual = "https://medicpath.herokuapp.com/usuarios/";
     //'http://localhost:3000/usuarios/'
-    this._urlDoctor = "https://medicpath.herokuapp.com/doctor/";
+    this._urlDoctor = "https://medicpath.herokuapp.com/usuarios/doctor/";
     //"http://localhost:3000/usuarios/doctor/";
-    this._urlAllDocs = "https://medicpath.herokuapp.com/doctorlist/";
+    this._urlAllDocs = "https://medicpath.herokuapp.com/usuarios/doctorlist/";
     //"http://localhost:3000/usuarios/doctorlist/";
 
   }
@@ -50,8 +50,8 @@ export class UsuarioService {
     });
   }
 
-  getDoctors(){
-    return this._http.get(this._urlAllDocs, {
+  getDoctors(tipo : any){
+    return this._http.get(this._urlAllDocs + tipo, {
       headers: new HttpHeaders().set(
         "Content-Type",
         "application/x-www-form-urlencoded"

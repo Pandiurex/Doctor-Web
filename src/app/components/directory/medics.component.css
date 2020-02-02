@@ -9,3 +9,24 @@
   border-radius: 2px;
   border-color: rgb(124, 131, 132);
 }
+
+.main-container input{
+  margin: 0 25px 8px;
+}
+.center {
+padding: 0 40%;
+}
+.checking{
+color: blue;
+}
+.space {
+margin-top: 15px;
+color: #2196f3;
+margin-left: 15px;
+}
+
+.main-container h3{
+text-align: left;
+margin-top: 15px;
+margin-bottom: 15px;
+}

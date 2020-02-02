@@ -37,5 +37,4 @@ export class InfoMedicComponent implements OnInit {
       }
     });
   }
-
 }
