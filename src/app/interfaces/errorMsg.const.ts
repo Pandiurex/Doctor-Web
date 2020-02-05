@@ -31,6 +31,15 @@ export class ErrorMsg {
         ],
         'same_password' : [
           {type: 'equalPasswords', message: 'Las contraseñas no son iguales'}
+        ],
+        'telefono' : [
+          {type: 'required', message: 'Es necesario ingresar un numero telefonico'},
+          {type: 'minlength', message: 'Es necesario ingresar un numero teléfonico con 10 caracteres'},
+          {type: 'maxlength', message: 'La cantidad de digitos para el número telefonico debe ser menor a 15'},
+          {type: 'pattern', message: 'Solo ingrese numeros'}
+        ],
+        'domicilio' :[
+          {type: 'required', message: 'Es necesario ingresar un domicilio para el médico'}
         ]
       }
 

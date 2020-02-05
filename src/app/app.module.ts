@@ -49,6 +49,8 @@ import { InfoMedicalRecordComponent} from './components/profile/medical-record/i
 import { MedicsComponent } from './components/directory/medics.component';
 import { InfoMedicComponent } from './components/directory/info-medic/info-medic.component';
 import { AuthInterceptorService } from "./components/auth/interceptor.service";
+import { RegistryComponent } from './components/registry/registry.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -87,7 +89,8 @@ import { AuthInterceptorService } from "./components/auth/interceptor.service";
     MedicalRecordComponent,
     MedicsComponent,
     InfoMedicComponent,
-    InfoMedicalRecordComponent
+    InfoMedicalRecordComponent,
+    RegistryComponent
   ],
   imports: [
     BrowserModule,

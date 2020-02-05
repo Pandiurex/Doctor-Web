@@ -22,6 +22,7 @@ import { MedicalRecordComponent } from './components/profile/medical-record/medi
 import { MedicsComponent } from './components/directory/medics.component';
 import { AdminGuardService } from './components/auth/admin-role-guard.service';
 import { DoctorGuardService } from './components/auth/doctor-role-guard.service';
+import { RegistryComponent } from './components/registry/registry.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'diagnostico', component: DiagnosticComponent },
@@ -52,6 +53,7 @@ const routes: Routes = [
   { path: 'recuperar/:hash', component : ResetPasswordComponent},
   { path: 'usuarios/info/:hash', component : UsuarioInfoComponent, canActivate: [AdminGuardService]},
   { path: 'bdc', component : BDCComponent},
+  { path: 'registry', component: RegistryComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 
