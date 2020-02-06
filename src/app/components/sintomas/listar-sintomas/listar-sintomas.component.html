@@ -1,6 +1,12 @@
 <div class="search">
     <i class="fas fa-search"></i>
-    <input type="text" placeholder="Nombre del sintoma" [(ngModel)]="myFilter" (ngModelChange)="filtering()">
+    <input type="text" placeholder="Nombre del sintoma" [(ngModel)]="myFilter" (ngModelChange)="filtering()" (keyup)="showResults($event)">
+    <span><i *ngIf="myFilter.length!=0" class="fas fa-trash delety" (click)="remove()"></i></span>
+    <ul *ngIf="searching === true">
+        <li *ngFor="let sint of sintomas | search: 'nombre_sint' : myFilter" (click)="selection(sint.nombre_sint)">
+            <span>{{sint.nombre_sint}}</span>
+        </li>
+    </ul>
 </div>
 
 <table>

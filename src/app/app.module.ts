@@ -50,6 +50,7 @@ import { MedicsComponent } from './components/directory/medics.component';
 import { InfoMedicComponent } from './components/directory/info-medic/info-medic.component';
 import { AuthInterceptorService } from "./components/auth/interceptor.service";
 import { RegistryComponent } from './components/registry/registry.component';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import { RegistryComponent } from './components/registry/registry.component';
     MedicsComponent,
     InfoMedicComponent,
     InfoMedicalRecordComponent,
-    RegistryComponent
+    RegistryComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

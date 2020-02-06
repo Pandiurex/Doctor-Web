@@ -16,8 +16,9 @@ export class ListarPadecimientosComponent implements OnInit {
   public padecimientos : Padecimiento[] = [];
   key :string = 'nombre_pad';
   reversa : boolean = false;
-  myFilter;
+  public myFilter : any = "";
   content;
+  public searching: boolean = false;
   constructor(private padServ : PadecimientoService, private modalService : NgbModal) { 
 
   }
@@ -47,5 +48,22 @@ export class ListarPadecimientosComponent implements OnInit {
   sorting(key : any){
     this.key = key;
     this.reversa = !this.reversa;
+  }
+
+  showResults(event :any){
+    if(event.target.value.length >= 1){
+      this.searching= true;
+    }else{
+      this.searching=false;
+    }
+  }
+
+  selection(name: any){
+    this.myFilter = name;
+    this.searching=false;
+  }
+  
+  remove(){
+    this.myFilter="";
   }
 }

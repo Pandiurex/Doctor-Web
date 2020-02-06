@@ -22,7 +22,8 @@ export class ListarSintomasComponent implements OnInit {
   key :string = 'nombre_sint';
   reversa : boolean = false;
   content;
-  myFilter;
+  public myFilter : any = "";
+  public searching: boolean = false;
   constructor(private sintServ : SintomasService, private http : HttpClient, private modalService: NgbModal) { 
 
   }
@@ -54,5 +55,22 @@ export class ListarSintomasComponent implements OnInit {
   sorting(key : any){
     this.key = key;
     this.reversa = !this.reversa;
+  }
+
+  showResults(event :any){
+    if(event.target.value.length >= 1){
+      this.searching= true;
+    }else{
+      this.searching=false;
+    }
+  }
+
+  selection(name: any){
+    this.myFilter = name;
+    this.searching=false;
+  }
+  
+  remove(){
+    this.myFilter="";
   }
 }
