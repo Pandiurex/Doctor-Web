@@ -13,6 +13,8 @@ import {Router} from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorMsg } from '../../interfaces/errorMsg.const';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { NicknameValidator } from "../../validators/NicknameValidator";
+import { EmailValidator } from "../../validators/EmailValidator";
 @Component({
   selector: 'app-registry',
   templateUrl: './registry.component.html',
@@ -31,7 +33,9 @@ export class RegistryComponent implements OnInit {
   public selectedEspe : any = [];
   public especializaciones : any = [];
   
-  constructor(private regServ : RegistryService, private http : HttpClient, private router : Router, private toast : ToastrService) {
+  constructor(private regServ : RegistryService, private http : HttpClient, 
+    private router : Router, private toast : ToastrService, private nickVal : NicknameValidator,
+    private emailVal : EmailValidator) {
     this.forma = new FormGroup({
 
       nombrecompleto: new FormGroup({
@@ -49,11 +53,11 @@ export class RegistryComponent implements OnInit {
       correo: new FormControl('', [
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
-      ]),
+      ], [this.emailVal.existingEmail()]),
       genero: new FormControl('Indefinido', Validators.required),
       username: new FormControl('', [Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(20)]),
+        Validators.maxLength(20)],[this.nickVal.existingNickname()]),
         password_validations : new FormGroup({
           password1 : new FormControl('', [Validators.required, Validators.minLength(5)]),
           password2 : new FormControl('', Validators.required),

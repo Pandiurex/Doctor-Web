@@ -3,7 +3,8 @@ import {
   FormGroup,
   FormControl,
   Validators,
-  FormArray
+  FormArray,
+  AbstractControl
 } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
@@ -12,6 +13,9 @@ import { SignupService } from './signup.service';
 import {Router} from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorMsg } from '../../interfaces/errorMsg.const';
+import { map } from 'rxjs/operators';
+import { NicknameValidator } from "../../validators/NicknameValidator";
+import { EmailValidator } from "../../validators/EmailValidator";
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -29,7 +33,9 @@ export class SignupComponent implements OnInit {
   sexos = ['Hombre', 'Mujer', 'Indefinido'];
 
 
-  constructor(private signupServ : SignupService, private http : HttpClient, private router : Router, private toast : ToastrService) {
+  constructor(private signupServ : SignupService, private http : HttpClient, 
+    private router : Router, private toast : ToastrService, private nickVal : NicknameValidator,
+    private emailVal : EmailValidator) {
     this.forma = new FormGroup({
 
       nombrecompleto: new FormGroup({
@@ -47,11 +53,11 @@ export class SignupComponent implements OnInit {
       correo: new FormControl('', [
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
-      ]),
+      ], [this.emailVal.existingEmail()]),
       genero: new FormControl('Indefinido', Validators.required),
       username: new FormControl('', [Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(20)]),
+        Validators.maxLength(20)],[this.nickVal.existingNickname()]),
         password_validations : new FormGroup({
           password1 : new FormControl('', [Validators.required, Validators.minLength(5)]),
           password2 : new FormControl('', Validators.required),

@@ -3,7 +3,8 @@ export class ErrorMsg {
         'nickname' : [
           {type: 'required', message: 'Es necesario el ingresar un nombre de usuario'},
           {type: 'minlength', message: 'El nombre de usuario debe ser mayor a 3 caracteres'},
-          {type: 'maxlength', message: 'El nombre de usuario debe ser menor a 20 caracteres'}
+          {type: 'maxlength', message: 'El nombre de usuario debe ser menor a 20 caracteres'},
+          {type: 'userTaken', message: 'Usuario en uso, intente con otro'}
         ],
         'nombre' : [
           {type: 'required', message: 'El nombre es necesario'},
@@ -17,7 +18,8 @@ export class ErrorMsg {
         ],
         'correo' : [
           {type: 'required', message: 'Es necesario ingresar un correo'},
-          {type: 'pattern', message: 'El texto ingresado no representa un correo'}
+          {type: 'pattern', message: 'El texto ingresado no representa un correo'},
+          {type: 'emailTaken', message: 'Correo en uso, intente con otro'}
         ],
         'fechanacimiento' : [
           {type: 'required', message: 'Debe seleccionar una fecha'}
@@ -63,7 +65,8 @@ export class ErrorMsg {
           'nombrePad' : [
             {type: 'required', message: 'Es necesario ingresar el nombre del padecimiento'},
             {type: 'minlength', message: 'El nombre del padecimiento debe ser mayor a 4 caracteres'},
-            {type: 'maxlength', message: 'La longitud debe ser menor a 50 caracteres'}
+            {type: 'maxlength', message: 'La longitud debe ser menor a 50 caracteres'},
+            {type: 'nameUsed', message: 'Ya existe un padecimiento con este nombre'}
           ],
           'keyword' : [
             {type: 'required', message: 'Es necesario ingresar una palabra clave para el síntoma'},
