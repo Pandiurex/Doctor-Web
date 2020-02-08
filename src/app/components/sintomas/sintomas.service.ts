@@ -17,13 +17,11 @@ export class SintomasService {
     //'http://localhost:3000/sintomas/sintlist/';
     this._urlIndividual = "https://medicpath.herokuapp.com/sintomas/";
     //'http://localhost:3000/sintomas/';
-    this._urlComponente =
-      "https://medicpath.herokuapp.com/sintomas/componentes";
+    this._urlComponente = "https://medicpath.herokuapp.com/sintomas/componentes";
     //'http://localhost:3000/sintomas/componentes';
     this._urlCreate = "https://medicpath.herokuapp.com/sintomas/create";
     //'http://localhost:3000/sintomas/create';
-    this._urlCompList =
-      "https://medicpath.herokuapp.com/sintomas/comp/getComponents/";
+    this._urlCompList = "https://medicpath.herokuapp.com/sintomas/comp/getComponents/";
     //'http://localhost:3000/sintomas/comp/getComponents/';
     this._urlModificar = "https://medicpath.herokuapp.com/sintomas/update/";
     //'http://localhost:3000/sintomas/update/'
@@ -82,8 +80,8 @@ export class SintomasService {
     });
   }
 
-  modificar(id: any, parametros: HttpParams) {
-    return this._http.put(this._urlModificar + id, parametros.toString(), {
+  modificar(hash: any, parametros: HttpParams) {
+    return this._http.put(this._urlModificar + encodeURIComponent(hash), parametros.toString(), {
       headers: new HttpHeaders().set(
         "Content-Type",
         "application/x-www-form-urlencoded"

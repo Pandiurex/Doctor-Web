@@ -42,7 +42,7 @@ export class ModificarSintomasComponent implements OnInit {
     this.modify = new FormGroup({
       nombre: new FormControl('', 
       [Validators.required,
-        Validators.minLength(4),
+        Validators.minLength(3),
         Validators.maxLength(50)]),
 
       keyword: new FormControl('', 
@@ -141,13 +141,13 @@ export class ModificarSintomasComponent implements OnInit {
       .set('composicion', this.composicionBack)
     }
     console.log(this.values);
-    this.sintServ.modificar(this.sintoma.idSint,this.values).subscribe(res =>{
+    this.sintServ.modificar(this.sintoma.hashId,this.values).subscribe(res =>{
       console.log("Ok", res)
       this.toast.success('Se ha modificado el sintoma con éxito!', 'Modificación Exitosa!');
     this.router.navigate(['/sintomas'])
   }, error =>{
       console.log("Error", error.error);
-      this.toast.error(error.error, 'Error');
+      this.toast.error(error.error.message, 'Error');
   })
   }
 
