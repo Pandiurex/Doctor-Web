@@ -15,9 +15,10 @@ export class MedicsComponent implements OnInit {
   pagina = 0;
   key :string = 'padecimiento_final';
   reversa : boolean = false;
-  myFilter;
+  public myFilter : any = "";
   tipo = "all";
   hasEspe = false;
+  public searching: boolean = false;
   constructor(private userServ : UsuarioService, private modalService : NgbModal, private route : ActivatedRoute) { }
 
   ngOnInit() {
@@ -29,7 +30,7 @@ export class MedicsComponent implements OnInit {
     this.userServ.getDoctors(this.tipo).subscribe((res: any) =>{
 
       this.medicos = res.body;
-
+      console.log(this.medicos);
     });
   }
 
@@ -40,5 +41,23 @@ export class MedicsComponent implements OnInit {
 
   filtering(){
     this.pagina=1;
+  }
+
+  showResults(event :any){
+    if(event.target.value.length >= 1){
+      this.searching= true;
+    }else{
+      this.searching=false;
+    }
+  }
+
+  selection(medico: any){
+    this.myFilter =medico;
+    this.searching=false;
+  }
+  
+  remove(){
+    this.myFilter="";
+    this.searching=false;
   }
 }

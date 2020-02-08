@@ -3,7 +3,13 @@
     <h3 *ngIf="hasEspe">Visualizando los datos de los médicos especialistas en: {{tipo}}</h3>
             <div class="search">
                     <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Nombre del medico" [(ngModel)]="myFilter" (ngModelChange)="filtering()">
+                    <input type="text" placeholder="Nombre del medico" [(ngModel)]="myFilter" (ngModelChange)="filtering()" (keyup)="showResults($event)">
+                    <span><i *ngIf="myFilter.length!=0" class="fas fa-trash delety" (click)="remove()"></i></span>
+                    <ul *ngIf="searching === true">
+                        <li *ngFor="let medico of medicos | search: 'fullname' : myFilter" (click)="selection(medico.fullname)">
+                            <span>{{medico.fullname}}</span>
+                        </li>
+                    </ul>
             </div>
       
         <table>
@@ -14,8 +20,8 @@
                 <th>Teléfono</th>
                 <th>Acciones</th>
             </tr>
-            <tr ng-if="medicos.length>0" *ngFor="let medico of medicos | orderBy : key : reversa : true | ListFilter: 'nombres' : myFilter | paginate:{itemsPerPage: 10, currentPage:pagina}">
-                <th>{{medico.nombres +" " + medico.apellidos}}</th>
+            <tr ng-if="medicos.length>0" *ngFor="let medico of medicos | orderBy : key : reversa : true | ListFilter: 'fullname' : myFilter | paginate:{itemsPerPage: 10, currentPage:pagina}">
+                <th>{{medico.fullname}}</th>
                 <th *ngIf="!hasEspe"><div *ngFor="let espe of medico.especializacions"><span>{{espe.nombre_esp}}</span></div></th>
                 <th>{{ medico.direccion}}</th>
                 <th>{{ medico.telefono}}</th>
