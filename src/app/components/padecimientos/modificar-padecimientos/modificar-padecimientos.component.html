@@ -9,7 +9,7 @@
             <div class="form-group row">
               <div class="col-md-8">
                 <input [ngClass]="{'is-invalid': !modify.controls['nombre'].valid}" formControlName="nombre"
-                  class="form-control is-valid" type="text" placeholder="Nombre del padecimiento a modificar">
+                  class="form-control is-valid" type="text" placeholder="Nombre del padecimiento a modificar" (keyup)="check()">
                   <div class="validation-errors">
                     <ng-container *ngFor="let validation of mensajes_error.nombrePad">
                       <div class="form-control-feedback" *ngIf="modify.get('nombre').hasError(validation.type) 

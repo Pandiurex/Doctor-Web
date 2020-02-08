@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 import { ErrorMsg } from '../../../interfaces/errorMsg.const';
 import { ProfileService } from '../profile.service';
 import {Router} from '@angular/router';
+import { NicknameValidator } from "../../../validators/NicknameValidator";
 
 @Component({
   selector: 'app-profile-info',
@@ -19,7 +20,9 @@ export class ProfileInfoComponent implements OnInit {
   mensajes_error = ErrorMsg.ERROR_MSG_REGISTER;
   formData: any = new FormData();
   datos_perfil : FormGroup;
-  constructor(private profileServ : ProfileService, private toast : ToastrService, private router : Router) {
+  public originalValue : any = "";
+  constructor(private profileServ : ProfileService, private toast : ToastrService, 
+              private router : Router, private nickVal : NicknameValidator) {
     this.datos_perfil = new FormGroup({
       nombres : new FormControl('', [
         Validators.required,
@@ -40,7 +43,6 @@ export class ProfileInfoComponent implements OnInit {
    }
 
   ngOnInit() {
-    console.log(sessionStorage.getItem('token'));
     this.datos_perfil.controls['nickname'].setValue(this.usuarioInfo.nickname, {onlySelf : true});
     this.datos_perfil.controls['nombres'].setValue(this.usuarioInfo.nombres, {onlySelf : true});
     this.datos_perfil.controls['apellidos'].setValue(this.usuarioInfo.apellidos, {onlySelf : true});
@@ -70,5 +72,17 @@ export class ProfileInfoComponent implements OnInit {
           this.formData = new FormData();
       })
     
+  }
+
+  check(){
+    if(this.usuarioInfo.nickname.toLowerCase()!=this.datos_perfil.get('nickname').value.toString().toLowerCase()){
+
+      this.datos_perfil.get('nickname').updateValueAndValidity();
+      this.datos_perfil.get('nickname').setAsyncValidators(this.nickVal.existingNickname());
+      
+    }else{
+      this.datos_perfil.get('nickname').clearAsyncValidators();
+      this.datos_perfil.get('nickname').updateValueAndValidity();
+    }
   }
 }

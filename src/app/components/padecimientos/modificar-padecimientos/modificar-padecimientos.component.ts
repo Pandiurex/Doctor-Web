@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, } from '@angular/forms';
 import { PadecimientoService } from '../padecimientos.service';
 import { SintomasService } from '../../sintomas/sintomas.service';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Padecimiento } from '../../../interfaces/padecimiento.interface';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ErrorMsg } from '../../../interfaces/errorMsg.const';
+import { AilmentNameValidator } from '../../../validators/AilmentNameValidator';
 @Component({
   selector: 'app-modificar-padecimientos',
   templateUrl: './modificar-padecimientos.component.html',
@@ -38,12 +39,18 @@ export class ModificarPadecimientosComponent implements OnInit {
   formData: any = new FormData();
   public  hasInfo : boolean = false;
   public urlImage : string = "../../../../assets/default-image.jpg";
-  constructor(private padServ : PadecimientoService, private sintServ : SintomasService, private toast : ToastrService, private router : Router, private url : ActivatedRoute) {
+  public originalValue : any = "";
+
+  private nameValidators = [
+    Validators.required,
+    Validators.minLength(4),
+    Validators.maxLength(50)
+  ]
+  constructor(private padServ : PadecimientoService, private sintServ : SintomasService,
+              private toast : ToastrService, private router : Router, 
+              private url : ActivatedRoute, private nameVal : AilmentNameValidator) {
     this.modify = new FormGroup({
-      nombre: new FormControl('', 
-      [Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(50)]),
+      nombre: new FormControl('', this.nameValidators),
       categoria: new FormControl('', Validators.required),
       especializacion: new FormControl('', Validators.required),
       descripcion: new FormControl('', [Validators.required,
@@ -71,6 +78,7 @@ export class ModificarPadecimientosComponent implements OnInit {
   this.padServ.getPad(this.url.snapshot.params.hash).subscribe( (res : any) =>{
     console.log(res.body);
     this.padecimiento = res.body.padecimiento;
+    this.originalValue = this.padecimiento.nombre_pad;
     this.selectedSints = res.body.sintomas;
     
     this.selectedSints.forEach(element => {
@@ -178,4 +186,15 @@ export class ModificarPadecimientosComponent implements OnInit {
   })
   }
 
+  check(){
+    console.log(this.modify.value.nombre.toString().toLowerCase());
+    if(this.originalValue.toLowerCase()!=this.modify.value.nombre.toString().toLowerCase()){
+      this.modify.get('nombre').updateValueAndValidity();
+      this.modify.get('nombre').setAsyncValidators(this.nameVal.existingAilment());
+      
+    }else{
+      this.modify.get('nombre').clearAsyncValidators();
+      this.modify.get('nombre').updateValueAndValidity();
+    }
+  }
 }

@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Sintoma } from '../../../interfaces/sintoma.interface';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ErrorMsg } from '../../../interfaces/errorMsg.const';
+import { SymptomNameValidator } from '../../../validators/SymptomNameValidator';
 @Component({
   selector: 'app-modificar-sintomas',
   templateUrl: './modificar-sintomas.component.html',
@@ -37,8 +38,10 @@ export class ModificarSintomasComponent implements OnInit {
   public  isChecked : boolean;
   public composicionFront : string = "";
   public composicionBack : string = "";
-
-  constructor(private sintServ : SintomasService, private router : Router, private toast : ToastrService, private url : ActivatedRoute) {
+  public originalValue : any = "";
+  constructor(private sintServ : SintomasService, private router : Router,
+              private toast : ToastrService, private url : ActivatedRoute,
+              private nameVal : SymptomNameValidator) {
     this.modify = new FormGroup({
       nombre: new FormControl('', 
       [Validators.required,
@@ -97,6 +100,7 @@ export class ModificarSintomasComponent implements OnInit {
       this.isChecked = this.sintoma.compuesto;
       this.modify.controls['categoria'].setValue(this.sintoma.categoria_sint, {onlySelf : true});
 
+      this.originalValue = this.sintoma.nombre_sint;
     });
 
     //Carga de componentes
@@ -196,6 +200,17 @@ export class ModificarSintomasComponent implements OnInit {
     }
     else{
       return false;
+    }
+  }
+
+  check(){
+    if(this.originalValue.toLowerCase()!=this.modify.value.nombre.toString().toLowerCase()){
+      this.modify.get('nombre').updateValueAndValidity();
+      this.modify.get('nombre').setAsyncValidators(this.nameVal.existingSymptomName());
+      
+    }else{
+      this.modify.get('nombre').clearAsyncValidators();
+      this.modify.get('nombre').updateValueAndValidity();
     }
   }
 }
