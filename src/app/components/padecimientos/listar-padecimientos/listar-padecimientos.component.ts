@@ -65,5 +65,6 @@ export class ListarPadecimientosComponent implements OnInit {
   
   remove(){
     this.myFilter="";
+    this.searching=false;
   }
 }

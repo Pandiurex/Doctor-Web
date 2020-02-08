@@ -72,5 +72,6 @@ export class ListarSintomasComponent implements OnInit {
   
   remove(){
     this.myFilter="";
+    this.searching=false;
   }
 }
