@@ -48,8 +48,9 @@ export class ErrorMsg {
     public static ERROR_MSG_SINT_PADS = {
         'nombreSint' : [
             {type: 'required', message: 'Es necesario ingresar el nombre del síntoma'},
-            {type: 'minlength', message: 'El nombre del sintoma debe ser mayor a 4 caracteres'},
-            {type: 'maxlength', message: 'La longitud debe ser menor a 50 caracteres'}
+            {type: 'minlength', message: 'El nombre del sintoma debe ser mayor a 3 caracteres'},
+            {type: 'maxlength', message: 'La longitud debe ser menor a 50 caracteres'},
+            {type: 'nameUsed', message: 'Ya existe un sintoma con este nombre'}
           ],
           'descripcion' : [
             {type: 'required', message: 'Es necesario ingresar una descripción'},

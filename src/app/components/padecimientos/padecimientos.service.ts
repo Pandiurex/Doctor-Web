@@ -2,14 +2,16 @@ import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PadecimientoService {
   _url: string = "";
   _urlInd: string = "";
   _create: string = "";
   _urlModificar = "";
   _urlEspecializaciones = "";
-
+  
   constructor(private _http: HttpClient) {
     this._url = "https://medicpath.herokuapp.com/padecimientos/padlist";
     //"http://localhost:3000/padecimientos/padlist";

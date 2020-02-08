@@ -1,7 +1,9 @@
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SintomasService {
   _url: string = "";
   _urlIndividual: string = "";
@@ -9,6 +11,7 @@ export class SintomasService {
   _urlCreate: string = "";
   _urlCompList: string = "";
   _urlModificar: string = "";
+  _urlCheckName: string = "";
   constructor(private _http: HttpClient) {
     this._url = "https://medicpath.herokuapp.com/sintomas/sintlist";
     //'http://localhost:3000/sintomas/sintlist/';
@@ -24,6 +27,8 @@ export class SintomasService {
     //'http://localhost:3000/sintomas/comp/getComponents/';
     this._urlModificar = "https://medicpath.herokuapp.com/sintomas/update/";
     //'http://localhost:3000/sintomas/update/'
+    this._urlCheckName = "https://medicpath.herokuapp.com/sintomas/checkName/";
+    //"http://localhost:3000/sintomas/checkName/";
   }
 
   getSints() {
@@ -85,5 +90,16 @@ export class SintomasService {
       ),
       observe: "response"
     });
+  }
+
+  checkSintName(name : any){
+    return this._http.get(this._urlCheckName + name,
+    {
+      headers: new HttpHeaders().set(
+        "Content-Type",
+        "application/x-www-form-urlencoded"
+      ),
+      observe: "response"
+    })
   }
 }

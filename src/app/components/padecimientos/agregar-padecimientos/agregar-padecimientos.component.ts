@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ErrorMsg } from '../../../interfaces/errorMsg.const';
+import{ AilmentNameValidator } from '../../../validators/AilmentNameValidator';
 @Component({
   selector: 'app-agregar-padecimientos',
   templateUrl: './agregar-padecimientos.component.html',
@@ -37,12 +38,13 @@ export class AgregarPadecimientosComponent implements OnInit {
   selectedFile : File = null;
   formData: any = new FormData();
   
-  constructor(private padServ : PadecimientoService, private sintServ : SintomasService, private toast : ToastrService, private router : Router) {
+  constructor(private padServ : PadecimientoService, private sintServ : SintomasService,
+              private toast : ToastrService, private router : Router, private nameVal : AilmentNameValidator) {
     this.padecimiento = new FormGroup({
       nombre: new FormControl('', 
       [Validators.required,
        Validators.minLength(4),
-       Validators.maxLength(50)]),
+       Validators.maxLength(50)], [this.nameVal.existingAilment()]),
 
       categoria: new FormControl('', Validators.required),
       especializacion: new FormControl('', Validators.required),

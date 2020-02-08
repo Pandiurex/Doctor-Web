@@ -6,11 +6,13 @@ import {Router} from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ErrorMsg } from '../../../interfaces/errorMsg.const';
+import { SymptomNameValidator } from '../../../validators/SymptomNameValidator';
+
 @Component({
   selector: 'app-agregar-sintomas',
   templateUrl: './agregar-sintomas.component.html',
   styleUrls: ['./agregar-sintomas.component.css'],
-  providers : [SintomasService]
+  providers : [SintomasService, HttpClient]
 })
 export class AgregarSintomasComponent implements OnInit {
 
@@ -35,12 +37,13 @@ export class AgregarSintomasComponent implements OnInit {
   public composicionFront : string = "";
   public composicionBack : string = "";
 
-  constructor(private sintServ : SintomasService, private router : Router, private toast : ToastrService) {
+  constructor(private sintServ : SintomasService, private router : Router, 
+              private toast : ToastrService, private nameVal : SymptomNameValidator) {
     this.sintomas = new FormGroup({
       nombre: new FormControl('', 
       [Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(50)]),
+        Validators.minLength(3),
+        Validators.maxLength(50)], [this.nameVal.existingSymptomName()]),
 
       keyword: new FormControl('', 
       [Validators.required,

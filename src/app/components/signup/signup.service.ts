@@ -9,6 +9,7 @@ export class SignupService{
     _url : string = '';
     _checkUserName : string = '';
     _checkEmail : string = '';
+    _urlCheckName = "";
     private router: Router;
     constructor(private _http: HttpClient) {
         this._url = 'https://medicpath.herokuapp.com/usuarios/create';
@@ -17,6 +18,9 @@ export class SignupService{
         //'http://localhost:3000/usuarios/checkUsername/'
         this._checkEmail = 'https://medicpath.herokuapp.com/usuarios/checkEmail/';
         //'http://localhost:3000/usuarios/checkEmail/'
+
+        this._urlCheckName = 'https://medicpath.herokuapp.com/padecimientos/checkName/';
+        //'http://localhost:3000/padecimientos/checkName/'
     }
 
     checkRegister(valores : HttpParams){
@@ -49,4 +53,15 @@ export class SignupService{
           observe : 'response'
         })
     }
+
+    checkPadName(name : any){
+        return this._http.get(this._urlCheckName + name,
+        {
+          headers: new HttpHeaders().set(
+            "Content-Type",
+            "application/x-www-form-urlencoded"
+          ),
+          observe: "response"
+        })
+      }
 }

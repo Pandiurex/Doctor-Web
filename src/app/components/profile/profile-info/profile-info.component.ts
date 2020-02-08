@@ -6,7 +6,7 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 import { ErrorMsg } from '../../../interfaces/errorMsg.const';
 import { ProfileService } from '../profile.service';
 import {Router} from '@angular/router';
-import { NicknameValidator } from "../../../validators/NicknameValidator";
+
 @Component({
   selector: 'app-profile-info',
   templateUrl: './profile-info.component.html',
@@ -19,7 +19,7 @@ export class ProfileInfoComponent implements OnInit {
   mensajes_error = ErrorMsg.ERROR_MSG_REGISTER;
   formData: any = new FormData();
   datos_perfil : FormGroup;
-  constructor(private profileServ : ProfileService, private toast : ToastrService, private router : Router, private nickVal : NicknameValidator) {
+  constructor(private profileServ : ProfileService, private toast : ToastrService, private router : Router) {
     this.datos_perfil = new FormGroup({
       nombres : new FormControl('', [
         Validators.required,
@@ -35,7 +35,7 @@ export class ProfileInfoComponent implements OnInit {
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(20)
-      ],[this.nickVal.existingNickname()])
+      ])
     })
    }
 
