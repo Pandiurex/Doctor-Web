@@ -2,10 +2,10 @@
 <div class="container main-container">
     <div class="search">
             <i class="fas fa-search"></i>
-            <input type="text" placeholder="Nombre del usuario" [(ngModel)]="myFilter" (ngModelChange)="filtering()" (keyup)="showResults($event)">
-            <span><i *ngIf="myFilter.length!=0" class="fas fa-trash delety" (click)="remove()"></i></span>
+            <input type="text" placeholder="Nombre del usuario" [(ngModel)]="mySearch" (keyup)="showResults($event)" (focusout)="focusLost()">
+            <span><i *ngIf="mySearch.length!=0" class="fas fa-trash delety" (click)="remove()"></i></span>
             <ul *ngIf="searching === true">
-                <li *ngFor="let usuario of users | search: 'fullname' : myFilter" (click)="selection(usuario.fullname)">
+                <li *ngFor="let usuario of users | search: 'fullname' : mySearch" (click)="selection(usuario.fullname)">
                     <span>{{usuario.fullname}}</span>
                 </li>
             </ul>

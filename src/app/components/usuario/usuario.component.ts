@@ -26,6 +26,7 @@ export class UsuarioComponent implements OnInit {
   key = 'fullname';
   reversa = false;
   public myFilter : any = "";
+  public mySearch : any = "";
   public searching : boolean = false;
   constructor(private userServ: UsuarioService, private http: HttpClient) {}
 
@@ -57,7 +58,8 @@ export class UsuarioComponent implements OnInit {
     let tabcontent;
     let links;
     let active;
-
+    this.myFilter="";
+    this.mySearch="";
     if (tipo === 'Paciente') {
       this.users = this.patients;
       this.pagina = 1;
@@ -83,7 +85,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   filtering() {
-    this.pagina = 1;
+    
   }
 
   sorting(key: any) {
@@ -100,13 +102,19 @@ export class UsuarioComponent implements OnInit {
   }
 
   selection(medico: any){
-    this.myFilter =medico;
+    this.mySearch =medico;
+    this.myFilter=medico;
+    this.pagina = 1;
     this.searching=false;
   }
   
   remove(){
     this.myFilter="";
+    this.mySearch="";
     this.searching=false;
   }
 
+  focusLost(){
+    this.myFilter=this.mySearch;
+  }
 }
