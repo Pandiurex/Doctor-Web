@@ -13,7 +13,7 @@ export class MedicsComponent implements OnInit {
 
   medicos : any[] = [];
   pagina = 0;
-  key :string = 'padecimiento_final';
+  key :string = 'fullname';
   reversa : boolean = false;
   public myFilter : any = "";
   tipo = "all";

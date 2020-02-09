@@ -23,9 +23,10 @@ export class UsuarioComponent implements OnInit {
   public users: Usuario[] = [];
   public doctors: Usuario[] = [];
   public patients: Usuario[] = [];
-  key = 'nombres';
+  key = 'fullname';
   reversa = false;
-  myFilter;
+  public myFilter : any = "";
+  public searching : boolean = false;
   constructor(private userServ: UsuarioService, private http: HttpClient) {}
 
   ngOnInit() {
@@ -89,4 +90,23 @@ export class UsuarioComponent implements OnInit {
     this.key = key;
     this.reversa = !this.reversa;
   }
+
+  showResults(event :any){
+    if(event.target.value.length >= 1){
+      this.searching= true;
+    }else{
+      this.searching=false;
+    }
+  }
+
+  selection(medico: any){
+    this.myFilter =medico;
+    this.searching=false;
+  }
+  
+  remove(){
+    this.myFilter="";
+    this.searching=false;
+  }
+
 }
