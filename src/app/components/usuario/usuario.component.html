@@ -32,7 +32,7 @@
         <a routerLink="info/{{doctor.hash_id}}"><th>{{doctor.fullname}}</th></a>
                 <th>{{ doctor.nickname}}</th>
                 <th>{{ doctor.email}}</th>
-                <th>{{ doctor.createdAt}}</th>
+                <th>{{ doctor.since}}</th>
                 <th>{{ doctor.enabled}}</th>
         </tr>
         <tr *ngIf="doctors.length==0">
@@ -58,7 +58,7 @@
                 <a routerLink="info/{{patient.hash_id}}"><th>{{patient.fullname}}</th></a>
                     <th>{{ patient.nickname}}</th>
                     <th>{{ patient.email}}</th>
-                    <th>{{ patient.createdAt}}</th>
+                    <th>{{ patient.since}}</th>
                     <th>{{ patient.enabled}}</th>
             </tr>
             <tr *ngIf="patients.length==0">
