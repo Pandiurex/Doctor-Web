@@ -100,8 +100,8 @@ export class RegistryComponent implements OnInit {
     formData.append('telefono', this.forma.value.telefono);
     formData.append('direccion', this.forma.value.direccion);
     formData.append('especialidades', idsOnly);
-    this.regServ.checkRegister(formData).subscribe(res =>{
-      console.log("Ok", res)
+    this.regServ.checkRegister(formData).subscribe((res:any) =>{
+      sessionStorage.setItem('token',res.body.token);
       this.toast.success('Le hemos enviado un correo al usuario registrado confirmar su cuenta', 'Registro Exitoso!');
     this.router.navigate(['/home'])
   }, error =>{

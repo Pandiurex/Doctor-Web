@@ -34,11 +34,12 @@ export class UsuarioComponent implements OnInit {
     document.getElementById('defaultOpen').click();
     this.userServ.getUsers().subscribe(
       (res: any) => {
-        for (let i = 0; i < res.body.length; i++) {
-          if (res.body[i].tipoUsuario === 2) {
-            this.doctors.push(res.body[i]);
-          } else if (res.body[i].tipoUsuario === 1) {
-            this.patients.push(res.body[i]);
+        sessionStorage.setItem('token',res.body.token);
+        for (let i = 0; i < res.body.users.length; i++) {
+          if (res.body.users[i].tipoUsuario === 2) {
+            this.doctors.push(res.body.users[i]);
+          } else if (res.body.users[i].tipoUsuario === 1) {
+            this.patients.push(res.body.users[i]);
           }
         }
         if (this.doctors.length !== 0) {

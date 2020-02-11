@@ -30,6 +30,7 @@ export class ProfilePicComponent implements OnInit {
 
   actualizarDatos(){
         this.profileServ.updateProfilePic(this.hash, this.formData).subscribe( (res: any) =>{
+          sessionStorage.setItem('token',res.body.token);
           this.formData = new FormData();
           window.location.reload();
           this.toast.success('Imagen cambiada con éxito!', 'Modificación Exitosa!');

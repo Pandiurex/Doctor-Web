@@ -21,9 +21,9 @@ export class InfoMedicalRecordComponent implements OnInit {
   ngOnInit() {
     this.profileServ.getHistory(this.historial).subscribe( (res: any) =>{
        console.log(res.body);
-      this.historial = res.body;
-      this.sintomas = res.body.detalles.split(",");
-      console.log(this.sintomas);
+      this.historial = res.body.resultado;
+      this.sintomas = res.body.resultado.detalles.split(",");
+      sessionStorage.setItem('token', res.body.token);
       if(this.historial.url_imagen_pad!= null){
       this.url = 'data:image/jpg;base64,' + this.historial.url_imagen_pad.toString();
       }
