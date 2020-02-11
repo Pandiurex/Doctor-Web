@@ -114,15 +114,31 @@ export class SearchPipe implements PipeTransform {
     }
 
     searchText = this.removeDiacritics(searchText.toLowerCase());
-
-    return items.filter(it =>{
+    let itemsToReturn = items.filter(it =>{
       return this.removeDiacritics(it[field].toLowerCase()).includes(searchText);
     });
+    let uniqueRes = this.removeDuplicates(itemsToReturn,field);
+   
+    return uniqueRes;
   }
 
   public removeDiacritics(str): string{
     return str.replace(/[^\u0000-\u007E]/g, function(a){
       return this.diacriticsMap[a] || a;
     }.bind(this));
+  }
+
+  public removeDuplicates(items,key){
+    let newResult = [];
+    let lookup = {}
+    for (var item in items) {
+      lookup[items[item][key]] = items[item];
+    }
+
+    for(var i in lookup){
+      newResult.push(lookup[i]);
+    }
+
+    return newResult;
   }
 }
