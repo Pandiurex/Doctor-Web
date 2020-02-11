@@ -17,8 +17,8 @@ export class MedicalRecordComponent implements OnInit {
   public historiales : any[] = [];
   key :string = 'padecimiento_final';
   reversa : boolean = false;
-  myFilter;
-  content;
+  public myFilter : any = "";
+  public searching : boolean = false;
   constructor(private profileServ : ProfileService, private modalService : NgbModal) { }
 
   ngOnInit() {
@@ -46,4 +46,21 @@ export class MedicalRecordComponent implements OnInit {
     modalRef.componentInstance.historial = hist;
   }
 
+  showResults(event :any){
+    if(event.target.value.length >= 1){
+      this.searching= true;
+    }else{
+      this.searching=false;
+    }
+  }
+
+  selection(medico: any){
+    this.myFilter =medico;
+    this.searching=false;
+  }
+  
+  remove(){
+    this.myFilter="";
+    this.searching=false;
+  }
 }
