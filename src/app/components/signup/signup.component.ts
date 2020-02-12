@@ -16,6 +16,7 @@ import { ErrorMsg } from '../../interfaces/errorMsg.const';
 import { map } from 'rxjs/operators';
 import { NicknameValidator } from "../../validators/NicknameValidator";
 import { EmailValidator } from "../../validators/EmailValidator";
+import { DateValidator } from '../../validators/DateValidator';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -64,7 +65,7 @@ export class SignupComponent implements OnInit {
           }, (formGroup : FormGroup) => {
               return this.equalPasswords(formGroup);
           }),
-      fechanacimiento: new FormControl('', Validators.required),
+      fechanacimiento: new FormControl('', [Validators.required,DateValidator.isFutureDate,DateValidator.noValidAge]),
     });
 
 
