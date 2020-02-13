@@ -23,9 +23,11 @@ import { MedicsComponent } from './components/directory/medics.component';
 import { AdminGuardService } from './components/auth/admin-role-guard.service';
 import { DoctorGuardService } from './components/auth/doctor-role-guard.service';
 import { RegistryComponent } from './components/registry/registry.component';
+import { GuidedDiagnosticComponent } from './components/guided-diagnostic/guided-diagnostic.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'diagnostico', component: DiagnosticComponent },
+  { path: 'diagnosticoGuiado', component: GuidedDiagnosticComponent},
   { path: 'tratamiento', component: TreatmentComponent },
   { path: 'registro', component: SignupComponent },
   { path: 'about', component: AboutComponent },
