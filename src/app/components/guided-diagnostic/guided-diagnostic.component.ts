@@ -7,6 +7,8 @@ import { MemoriaTrabajo } from '../../inferencia/memoriaTrabajo.class';
 import { ToastrService } from 'ngx-toastr';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from '@angular/router';
+import { SintomasService } from '../sintomas/sintomas.service';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-guided-diagnostic',
@@ -31,12 +33,21 @@ export class GuidedDiagnosticComponent implements OnInit {
   selectedUser : boolean;
   public usuarios : any = [];
   public usuario : any;
-  constructor(private diagServ : DiagnosticService, private toast : ToastrService, private router : Router) { }
+  public iniciales : any = [];
+  public sintomasSeleccionados : any = [];
+  public isSelection : boolean = false;
+  constructor(private diagServ : DiagnosticService, private toast : ToastrService,
+              private router : Router, private sintServ : SintomasService) { }
 
   ngOnInit() {
     this.diagServ.obtenerUsuarios().subscribe((res: any) =>{
       console.log(res.body);
       this.usuarios = res.body.usuarios;
+    })
+
+    this.sintServ.getComponents().subscribe(res =>{
+      this.iniciales = res.body;
+      console.log(this.iniciales);
     })
   }
 
@@ -62,8 +73,20 @@ export class GuidedDiagnosticComponent implements OnInit {
     }
 
     inferencia(){
-      
+        let indice;
+        if(this.isSelection==true){
+          indice = this.evaluacionInicial();
+          if(indice!=undefined){
+            this.contador++;
+          }
+          this.isSelection=false;
+        }
+        if(indice==undefined){
         this.reglaEvaluar = this.baseConocimiento[this.contador];
+        }else{
+          this.reglaEvaluar = this.baseConocimiento[indice-1];
+        }
+        
         //console.log("Entro regla");
         //console.log(this.reglaEvaluar);
         for  (var element of this.reglaEvaluar.partesCondicion){
@@ -175,5 +198,63 @@ export class GuidedDiagnosticComponent implements OnInit {
     selectUser(event : any){
       this.usuario = event.target.value;
       this.selectedUser=true;
+    }
+
+    selection(){
+      this.isSelection=true;
+    }
+
+    cancel(){
+      this.isSelection=false;
+    }
+
+    fromSintomasIniciales(){
+      this.sintomasSeleccionados.forEach(element => {
+        //Generar atomo
+        let atomoRegla = new Atomo(element.nombre_sint,true,false,null);
+        
+        //Guardar en memoria de trabajo
+        this.memoriaDeTrabajo.almacenarAtomo(atomoRegla);
+        this.breadcrumb = this.breadcrumb + element.nombre_sint + "->"
+      });
+      
+     this.iniciarDiagnostico();
+    }
+
+    drop(event: CdkDragDrop<string[]>){
+      if(event.previousContainer !== event.container){
+        transferArrayItem(event.previousContainer.data,event.container.data,
+                          event.previousIndex, event.currentIndex);
+                          console.log(this.sintomasSeleccionados);
+      }else{
+        moveItemInArray(this.iniciales, event.previousIndex, event.currentIndex);
+        console.log(this.sintomasSeleccionados);
+      }
+    }
+
+    evaluacionInicial(){
+      let bestStart;
+      let atomsInRule;
+      let commonAtoms;
+      let porcentage;
+      let index = 0;
+      this.baseConocimiento.forEach((element:Regla)=> {
+        atomsInRule=0;
+        commonAtoms=0;
+        index++;
+        element.partesCondicion.forEach(parte =>{
+          if(parte instanceof Atomo){
+            atomsInRule++;
+          }
+          if(this.memoriaDeTrabajo.atomosAfirmados.some(atom => atom.desc === parte.desc)){
+            commonAtoms++;
+          }
+        });
+        porcentage = commonAtoms * 100 / atomsInRule;
+        if(porcentage => 60){
+          bestStart = index;
+        }
+      });
+      return bestStart;
     }
 }
