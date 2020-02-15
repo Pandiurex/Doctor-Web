@@ -23,6 +23,7 @@ export class GuidedDiagnosticComponent implements OnInit {
   message : string = "";
   descripcion : string = "";
   baseConocimiento : any[] = [];
+  conocimientoEvaluado : any[] = [];
   memoriaDeTrabajo = new MemoriaTrabajo();
   reglaEvaluar = new Regla();
   preguntas : string[] = [];
@@ -75,11 +76,12 @@ export class GuidedDiagnosticComponent implements OnInit {
     }
 
     inferencia(){
-
+      
         let indice = this.pathSelection();
         
         this.reglaEvaluar = this.baseConocimiento[indice-1];
-        this.contador++;
+        this.conocimientoEvaluado.push(this.baseConocimiento.splice(indice-1,1))
+        console.log(this.conocimientoEvaluado);
         //console.log("Entro regla");
         //console.log(this.reglaEvaluar);
         for  (var element of this.reglaEvaluar.partesCondicion){
@@ -145,10 +147,8 @@ export class GuidedDiagnosticComponent implements OnInit {
         }
 
         if(this.reglaEvaluar.objetivo===true){
-          console.log(this.reglaEvaluar.partesConclusion[0].desc)
           this.message="Usted padece de : " + this.reglaEvaluar.partesConclusion[0].desc;
           this.hasResult=true;
-          console.log(this.reglaEvaluar.partesConclusion[0]);
           this.idResultado=this.reglaEvaluar.partesConclusion[0].padecimiento;
             this.guardar();
           
@@ -164,7 +164,7 @@ export class GuidedDiagnosticComponent implements OnInit {
       console.log(this.memoriaDeTrabajo)
       console.log(this.contador);
       console.log(this.baseConocimiento.length);
-      if(this.contador<this.baseConocimiento.length && this.hasResult==false){
+      if(this.baseConocimiento.length!=0 && this.hasResult==false){
       this.inferencia();
       }else if(this.hasResult==false){
         this.message="Lo sentimos, no se pudo encontrar su padecimiento conforme sus respuestas";
@@ -254,7 +254,7 @@ export class GuidedDiagnosticComponent implements OnInit {
         }
       });
       if(bestStart==undefined){
-      bestStart = Math.floor(Math.random() * this.baseConocimiento.length);
+      bestStart = Math.floor(Math.random() * this.baseConocimiento.length) + 1;
       }
       return bestStart;
     }

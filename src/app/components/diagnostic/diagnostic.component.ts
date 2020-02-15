@@ -7,7 +7,7 @@ import { MemoriaTrabajo } from '../../inferencia/memoriaTrabajo.class';
 import { ToastrService } from 'ngx-toastr';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from '@angular/router';
-
+import { SintomasService } from '../sintomas/sintomas.service';
 @Component({
   selector: 'app-diagnostic',
   templateUrl: './diagnostic.component.html',
@@ -19,22 +19,34 @@ export class DiagnosticComponent implements OnInit {
 
   hasPregunta : boolean = false;
   message : string = "";
+  descripcion : string = "";
   baseConocimiento : any[] = [];
   memoriaDeTrabajo = new MemoriaTrabajo();
+  conocimientoEvaluado : any[] = [];
   reglaEvaluar = new Regla();
   preguntas : string[] = [];
   atomosCondicion : Atomo[] = [];
-  contador : number = 0;
   hasResult : boolean = false;
   breadcrumb : string = "";
   idResultado : string = '';
   user : boolean = false;
-  constructor(private diagServ : DiagnosticService, private toast : ToastrService, private router : Router) { }
+  public iniciales : any = [];
+  public sintomasSeleccionados : any = [];
+  public sintomasExtras : any =[];
+  public isSelection : boolean = false;
+  public descs : any = [];
+  constructor(private diagServ : DiagnosticService, private toast : ToastrService, 
+              private router : Router, private sintServ : SintomasService) { }
 
   ngOnInit() {
     if(window.sessionStorage.getItem('usuario')!=null){
       this.user = true;
     }
+
+    this.sintServ.getComponents().subscribe(res =>{
+      this.iniciales = res.body;
+      console.log(this.iniciales);
+    })
   }
 
   iniciarDiagnostico(){
@@ -59,8 +71,10 @@ export class DiagnosticComponent implements OnInit {
     }
 
     inferencia(){
+      let indice = this.pathSelection();
       
-        this.reglaEvaluar = this.baseConocimiento[this.contador];
+      this.reglaEvaluar = this.baseConocimiento[indice-1];
+      this.conocimientoEvaluado.push(this.baseConocimiento.splice(indice-1,1))
         //console.log("Entro regla");
         //console.log(this.reglaEvaluar);
         for  (var element of this.reglaEvaluar.partesCondicion){
@@ -73,12 +87,12 @@ export class DiagnosticComponent implements OnInit {
             if(almacenado===false){
             this.atomosCondicion.push(new Atomo(element.desc,element.estado,element.obj,element.padecimiento));
              this.preguntas.push("¿Ha tenido " + element.desc + " ?");
+             this.descs.push(element.desc);
             }
           }
         };
         //console.log(this.atomosCondicion);
         //console.log(this.preguntas);
-        this.contador++;
         if(this.preguntas.length!=0){
           this.generarPregunta();
           }
@@ -88,7 +102,15 @@ export class DiagnosticComponent implements OnInit {
     }
 
     generarPregunta(){
+      let id = this.descs.pop();
+      console.log(id);
       this.message = this.preguntas.pop();
+      let found = this.iniciales.find(item => item['nombre_sint'].toString() === id);
+
+      if(found!=undefined){
+      this.descripcion = found.descripcion;
+      }
+
     }
 
     responder(resp : any){
@@ -123,14 +145,7 @@ export class DiagnosticComponent implements OnInit {
         }
 
         if(this.reglaEvaluar.objetivo===true){
-          console.log(this.reglaEvaluar.partesConclusion[0].desc)
-          this.message="Usted padece de : " + this.reglaEvaluar.partesConclusion[0].desc;
-          this.hasResult=true;
-          console.log(this.reglaEvaluar.partesConclusion[0]);
-          this.idResultado=this.reglaEvaluar.partesConclusion[0].padecimiento;
-          if(this.user==true){
-            this.guardar();
-          }
+         this.showWhy();
         }
       }else{
         console.log("No se cumplio: " + this.reglaEvaluar.partesConclusion)
@@ -139,14 +154,11 @@ export class DiagnosticComponent implements OnInit {
           this.memoriaDeTrabajo.almacenarAtomo(atomoNoCumplido);
         }
       }
-      
-      console.log(this.memoriaDeTrabajo)
-      console.log(this.contador);
-      console.log(this.baseConocimiento.length);
-      if(this.contador<this.baseConocimiento.length && this.hasResult==false){
+      if(this.baseConocimiento.length!=0 && this.hasResult==false){
       this.inferencia();
       }else if(this.hasResult==false){
         this.message="Lo sentimos, no se pudo encontrar su padecimiento conforme sus respuestas";
+        this.hasResult=true;
       }
     }
 
@@ -168,5 +180,52 @@ export class DiagnosticComponent implements OnInit {
         this.toast.error(error.error, 'Error');
         this.router.navigate(['/landing'])
     })
+    }
+
+    pathSelection(){
+      let bestStart;
+      let atomsInRule;
+      let commonAtoms;
+      let bestPorcentage = 0;
+      let porcentage;
+      let index = 0;
+      this.baseConocimiento.forEach((element:Regla)=> {
+        atomsInRule=0;
+        commonAtoms=0;
+        index++;
+        element.partesCondicion.forEach(parte =>{
+          if(parte instanceof Atomo){
+            atomsInRule++;
+          }
+          if(this.memoriaDeTrabajo.atomosAfirmados.some(atom => atom.desc === parte.desc)){
+            commonAtoms++;
+          }
+        });
+        porcentage = commonAtoms * 100 / atomsInRule;
+        if(porcentage > bestPorcentage){
+          bestPorcentage = porcentage;
+          bestStart = index;
+        }
+      });
+      if(bestStart==undefined){
+      bestStart = Math.floor(Math.random() * this.baseConocimiento.length) + 1;
+      }
+      return bestStart;
+    }
+
+    showWhy(){
+      console.log(this.reglaEvaluar.partesConclusion[0].desc)
+      this.message="Usted padece de : " + this.reglaEvaluar.partesConclusion[0].desc;
+      this.hasResult=true;
+      this.idResultado=this.reglaEvaluar.partesConclusion[0].padecimiento;
+      console.log(this.sintomasSeleccionados);
+      this.reglaEvaluar.partesCondicion.forEach(element => {
+          if((element!=="&") && (element!=="!")){
+          this.sintomasSeleccionados.push(this.memoriaDeTrabajo.estaAfirmado(element));
+         }
+      });
+      if(this.user==true){
+        this.guardar();
+      }
     }
 }
