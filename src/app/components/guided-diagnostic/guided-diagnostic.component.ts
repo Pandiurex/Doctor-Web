@@ -21,6 +21,7 @@ export class GuidedDiagnosticComponent implements OnInit {
 
   hasPregunta : boolean = false;
   message : string = "";
+  descripcion : string = "";
   baseConocimiento : any[] = [];
   memoriaDeTrabajo = new MemoriaTrabajo();
   reglaEvaluar = new Regla();
@@ -36,6 +37,7 @@ export class GuidedDiagnosticComponent implements OnInit {
   public iniciales : any = [];
   public sintomasSeleccionados : any = [];
   public isSelection : boolean = false;
+  public descs : any = [];
   constructor(private diagServ : DiagnosticService, private toast : ToastrService,
               private router : Router, private sintServ : SintomasService) { }
 
@@ -73,20 +75,10 @@ export class GuidedDiagnosticComponent implements OnInit {
     }
 
     inferencia(){
-        let indice;
-        if(this.isSelection==true){
-          indice = this.evaluacionInicial();
-          if(indice!=undefined){
-            this.contador++;
-          }
-          this.isSelection=false;
-        }
-        if(indice==undefined){
-        this.reglaEvaluar = this.baseConocimiento[this.contador];
-        }else{
-          this.reglaEvaluar = this.baseConocimiento[indice-1];
-        }
+        let indice = this.pathSelection();
         
+          this.reglaEvaluar = this.baseConocimiento[indice-1];
+
         //console.log("Entro regla");
         //console.log(this.reglaEvaluar);
         for  (var element of this.reglaEvaluar.partesCondicion){
@@ -99,6 +91,7 @@ export class GuidedDiagnosticComponent implements OnInit {
             if(almacenado===false){
             this.atomosCondicion.push(new Atomo(element.desc,element.estado,element.obj,element.padecimiento));
              this.preguntas.push("¿Ha tenido " + element.desc + " ?");
+             this.descs.push(element.desc);
             }
           }
         };
@@ -114,7 +107,9 @@ export class GuidedDiagnosticComponent implements OnInit {
     }
 
     generarPregunta(){
+      let id = this.descs.pop();
       this.message = this.preguntas.pop();
+      this.descripcion = this.iniciales.find(item => item['nombre_sint'].toString() === id);
     }
 
     responder(resp : any){
@@ -232,10 +227,11 @@ export class GuidedDiagnosticComponent implements OnInit {
       }
     }
 
-    evaluacionInicial(){
+    pathSelection(){
       let bestStart;
       let atomsInRule;
       let commonAtoms;
+      let bestPorcentage = 0;
       let porcentage;
       let index = 0;
       this.baseConocimiento.forEach((element:Regla)=> {
@@ -251,10 +247,14 @@ export class GuidedDiagnosticComponent implements OnInit {
           }
         });
         porcentage = commonAtoms * 100 / atomsInRule;
-        if(porcentage => 60){
+        if(porcentage > bestPorcentage){
+          bestPorcentage = porcentage;
           bestStart = index;
         }
       });
+      if(bestStart==undefined){
+      bestStart = Math.floor(Math.random() * this.baseConocimiento.length);
+      }
       return bestStart;
     }
 }
