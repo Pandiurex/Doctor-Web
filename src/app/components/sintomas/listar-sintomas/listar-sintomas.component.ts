@@ -23,6 +23,7 @@ export class ListarSintomasComponent implements OnInit {
   reversa : boolean = false;
   content;
   public myFilter : any = "";
+  public mySearch : any = "";
   public searching: boolean = false;
   constructor(private sintServ : SintomasService, private http : HttpClient, private modalService: NgbModal) { 
 
@@ -66,12 +67,18 @@ export class ListarSintomasComponent implements OnInit {
   }
 
   selection(name: any){
-    this.myFilter = name;
+    this.mySearch =name;
+    this.myFilter=name;
+    this.pagina = 1;
     this.searching=false;
   }
   
   remove(){
     this.myFilter="";
     this.searching=false;
+  }
+
+  focusLost(){
+    this.myFilter=this.mySearch;
   }
 }

@@ -17,7 +17,7 @@ export class ListarPadecimientosComponent implements OnInit {
   key :string = 'nombre_pad';
   reversa : boolean = false;
   public myFilter : any = "";
-  content;
+  public mySearch : any = "";
   public searching: boolean = false;
   constructor(private padServ : PadecimientoService, private modalService : NgbModal) { 
 
@@ -59,12 +59,18 @@ export class ListarPadecimientosComponent implements OnInit {
   }
 
   selection(name: any){
-    this.myFilter = name;
+    this.mySearch =name;
+    this.myFilter=name;
+    this.pagina = 1;
     this.searching=false;
   }
   
   remove(){
     this.myFilter="";
     this.searching=false;
+  }
+
+  focusLost(){
+    this.myFilter=this.mySearch;
   }
 }
