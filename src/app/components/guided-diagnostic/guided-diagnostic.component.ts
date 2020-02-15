@@ -75,10 +75,11 @@ export class GuidedDiagnosticComponent implements OnInit {
     }
 
     inferencia(){
+
         let indice = this.pathSelection();
         
-          this.reglaEvaluar = this.baseConocimiento[indice-1];
-
+        this.reglaEvaluar = this.baseConocimiento[indice-1];
+        this.contador++;
         //console.log("Entro regla");
         //console.log(this.reglaEvaluar);
         for  (var element of this.reglaEvaluar.partesCondicion){
@@ -212,7 +213,7 @@ export class GuidedDiagnosticComponent implements OnInit {
         this.memoriaDeTrabajo.almacenarAtomo(atomoRegla);
         this.breadcrumb = this.breadcrumb + element.nombre_sint + "->"
       });
-      
+
      this.iniciarDiagnostico();
     }
 
