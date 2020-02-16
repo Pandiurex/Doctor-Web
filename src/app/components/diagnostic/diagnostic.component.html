@@ -21,6 +21,14 @@
                   {{sintoma.desc}}
                 </li>
             </ul>
+
+            <ul *ngIf="sintomasExtras.length>0">
+                <h2>Sin embargo presento sintomas que pueden concordar con las siguientes enfermedades: </h2>
+                <li *ngFor="let sints of sintomasExtras">
+                  {{sints.padecimiento}} 
+                  <p><ngb-progressbar type="success" [value]="sints.porcentaje" showValue="true"></ngb-progressbar></p>
+                </li>
+            </ul>
             <button type="button" [hidden]="hasResult" class="btn btn-danger btn-lg" (click)="responder('No')">No</button>
 
             <button type="button" [hidden]="hasResult" class="btn btn-primary btn-lg" (click)="responder('Si')">Si</button>

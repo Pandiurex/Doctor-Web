@@ -34,7 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsuarioInfoComponent} from './components/usuario/usuarioInfo/usuarioInfo.component';
 import { InfoPadecimientosComponent } from './components/padecimientos/info-padecimientos/info-padecimientos.component';
 import { BDCComponent } from './components/bdc/bdc.component';
-import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {ScrollingModule} from '@angular/cdk/scrolling';
@@ -109,7 +109,8 @@ import { GuidedDiagnosticComponent } from './components/guided-diagnostic/guided
     DragDropModule,
     ScrollingModule,
     NgxPaginationModule,
-    OrderModule
+    OrderModule,
+    NgbProgressbarModule
     ],
   providers: [NgbActiveModal,{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent],

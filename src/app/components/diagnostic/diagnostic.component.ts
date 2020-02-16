@@ -35,6 +35,7 @@ export class DiagnosticComponent implements OnInit {
   public sintomasExtras : any =[];
   public isSelection : boolean = false;
   public descs : any = [];
+  public nextObjective : any = [];
   constructor(private diagServ : DiagnosticService, private toast : ToastrService, 
               private router : Router, private sintServ : SintomasService) { }
 
@@ -71,12 +72,24 @@ export class DiagnosticComponent implements OnInit {
     }
 
     inferencia(){
-      let indice = this.pathSelection();
+      let indice;
+      if(this.nextObjective.length==0){
+      indice = this.pathSelection();
       
       this.reglaEvaluar = this.baseConocimiento[indice-1];
+      }else{
+        this.reglaEvaluar = this.nextObjective.pop();
+      }
+      //Todo evitar que se usen atomos intermedios como una pregunta en concreta.
+      console.log(this.reglaEvaluar);
+      let middleAtomRule = this.hasMiddleAtom();
+      if(middleAtomRule!=undefined){
+        this.nextObjective.push(this.reglaEvaluar);
+        console.log(this.nextObjective);
+        this.reglaEvaluar= this.baseConocimiento[middleAtomRule];
+        indice=middleAtomRule;
+      }
       this.conocimientoEvaluado.push(this.baseConocimiento.splice(indice-1,1))
-        //console.log("Entro regla");
-        //console.log(this.reglaEvaluar);
         for  (var element of this.reglaEvaluar.partesCondicion){
           //console.log(element);
           if(element instanceof Atomo){
@@ -159,6 +172,7 @@ export class DiagnosticComponent implements OnInit {
       }else if(this.hasResult==false){
         this.message="Lo sentimos, no se pudo encontrar su padecimiento conforme sus respuestas";
         this.hasResult=true;
+        this.calculateCloseness();
       }
     }
 
@@ -218,14 +232,77 @@ export class DiagnosticComponent implements OnInit {
       this.message="Usted padece de : " + this.reglaEvaluar.partesConclusion[0].desc;
       this.hasResult=true;
       this.idResultado=this.reglaEvaluar.partesConclusion[0].padecimiento;
-      console.log(this.sintomasSeleccionados);
       this.reglaEvaluar.partesCondicion.forEach(element => {
           if((element!=="&") && (element!=="!")){
           this.sintomasSeleccionados.push(this.memoriaDeTrabajo.estaAfirmado(element));
          }
       });
+
+      this.calculateCloseness();
       if(this.user==true){
         this.guardar();
       }
+    }
+    //TODO debatir si esto será necesario mostrarle y en caso que si, ver que tanto porcentaje de oportunidad daremos.
+    calculateCloseness(){
+      let atomsInRule;
+      let commonAtoms;
+      let bestPorcentage = 0;
+      let porcentage;
+      this.conocimientoEvaluado.forEach(element => {
+         if(element[0].partesConclusion[0].obj==true){
+        atomsInRule=0;
+        commonAtoms=0;
+        element[0].partesCondicion.forEach(parte =>{
+          if(parte instanceof Atomo){
+            atomsInRule++;
+          }
+          if(this.memoriaDeTrabajo.atomosAfirmados.some(atom => atom.desc === parte.desc)){
+            commonAtoms++;
+          }
+        });
+        porcentage = commonAtoms * 100 / atomsInRule;
+        if(porcentage > 10 && porcentage != 100){
+          let closeness = {padecimiento: element[0].partesConclusion[0].desc, porcentaje: Math.floor(porcentage)};
+          this.sintomasExtras.push(closeness);
+        }
+      }
+      });
+      this.baseConocimiento.forEach(element => {
+        if(element.partesConclusion[0].obj==true){
+        atomsInRule=0;
+        commonAtoms=0;
+        element.partesCondicion.forEach(parte =>{
+          if(parte instanceof Atomo){
+            atomsInRule++;
+          }
+          if(this.memoriaDeTrabajo.atomosAfirmados.some(atom => atom.desc === parte.desc)){
+            commonAtoms++;
+          }
+        });
+        porcentage = commonAtoms * 100 / atomsInRule;
+        if(porcentage > 10 && porcentage != 100){
+          let closeness = {padecimiento: element.partesConclusion[0].desc, porcentaje: Math.floor(porcentage)};
+          this.sintomasExtras.push(closeness);
+        }
+      }
+      });
+
+      console.log(this.sintomasExtras);
+    }
+
+    hasMiddleAtom(){
+     let previousRuleIndex;
+      this.reglaEvaluar.partesCondicion.forEach(condition => {
+        if(!this.memoriaDeTrabajo.estaAlmacenado(condition)){
+        this.baseConocimiento.forEach(function(rule,index){
+          if(condition.desc === rule.partesConclusion[0].desc){
+            previousRuleIndex = index;
+          }
+        });
+      }
+      });
+
+      return previousRuleIndex;
     }
 }
