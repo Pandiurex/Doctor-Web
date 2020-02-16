@@ -39,6 +39,7 @@ export class GuidedDiagnosticComponent implements OnInit {
   public sintomasSeleccionados : any = [];
   public isSelection : boolean = false;
   public descs : any = [];
+  public nextObjective : any = [];
   constructor(private diagServ : DiagnosticService, private toast : ToastrService,
               private router : Router, private sintServ : SintomasService) { }
 
@@ -77,10 +78,24 @@ export class GuidedDiagnosticComponent implements OnInit {
 
     inferencia(){
       
-        let indice = this.pathSelection();
-        
-        this.reglaEvaluar = this.baseConocimiento[indice-1];
-        this.conocimientoEvaluado.push(this.baseConocimiento.splice(indice-1,1))
+      let indice;
+      if(this.nextObjective.length==0){
+      indice = this.pathSelection();
+      
+      this.reglaEvaluar = this.baseConocimiento[indice];
+      }else{
+        this.reglaEvaluar = this.nextObjective.pop();
+      }
+      //Todo evitar que se usen atomos intermedios como una pregunta en concreta.
+      console.log(this.reglaEvaluar);
+      let middleAtomRule = this.hasMiddleAtom();
+      if(middleAtomRule!=undefined){
+        this.nextObjective.push(this.reglaEvaluar);
+        console.log(this.nextObjective);
+        this.reglaEvaluar= this.baseConocimiento[middleAtomRule];
+        indice=middleAtomRule;
+      }
+        this.conocimientoEvaluado.push(this.baseConocimiento.splice(indice,1))
         console.log(this.conocimientoEvaluado);
         //console.log("Entro regla");
         //console.log(this.reglaEvaluar);
@@ -256,6 +271,21 @@ export class GuidedDiagnosticComponent implements OnInit {
       if(bestStart==undefined){
       bestStart = Math.floor(Math.random() * this.baseConocimiento.length) + 1;
       }
-      return bestStart;
+      return bestStart - 1;
     }
+
+    hasMiddleAtom(){
+      let previousRuleIndex;
+       this.reglaEvaluar.partesCondicion.forEach(condition => {
+         if(!this.memoriaDeTrabajo.estaAlmacenado(condition)){
+         this.baseConocimiento.forEach(function(rule,index){
+           if(condition.desc === rule.partesConclusion[0].desc){
+             previousRuleIndex = index;
+           }
+         });
+       }
+       });
+ 
+       return previousRuleIndex;
+     }
 }

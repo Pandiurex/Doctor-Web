@@ -76,7 +76,7 @@ export class DiagnosticComponent implements OnInit {
       if(this.nextObjective.length==0){
       indice = this.pathSelection();
       
-      this.reglaEvaluar = this.baseConocimiento[indice-1];
+      this.reglaEvaluar = this.baseConocimiento[indice];
       }else{
         this.reglaEvaluar = this.nextObjective.pop();
       }
@@ -89,7 +89,7 @@ export class DiagnosticComponent implements OnInit {
         this.reglaEvaluar= this.baseConocimiento[middleAtomRule];
         indice=middleAtomRule;
       }
-      this.conocimientoEvaluado.push(this.baseConocimiento.splice(indice-1,1))
+      this.conocimientoEvaluado.push(this.baseConocimiento.splice(indice,1))
         for  (var element of this.reglaEvaluar.partesCondicion){
           //console.log(element);
           if(element instanceof Atomo){
@@ -224,7 +224,7 @@ export class DiagnosticComponent implements OnInit {
       if(bestStart==undefined){
       bestStart = Math.floor(Math.random() * this.baseConocimiento.length) + 1;
       }
-      return bestStart;
+      return bestStart-1;
     }
 
     showWhy(){
