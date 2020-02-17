@@ -3,10 +3,10 @@
     <h3 *ngIf="hasEspe">Visualizando los datos de los médicos especialistas en: {{tipo}}</h3>
             <div class="search">
                     <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Nombre del medico" [(ngModel)]="myFilter" (ngModelChange)="filtering()" (keyup)="showResults($event)">
-                    <span><i *ngIf="myFilter.length!=0" class="fas fa-trash delety" (click)="remove()"></i></span>
+                    <input type="text" placeholder="Nombre del medico" [(ngModel)]="mySearch" (keyup)="showResults($event)">
+                    <span><i *ngIf="mySearch.length!=0" class="fas fa-trash delety" (click)="remove()"></i></span>
                     <ul *ngIf="searching === true">
-                        <li *ngFor="let medico of medicos | search: 'fullname' : myFilter" (click)="selection(medico.fullname)">
+                        <li *ngFor="let medico of medicos | search: 'fullname' : mySearch" (click)="selection(medico.fullname)">
                             <span>{{medico.fullname}}</span>
                         </li>
                     </ul>
@@ -14,7 +14,10 @@
       
         <table>
             <tr>
-                <th>Nombre</th>
+                <th (click)="sorting('fullname')" class="ordering">Nombre
+                    <span class="fas" *ngIf="key == 'fullname'" [ngClass]="{'fa-chevron-up':reversa==true,'fa-chevron-down':reversa==false}"></span>    
+                    
+                </th>
                 <th *ngIf="!hasEspe">Especializaciones</th>
                 <th>Direccion</th>
                 <th>Teléfono</th>

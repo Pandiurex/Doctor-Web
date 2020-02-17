@@ -16,6 +16,7 @@ export class MedicsComponent implements OnInit {
   key :string = 'fullname';
   reversa : boolean = false;
   public myFilter : any = "";
+  public mySearch : any = "";
   tipo = "all";
   hasEspe = false;
   public searching: boolean = false;
@@ -43,6 +44,11 @@ export class MedicsComponent implements OnInit {
     this.pagina=1;
   }
 
+  sorting(key : any){
+    this.key = key;
+    this.reversa = !this.reversa;
+  }
+  
   showResults(event :any){
     if(event.target.value.length >= 1){
       this.searching= true;
@@ -52,12 +58,19 @@ export class MedicsComponent implements OnInit {
   }
 
   selection(medico: any){
-    this.myFilter =medico;
+    this.mySearch =medico;
+    this.myFilter=medico;
+    this.pagina = 1;
     this.searching=false;
   }
   
   remove(){
     this.myFilter="";
+    this.mySearch="";
     this.searching=false;
+  }
+
+  focusLost(){
+    this.myFilter=this.mySearch;
   }
 }

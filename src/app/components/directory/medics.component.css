@@ -45,4 +45,9 @@ ul li {
   position: relative;
   z-index: 2;
   color:red;
+  cursor: pointer;
+}
+
+.ordering {
+  cursor: pointer;
 }
