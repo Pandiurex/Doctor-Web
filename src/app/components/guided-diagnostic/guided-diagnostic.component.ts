@@ -77,7 +77,6 @@ export class GuidedDiagnosticComponent implements OnInit {
     }
 
     inferencia(){
-      
       let indice;
       if(this.nextObjective.length==0){
       indice = this.pathSelection();
@@ -85,18 +84,17 @@ export class GuidedDiagnosticComponent implements OnInit {
       this.reglaEvaluar = this.baseConocimiento[indice];
       }else{
         this.reglaEvaluar = this.nextObjective.pop();
+        indice = this.searchNextObjectiveCurrentIndex();
       }
-      //Todo evitar que se usen atomos intermedios como una pregunta en concreta.
-      console.log(this.reglaEvaluar);
       let middleAtomRule = this.hasMiddleAtom();
       if(middleAtomRule!=undefined){
         this.nextObjective.push(this.reglaEvaluar);
-        console.log(this.nextObjective);
+        //console.log(this.nextObjective);
         this.reglaEvaluar= this.baseConocimiento[middleAtomRule];
         indice=middleAtomRule;
       }
-        this.conocimientoEvaluado.push(this.baseConocimiento.splice(indice,1))
-        console.log(this.conocimientoEvaluado);
+
+      this.conocimientoEvaluado.push(this.baseConocimiento.splice(indice,1));
         //console.log("Entro regla");
         //console.log(this.reglaEvaluar);
         for  (var element of this.reglaEvaluar.partesCondicion){
@@ -279,13 +277,29 @@ export class GuidedDiagnosticComponent implements OnInit {
        this.reglaEvaluar.partesCondicion.forEach(condition => {
          if(!this.memoriaDeTrabajo.estaAlmacenado(condition)){
          this.baseConocimiento.forEach(function(rule,index){
-           if(condition.desc === rule.partesConclusion[0].desc){
-             previousRuleIndex = index;
+           if((condition!="&") && (condition!="!")){
+               if(condition.desc === rule.partesConclusion[0].desc){
+                 previousRuleIndex = index;
+                 
+               }
            }
          });
        }
        });
  
        return previousRuleIndex;
+     }
+ 
+     searchNextObjectiveCurrentIndex(){
+       let lastId;
+       let currentObjective = this.reglaEvaluar.partesConclusion[0].desc;
+       this.baseConocimiento.forEach(function(element, index) {
+ 
+         if(currentObjective==element.partesConclusion[0].desc){
+           lastId = index;
+         }
+       })
+ 
+       return lastId;
      }
 }

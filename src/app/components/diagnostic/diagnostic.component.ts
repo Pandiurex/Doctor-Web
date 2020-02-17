@@ -79,17 +79,17 @@ export class DiagnosticComponent implements OnInit {
       this.reglaEvaluar = this.baseConocimiento[indice];
       }else{
         this.reglaEvaluar = this.nextObjective.pop();
+        indice = this.searchNextObjectiveCurrentIndex();
       }
-      //Todo evitar que se usen atomos intermedios como una pregunta en concreta.
-      console.log(this.reglaEvaluar);
       let middleAtomRule = this.hasMiddleAtom();
       if(middleAtomRule!=undefined){
         this.nextObjective.push(this.reglaEvaluar);
-        console.log(this.nextObjective);
+        //console.log(this.nextObjective);
         this.reglaEvaluar= this.baseConocimiento[middleAtomRule];
         indice=middleAtomRule;
       }
-      this.conocimientoEvaluado.push(this.baseConocimiento.splice(indice,1))
+
+      this.conocimientoEvaluado.push(this.baseConocimiento.splice(indice,1));
         for  (var element of this.reglaEvaluar.partesCondicion){
           //console.log(element);
           if(element instanceof Atomo){
@@ -292,17 +292,33 @@ export class DiagnosticComponent implements OnInit {
     }
 
     hasMiddleAtom(){
-     let previousRuleIndex;
-      this.reglaEvaluar.partesCondicion.forEach(condition => {
-        if(!this.memoriaDeTrabajo.estaAlmacenado(condition)){
-        this.baseConocimiento.forEach(function(rule,index){
-          if(condition.desc === rule.partesConclusion[0].desc){
-            previousRuleIndex = index;
-          }
-        });
-      }
-      });
-
-      return previousRuleIndex;
-    }
+      let previousRuleIndex;
+       this.reglaEvaluar.partesCondicion.forEach(condition => {
+         if(!this.memoriaDeTrabajo.estaAlmacenado(condition)){
+         this.baseConocimiento.forEach(function(rule,index){
+           if((condition!="&") && (condition!="!")){
+               if(condition.desc === rule.partesConclusion[0].desc){
+                 previousRuleIndex = index;
+                 
+               }
+           }
+         });
+       }
+       });
+ 
+       return previousRuleIndex;
+     }
+ 
+     searchNextObjectiveCurrentIndex(){
+       let lastId;
+       let currentObjective = this.reglaEvaluar.partesConclusion[0].desc;
+       this.baseConocimiento.forEach(function(element, index) {
+ 
+         if(currentObjective==element.partesConclusion[0].desc){
+           lastId = index;
+         }
+       })
+ 
+       return lastId;
+     }
 }
