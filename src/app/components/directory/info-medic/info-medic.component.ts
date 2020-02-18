@@ -12,7 +12,7 @@ import { UsuarioService } from '../../usuario/usuario.service';
 export class InfoMedicComponent implements OnInit {
 
   @Input() public hash_doctor; 
-  public infoDoc : any[] = [];
+  public infoDoc : any = [];
   public especializaciones : any[] = [];
   public url : string = "";
   public  hasInfo : boolean = false;

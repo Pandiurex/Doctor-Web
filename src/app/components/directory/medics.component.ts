@@ -20,6 +20,7 @@ export class MedicsComponent implements OnInit {
   tipo = "all";
   hasEspe = false;
   public searching: boolean = false;
+  content;
   constructor(private userServ : UsuarioService, private modalService : NgbModal, private route : ActivatedRoute) { }
 
   ngOnInit() {
