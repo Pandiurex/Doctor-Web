@@ -43,9 +43,6 @@ export class ProfileInfoComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.datos_perfil.controls['nickname'].setValue(this.usuarioInfo.nickname, {onlySelf : true});
-    this.datos_perfil.controls['nombres'].setValue(this.usuarioInfo.nombres, {onlySelf : true});
-    this.datos_perfil.controls['apellidos'].setValue(this.usuarioInfo.apellidos, {onlySelf : true});
   }
 
   actualizarDatos(){
