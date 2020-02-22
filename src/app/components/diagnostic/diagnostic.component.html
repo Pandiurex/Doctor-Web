@@ -21,9 +21,23 @@
                   {{sintoma.desc}}
                 </li>
             </ul>
-
+            <div>
+            <ul *ngIf="niveles.Medio.length>0">
+                <h4>Sintomas destacados <i class="far fa-question-circle" title="Sintomas que pueden afectar su vida diaria"></i></h4>
+                <li *ngFor="let niv of niveles.Medio">
+                    <p>{{niv.sintoma}}</p>
+                </li>
+            </ul>
+            <ul *ngIf="niveles.Bajo.length>0">
+                    <h4>Sintomas de baja urgencia <i class="far fa-question-circle" title="Sintomas cuya persistencia por más de 3 días será necesario el checar con un médico"></i></h4>
+                   
+                    <li *ngFor="let niv of niveles.Bajo">
+                        <p>{{niv.sintoma}}</p>
+                    </li>
+                </ul>
+            </div>
             <ul *ngIf="sintomasExtras.length>0">
-                <h2>Sin embargo presento sintomas que pueden concordar con las siguientes enfermedades: </h2>
+                <h2>Sin embargo presento ciertos sintomas que pueden concordar con las siguientes enfermedades: </h2>
                 <li *ngFor="let sints of sintomasExtras">
                   {{sints.padecimiento}} 
                   <p><ngb-progressbar type="success" [value]="sints.porcentaje" showValue="true"></ngb-progressbar></p>

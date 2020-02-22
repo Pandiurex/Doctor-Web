@@ -53,21 +53,3 @@
     color: white;
     font-size: 32px !important;
 }
-
-[type="checkbox"]+span:not(.lever):before,
-[type="checkbox"]:not(.filled-in)+span:not(.lever):after{
-    width: 20px;
-    height: 20px;
-    
-    margin-top: 6px;
-    border: 2px solid white;
-}
-
-[type="checkbox"]:checked+span:not(.lever):before {
-    width: 16px;
-    height: 28px;
-    border-right: 2px solid red;
-    border-bottom: 2px solid red;
-        border-top: 2px solid transparent;
-        border-left: 2px solid transparent;
-}
