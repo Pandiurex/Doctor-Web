@@ -8,6 +8,11 @@
     
   }
 
+.form-control-feedback {
+    color: red;
+    margin-left: 40%;
+}
+
 .margin-color {
     margin: 20px 0;
     text-align: center;
