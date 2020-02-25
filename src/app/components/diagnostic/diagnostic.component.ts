@@ -361,8 +361,6 @@ export class DiagnosticComponent implements OnInit {
       let sympIndex = this.sintomas.findIndex(item => item['nombre_sint'].toString() === symp);
       if(atomSymp.nivel_urgencia==0.4){
         this.preguntas.push({message:'Del 1 al 10 que rango de molestia le causa el tener ' + atomSymp.nombre_sint, type: 'scale', index: sympIndex});
-      }else{
-        console.log('hello there');
       }
      }
 
@@ -370,7 +368,10 @@ export class DiagnosticComponent implements OnInit {
     let atomSymp = this.sintomas[index];
     let calculatedUrgency = (atomSymp.nivel_urgencia*num)/4;
     this.sintomas[index].nivel_urgencia = calculatedUrgency;
-    console.log(this.sintomas);
-    this.mostrarPregunta();
+    if(this.preguntas.length>0){
+      this.mostrarPregunta();
+      }else{
+      this.analize();
+      }
      }
 }
