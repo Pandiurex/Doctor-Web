@@ -174,28 +174,32 @@ export class ModificarPadecimientosComponent implements OnInit {
   }
 
   guardar(){
-    var idsOnly : any = [];
-     
-    this.selectedSints.forEach(element => {
-      idsOnly.push(element.idSint);
-    });
+    if(this.selectedSints.length>3){
+        var idsOnly : any = [];
+        
+        this.selectedSints.forEach(element => {
+          idsOnly.push(element.idSint);
+        });
 
-      this.formData.append('nombre_pad',this.modify.value.nombre);
-      this.formData.append('categoria', this.modify.value.categoria);
-      this.formData.append('descripcion', this.modify.value.descripcion);
-      this.formData.append('sintomas', idsOnly);
-      this.formData.append('especializacion', this.modify.value.especializacion);
-  
-    
-    this.padServ.updatePadecimiento(this.formData, this.url.snapshot.params.hash).subscribe(res =>{
-      console.log("Ok", res)
-      this.toast.success('Se ha modificado el padecimiento con éxito!', 'Modificación Exitosa!');
-    this.router.navigate(['/padecimientos'])
-  }, error =>{
-      console.log("Error", error.error);
-      this.toast.error(error.error.message, 'Error');
-      this.formData = new FormData();
-  })
+          this.formData.append('nombre_pad',this.modify.value.nombre);
+          this.formData.append('categoria', this.modify.value.categoria);
+          this.formData.append('descripcion', this.modify.value.descripcion);
+          this.formData.append('sintomas', idsOnly);
+          this.formData.append('especializacion', this.modify.value.especializacion);
+      
+        
+        this.padServ.updatePadecimiento(this.formData, this.url.snapshot.params.hash).subscribe(res =>{
+          console.log("Ok", res)
+          this.toast.success('Se ha modificado el padecimiento con éxito!', 'Modificación Exitosa!');
+        this.router.navigate(['/padecimientos'])
+      }, error =>{
+          console.log("Error", error.error);
+          this.toast.error(error.error.message, 'Error');
+          this.formData = new FormData();
+      })
+  }else{
+    this.toast.error('El padecimiento debe tener al menos 4 sintomas para que sea válido', 'Error');
+  }
   }
 
   check(){

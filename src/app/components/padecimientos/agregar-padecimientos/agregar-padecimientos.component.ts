@@ -100,6 +100,7 @@ export class AgregarPadecimientosComponent implements OnInit {
   }
 
   guardar(){
+    if(this.selectedSints.length>3){
     var idsOnly : any = [];
      
     this.selectedSints.forEach(element => {
@@ -122,5 +123,8 @@ export class AgregarPadecimientosComponent implements OnInit {
       this.toast.error(error.error, 'Error');
       this.formData = new FormData();
   })
+  }else{
+    this.toast.error('El padecimiento debe tener al menos 4 sintomas para que sea válido', 'Error');
   }
+}
 }

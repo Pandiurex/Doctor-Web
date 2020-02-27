@@ -126,15 +126,20 @@ export class AgregarSintomasComponent implements OnInit {
       .set('composicion', this.composicionBack)
       .set('nivel_urgencia', this.sintomas.value.urgencia)
     }
-    console.log(this.values);
-    this.sintServ.createSintoma(this.values).subscribe(res =>{
-      console.log("Ok", res)
-      this.toast.success('Se ha registrado el sintoma con éxito!', 'Registro Exitoso!');
-    this.router.navigate(['/sintomas'])
-  }, error =>{
-      console.log("Error", error.error);
-      this.toast.error(error.error, 'Error');
-  })
+
+    if(this.isChecked==true && this.selectedCompuestos.lenght<=1){
+      this.toast.error('Un sintoma compuesto debe tener al menos otros 2 sintomas como parte de su composición', 'Error');
+    }else{
+        console.log(this.values);
+        this.sintServ.createSintoma(this.values).subscribe(res =>{
+          console.log("Ok", res)
+          this.toast.success('Se ha registrado el sintoma con éxito!', 'Registro Exitoso!');
+        this.router.navigate(['/sintomas'])
+      }, error =>{
+          console.log("Error", error.error);
+          this.toast.error(error.error, 'Error');
+      })
+    }
   }
 
   changed(evt){

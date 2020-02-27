@@ -112,14 +112,14 @@ export class GuidedDiagnosticComponent implements OnInit {
             almacenado =  this.memoriaDeTrabajo.estaAlmacenado(element);
             console.log("Esta en la memoria?" + almacenado)
             if(almacenado===false){
-            this.atomosCondicion.push(new Atomo(element.desc,element.estado,element.obj,element.padecimiento));
+            this.atomosCondicion.push(new Atomo(element.desc,element.estado,element.obj,element.padecimiento,element.sintoma));
             let question = this.questionGen(element.desc); 
             if(question!=null){
               this.preguntas.push(question);
             }else{
             this.preguntas.push({message: "¿Ha tenido " + element.desc + " ?", type: "boolean"});
             }
-             this.descs.push(element.desc);
+             this.descs.push(element.sintoma);
             }
           }
         };
@@ -136,7 +136,7 @@ export class GuidedDiagnosticComponent implements OnInit {
     mostrarPregunta(){
       let id = this.descs.pop();
       this.question = this.preguntas.pop();
-      this.descripcion = this.iniciales.find(item => item['nombre_sint'].toString() === id);
+      this.descripcion = this.iniciales.find(item => item['idSint'].toString() === id);
     }
 
     responder(resp : any){
@@ -180,7 +180,7 @@ export class GuidedDiagnosticComponent implements OnInit {
       }else{
         console.log("No se cumplio: " + this.reglaEvaluar.partesConclusion)
         for(var noCumplido of this.reglaEvaluar.partesConclusion){
-          let atomoNoCumplido = new Atomo(noCumplido.desc,false,noCumplido.obj,noCumplido.padecimiento);
+          let atomoNoCumplido = new Atomo(noCumplido.desc,false,noCumplido.obj,noCumplido.padecimiento, noCumplido.sintoma);
           this.memoriaDeTrabajo.almacenarAtomo(atomoNoCumplido);
         }
       }
@@ -230,7 +230,7 @@ export class GuidedDiagnosticComponent implements OnInit {
     fromSintomasIniciales(){
       this.sintomasSeleccionados.forEach(element => {
         //Generar atomo
-        let atomoRegla = new Atomo(element.nombre_sint,true,false,null);
+        let atomoRegla = new Atomo(element.nombre_sint,true,false,null,element.idSint);
         
         //Guardar en memoria de trabajo
         this.memoriaDeTrabajo.almacenarAtomo(atomoRegla);

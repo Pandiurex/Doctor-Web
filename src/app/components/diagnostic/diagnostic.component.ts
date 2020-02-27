@@ -111,14 +111,14 @@ export class DiagnosticComponent implements OnInit {
             almacenado =  this.memoriaDeTrabajo.estaAlmacenado(element);
             //console.log("Esta en la memoria?" + almacenado)
             if(almacenado===false){
-            this.atomosCondicion.push(new Atomo(element.desc,element.estado,element.obj,element.padecimiento));
+            this.atomosCondicion.push(new Atomo(element.desc,element.estado,element.obj,element.padecimiento,element.sintoma));
             let question = this.questionGen(element.desc); 
             if(question!=null){
               this.preguntas.push(question);
             }else{
             this.preguntas.push({message: "¿Ha tenido " + element.desc + " ?", type: "boolean"});
             }
-             this.descs.push(element.desc);
+             this.descs.push(element.sintoma);
             }
           }
         };
@@ -139,7 +139,7 @@ export class DiagnosticComponent implements OnInit {
       let id = this.descs.pop();
       console.log(id);
       
-      let found = this.sintomas.find(item => item['nombre_sint'].toString() === id);
+      let found = this.sintomas.find(item => item['idSint'].toString() === id);
 
       if(found!=undefined){
       this.descripcion = found.descripcion;
@@ -152,7 +152,7 @@ export class DiagnosticComponent implements OnInit {
       if(resp=='Si'){
         atomoEvaluado.estado = true; 
         this.breadcrumb = this.breadcrumb + atomoEvaluado.desc + "->"
-        this.evaluateSypmtom(atomoEvaluado.desc);
+        this.evaluateSypmtom(atomoEvaluado.sintoma);
       }
       else{
         atomoEvaluado.estado = false; 
@@ -185,7 +185,7 @@ export class DiagnosticComponent implements OnInit {
       }else{
         //console.log("No se cumplio: " + this.reglaEvaluar.partesConclusion)
         for(var noCumplido of this.reglaEvaluar.partesConclusion){
-          let atomoNoCumplido = new Atomo(noCumplido.desc,false,noCumplido.obj,noCumplido.padecimiento);
+          let atomoNoCumplido = new Atomo(noCumplido.desc,false,noCumplido.obj,noCumplido.padecimiento,noCumplido.sintoma);
           this.memoriaDeTrabajo.almacenarAtomo(atomoNoCumplido);
         }
       }
@@ -357,8 +357,8 @@ export class DiagnosticComponent implements OnInit {
      }
 
      evaluateSypmtom(symp : any){
-      let atomSymp = this.sintomas.find(item => item['nombre_sint'].toString() === symp);
-      let sympIndex = this.sintomas.findIndex(item => item['nombre_sint'].toString() === symp);
+      let atomSymp = this.sintomas.find(item => item['idSint'].toString() === symp);
+      let sympIndex = this.sintomas.findIndex(item => item['idSint'].toString() === symp);
       if(atomSymp.nivel_urgencia==0.4){
         this.preguntas.push({message:'Del 1 al 10 que rango de molestia le causa el tener ' + atomSymp.nombre_sint, type: 'scale', index: sympIndex});
       }
