@@ -183,14 +183,18 @@ export class ModificarSintomasComponent implements OnInit {
       .set('nivel_urgencia', this.modify.value.urgencia)
     }
     console.log(this.values);
-    this.sintServ.modificar(this.sintoma.hashId,this.values).subscribe(res =>{
-      console.log("Ok", res)
-      this.toast.success('Se ha modificado el sintoma con éxito!', 'Modificación Exitosa!');
-    this.router.navigate(['/sintomas'])
-  }, error =>{
-      console.log("Error", error.error);
-      this.toast.error(error.error.message, 'Error');
-  })
+    if(this.isChecked==true && this.selectedCompuestos.lenght<=1){
+      this.toast.error('Un sintoma compuesto debe tener al menos otros 2 sintomas como parte de su composición', 'Error');
+    }else{
+        this.sintServ.modificar(this.sintoma.hashId,this.values).subscribe(res =>{
+          console.log("Ok", res)
+          this.toast.success('Se ha modificado el sintoma con éxito!', 'Modificación Exitosa!');
+        this.router.navigate(['/sintomas'])
+      }, error =>{
+          console.log("Error", error.error);
+          this.toast.error(error.error.message, 'Error');
+      })
+    }
   }
 
   creacionComposicion(){

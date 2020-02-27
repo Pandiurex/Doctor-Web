@@ -43,16 +43,21 @@
             </div>
             
             <div *ngIf="question.type === 'scale'">
-                <button class="btn btn-outline-primary boton" (click)="scaleAnswer(1,question.index)">1</button>
-                <button class="btn btn-outline-primary boton" (click)="scaleAnswer(2,question.index)">2</button>
-                <button class="btn btn-outline-primary boton" (click)="scaleAnswer(3,question.index)">3</button>
-                <button class="btn btn-outline-primary boton" (click)="scaleAnswer(4,question.index)">4</button>
-                <button class="btn btn-outline-primary boton" (click)="scaleAnswer(5,question.index)">5</button>
-                <button class="btn btn-outline-primary boton" (click)="scaleAnswer(6,question.index)">6</button>
-                <button class="btn btn-outline-primary boton" (click)="scaleAnswer(7,question.index)">7</button>
-                <button class="btn btn-outline-primary boton" (click)="scaleAnswer(8,question.index)">8</button>
-                <button class="btn btn-outline-primary boton" (click)="scaleAnswer(9,question.index)">9</button>
-                <button class="btn btn-outline-primary boton" (click)="scaleAnswer(10,question.index)">10</button>
+                <div>
+                    <button class="btn btn-primary" (click)="scaleAnswer(1,question.index)">1</button>
+                    <button class="btn btn-primary" (click)="scaleAnswer(2,question.index)">2</button>
+                    <button class="btn btn-success" (click)="scaleAnswer(3,question.index)">3</button>
+                    <button class="btn btn-success" (click)="scaleAnswer(4,question.index)">4</button>
+                    <button class="btn btn-warning" (click)="scaleAnswer(5,question.index)">5</button>
+                </div>
+
+                <div>
+                    <button class="btn btn-warning" (click)="scaleAnswer(6,question.index)">6</button>
+                    <button class="btn btn-warning" (click)="scaleAnswer(7,question.index)">7</button>
+                    <button class="btn btn-danger" (click)="scaleAnswer(8,question.index)">8</button>
+                    <button class="btn btn-danger" (click)="scaleAnswer(9,question.index)">9</button>
+                    <button class="btn btn-danger" (click)="scaleAnswer(10,question.index)">10</button>
+                </div>
             </div>
         </div>
 
